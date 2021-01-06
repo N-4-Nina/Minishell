@@ -29,21 +29,18 @@ OBJS	= ${SOURCES:.c=.o}
 
 .c.o:
 	${CC} ${CFLAGS} ${GNLBUFF} -c $< -o ${<:.c=.o} ${INCLUDES}
+	mv ${DIR_S}/*.o ${DIR_O}
 
 all : $(NAME)
 
 ${NAME}: ${OBJS} ft 
-	${CC} ${CFLAGS} ${INCLUDES} ${OBJS} ${LIBS} -o ${NAME}
+	${CC} ${CFLAGS} ${INCLUDES} ${DIR_O}/*.o ${LIBS} -o ${NAME}
 
 ft:
 	@make -C libft
 
-$(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)/*.h
-	@mkdir -p objs
-	@$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
-
 clean :
-	@rm -f $(OBJS)
+	@rm -f $(DIR_O)/*.o
 	@make clean -C $(LIBFT)
 
 fclean: clean
