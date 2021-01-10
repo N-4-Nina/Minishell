@@ -1,0 +1,2 @@
+https://www.gnu.org/software/bash/manual/html_node/index.html
+https://stackoverflow.com/questions/6697753/difference-between-single-and-double-quotes-in-bash
