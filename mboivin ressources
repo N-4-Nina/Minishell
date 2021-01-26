@@ -1,0 +1,30 @@
+Liens
+Signaux :
+https://sgeos.github.io/unix/c/signals/2016/02/24/passing-values-to-c-signal-handlers.html
+Environnement :
+https://www.gnu.org/software/libc/manual/html_node/Program-Arguments.html
+https://www.gnu.org/software/libc/manual/html_node/Environment-Access.html
+Ref grammaire :
+https://pubs.opengroup.org/onlinepubs/9699919799.2018edition/utilities/V3_chap02.html
+Parsing :
+https://en.wikipedia.org/wiki/Recursive_descent_parser
+https://en.wikipedia.org/wiki/Tree_traversal
+https://ruslanspivak.com/lsbasi-part1/
+http://www.gaudry.be/langages-analyse-syntaxique-ast.html
+Structure :
+https://www.aosabook.org/en/bash.html
+
+
+Méthodologie
+Flowcharts :
+https://www.programiz.com/article/flowchart-programming
+Nommer les variables et fonctions :
+https://github.com/kettanaito/naming-cheatsheet
+Un concept important :
+https://fr.wikipedia.org/wiki/Programmation_modulaire
+Guide ANSSI programmation en C :
+https://www.ssi.gouv.fr/guide/regles-de-programmation-pour-le-developpement-securise-de-logiciels-en-langage-c/
+Lire "Introduction" et "Backgrounds" suffit (pour connaître des termes comme : modulaire, monolithe, microservice, etc. Un autre terme à connaître est refactoring) :
+https://www.codeproject.com/Articles/1210984/How-to-Organize-Clean-Architecture-to-Modular-Patt
+Un livre bien même si c'est du Java :
+https://www.goodreads.com/work/quotes/3779106-clean-code-a-handbook-of-agile-software-craftsmanship-robert-c-martin

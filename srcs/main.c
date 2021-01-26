@@ -26,97 +26,29 @@ int	(*g_builtin_func[]) (char **) = {&nsh_echo, &nsh_cd, &nsh_pwd, &nsh_export,
 
 t_env	**g_env;
 
-
-int	nsh_launch(char **args)
+void display_tokens(char **tokens)
 {
-	int	status;
-	pid_t	pid;
-	pid_t	wpid;
-	char	*path;
-	char **env = env_to_array();
+	int i = 0;
 
-	pid = fork();
-	if (pid == -1)
-		return(-1);
-	if (pid == 0)
-	{
-		if(execve(args[0], args, env) == -1)
-		//	write(1, "couldn't exec, looking in PATH...\n", 25);
-		path = ft_strjoin(find_by_name("PATH")->value, args[0]);
-		if(execve(path, args, env) == -1)
-		//	write(1, "couldn't find in path either\n", 20);
-		free(path);
-		exit(EXIT_SUCCESS);
-	}
-	else
-	{
-		wpid = waitpid(pid, &status, WUNTRACED);
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			wpid = waitpid(pid, &status, WUNTRACED);
-	}
-	return (1);
-}
-
-
-int	nsh_execute(char **args)
-{
-	int i;
-
-	if (args[0] == NULL)
-		return (1);
-	i = 0; 
-	while (i < 7)
-	{
-		if (ft_strncmp(args[0], g_builtin_str[i], 5) == 0)
-			return (*g_builtin_func[i])(args);
-		i++;
-	}
-	
-	//return (0);
-	return nsh_launch(args);
-}
-/*
-int	nsh_interpret(char **tokens)
-{
-	int	i;
-	int	j;
-	char	**args;
-
-	i = 0;
 	while (tokens[i])
-	{
-		j = 0;
-		while (!isRedirect(tokens[i]))
-		{
-			ft_memcpy(args[j], tokens[i], ft_strlen(tokens[i]));
-			j++;
-			i++;
-		}
-	}
-}
-*/
-void	display_prompt()
-{
-	char **split;
-	t_env	*var;
-	int	i;
-
-	i = 0;
-	var = find_by_name("PWD");
-	split = ft_split(var->value, '/');
-	while (split[i])
-		i++;
-	write(1, split[i-1], ft_strlen(split[i-1]));
-	write(1, " -> ", 4);
+			{
+				write(1, "-------------------\n", 21);
+				//write(1, "\n", 1);
+				write(1, tokens[i], ft_strlen(tokens[i]));
+				write(1, "\n", 1);
+				i++;
+			}
 }
 
 int	nsh_loop()
 {
 	int	status;
+	int	toknb;
 	char	*line;
 	char	**tokens;
 
 	status = 1;
+	toknb = 0;
 
 	while (status)
 	{
@@ -126,9 +58,12 @@ int	nsh_loop()
 			status = 0;
 		if (line[0] == 3 || line[0] == 4)
 			continue;
-		tokens = ft_split(line, ' ');
-		nsh_execute(tokens);
-		//nsh_interpret(tokens); not ready
+		//tokens = ft_split(line, ' ');
+		tokens = parse(line, &toknb);
+		
+		interpret(tokens, toknb);
+		free_tokens(tokens);
+		//nsh_execute(tokens);
 		//status = 0;
 	}
 	return(status);

@@ -23,6 +23,11 @@ SOURCES =  srcs/main.c \
 	   srcs/builtins.c \
 	   srcs/utils.c \
 	   srcs/env.c \
+	   srcs/parser.c \
+	   srcs/interpreter.c \
+	   srcs/inits.c \
+	   srcs/prompt.c \
+	   srcs/exec.c \
 	srcs/get_next_line.c
 
 OBJS	= ${SOURCES:.c=.o}
