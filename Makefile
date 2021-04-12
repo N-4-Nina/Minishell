@@ -6,7 +6,7 @@
 #    By: chpl <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:45:13 by chpl              #+#    #+#              #
-#    Updated: 2020/11/24 10:20:58 by chpl             ###   ########.fr        #
+#    Updated: 2021/03/24 10:37:33 by chpl             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,33 +16,45 @@ DIR_S = srcs
 DIR_O = objs
 INCLUDES = -I includes/ -I ${LIBFT}
 CC = clang
-LIBS = -L libft/ -lft
+LIBS = -L libft/ -lft -lncurses -lX11
 CFLAGS	= -Wall -Wextra -Werror
 GNLBUFF = -D BUFFER_SIZE=100
 SOURCES =  srcs/main.c \
-	   srcs/builtins.c \
+	   srcs/builtins/builtins.c \
+	   srcs/lexer/lexer.c \
+	   srcs/lexer/count.c \
+	   srcs/lexer/set_len.c \
 	   srcs/utils.c \
+	   srcs/term.c \
 	   srcs/env.c \
-	   srcs/parser.c \
-	   srcs/interpreter.c \
-	   srcs/inits.c \
-	   srcs/prompt.c \
-	   srcs/exec.c \
-	srcs/get_next_line.c
+	   srcs/signals.c \
+	   srcs/loop.c \
+	   srcs/write_dot.c \
+	   srcs/parser/parser.c \
+	   srcs/parser/astree.c \
+	   srcs/prompt/prompt.c \
+	   srcs/inputs/get_input.c \
+	   srcs/inputs/history.c \
+	   srcs/inputs/arrows.c \
+	   srcs/inputs/utf.c
 
 OBJS	= ${SOURCES:.c=.o}
 
 .c.o:
 	${CC} ${CFLAGS} ${GNLBUFF} -c $< -o ${<:.c=.o} ${INCLUDES}
-	mv ${DIR_S}/*.o ${DIR_O}
+	mv ${<:.c=.o} ${DIR_O}
 
 all : $(NAME)
 
 ${NAME}: ${OBJS} ft 
+	
 	${CC} ${CFLAGS} ${INCLUDES} ${DIR_O}/*.o ${LIBS} -o ${NAME}
 
 ft:
 	@make -C libft
+
+graph:
+	dot -Tjpg graph.dot > graph.jpg
 
 clean :
 	@rm -f $(DIR_O)/*.o

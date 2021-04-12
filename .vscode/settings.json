@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "nsh.h": "c",
+        "environment.h": "c",
+        "get_next_line.h": "c",
+        "limits.h": "c",
+        "keysym.h": "c",
+        "lexer.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}

@@ -1,0 +1,28 @@
+
+int tcgetattr(int fd, struct termios *termios_p);
+
+tcgetattr() récupère les paramètres associés à l'objet référencé par fd et les stocke dans la structure termios
+pointée par termios_p. Cette fonction peut être appelée par un processus en arrière-plan. Néanmoins, les 
+attributs de terminal peuvent être modifiés par la suite par le processus au premier plan.
+
+--------------------------------------------------------------------------------------------------------------------
+
+int tcsetattr(int fd, int optional_actions, const struct termios *termios_p);
+
+tcsetattr() définit les paramètres du terminal (à moins que le matériel sous-jacent ne le supporte pas) en 
+lisant la structure termios pointée par termios_p. optional_actions précise quand les changements auront lieu :
+
+TCSANOW
+    Les modifications sont effectuées immédiatement.
+TCSADRAIN
+    Les modifications sont effectuées lorsque toutes les opérations d'écriture sur fd auront été transmises.
+     Cette option devrait être utilisée pour toute modification de paramètre affectant les sorties.
+TCSAFLUSH
+    Les modifications sont effectuées lorsque toutes les opérations d'écriture sur fd auront été transmises.
+     Les entrées qui n'ont pas été traitées seront éliminées avant de faire les modifications. 
+
+--------------------------------------------------------------------------------------------------------------------
+`le'
+    String of commands to move the cursor left one column. Unless the `bw' flag capability is specified, the effect is undefined if the cursor is at the left margin; do not use this command there. If `bw' is present, this command may be used at the left margin, and it wraps the cursor to the last column of the preceding line. 
+`nd'
+    String of commands to move the cursor right one column. The effect is undefined if the cursor is at the right margin; do not use this command there, not even if `am' is present. 

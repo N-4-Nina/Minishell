@@ -13,103 +13,72 @@
 #ifndef NSH_H
 # define NSH_H
 
+#include <curses.h>
+#include <errno.h>  
+#include <fcntl.h>
 #include <unistd.h>
 #include <linux/limits.h>
+
+#include <signal.h>
+#include <stdint.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <termios.h>
+#include <term.h>
+#include <X11/keysym.h>
+
+#include "astree.h"
+#include "environment.h"
+#include "builtins.h"
+#include "colors.h"
+#include "history.h"
+#include "inputs.h"
+#include "lexer.h"
+#include "token.h"
 #include "get_next_line.h"
 #include "../libft/libft.h"
-#include <sys/types.h>
-#include <sys/wait.h>
 
-#define SET_RED     "\x1b[31m"
-#define SET_GREEN   "\x1b[32m"
-#define SET_YELLOW  "\x1b[33m"
-#define SET_BLUE    "\x1b[34m"
-#define SET_MAGENTA "\x1b[35m"
-#define SET_CYAN    "\x1b[36m"
-#define SET_WHITE   "\x1b[0m"
-#define	COLOR_SIZE	6
+#define RIGHT	'C'
+#define LEFT	'D'
 
-typedef	struct	s_env
+typedef	struct	s_sh
 {
-	char	*name;
-	char	*value;
-	struct	s_env	*next;
-}		t_env;
+	t_ast	*ast;
+	t_lex	*lex;
+	t_env	*env;
+	t_bui	*bui;
+	t_inp	*inp;
+}				t_sh;
 
-extern	t_env	**g_env;
-
-typedef struct s_translater
-{
-	int quotes[2];
-    int back;
-    int dollar;
-	int	inf;
-	int	skip;
-	int i;
-	int new;
-	char	*str;
-	char	*tmp;
-}				t_trans;
-
-
-
-typedef	struct	s_interpreter
-{
-	int	i;
-	int	j;
-	int k;
-	int r;
-	char	***cmds;
-	int		*red;
-	int		*args;
-}				t_inter;
-
-typedef	struct s_seq
-{
-	int	cmdnb;
-	int *argnb;
-	int rednb;
-	int *red;
-}				t_seq;
-
-char	*g_builtin_str[7];
-
-int	(*g_builtin_func[7]) (char **);
-
-int	nsh_echo(char **args);
-int	nsh_cd(char **args);
-int	nsh_pwd(char **args);
-int	nsh_export(char **args);
-int	nsh_unset(char **args);
-int	nsh_env(char **args);
-int	nsh_exit(char **args);
 int	get_next_line(int fd, char **line);
+int get_input(t_sh *inp);
+int handleArrow(char *c);
 
-void display_prompt(void);
+void display_prompt(t_env *env, t_inp *inp);
+int	nsh_loop(t_sh *nsh);
+void	nsh_reset(t_sh *nsh);
+void	nsh_clear(t_sh *nsh);
 
 char	*get_current_dir_name(void);
 
-t_env	*find_by_name(char *str);
-
-void	add_var(char *name, char *value);
-void	env_init(void);
-char	**env_to_array(void);
-char	**parse(char *s, int *c);
+int     tree_init(t_sh *nsh);
+int		parse(t_sh *nsh);
 void	free_tokens(char **tokens);
 
-int     interpret(char **tokens, int toknb);
-
+void    write_dot(t_ast **node);
 /* 
 *utils.c
 */
-void    toggle(int i, t_trans *trs);
+
 int		isBlank(char c);
-/* 
-*inits.c
-*/
-t_trans trs_init();
-t_inter inter_init(int i);
+int		isSpec(char c);
+int		isQuote(char c);
 
+int		term_init(void);
+void	env_init(t_env **env);
 
+void	set_sig_behav(void);
+void	signal_callback_handler(int signum);
 
 #endif

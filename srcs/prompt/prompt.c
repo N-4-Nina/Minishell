@@ -12,64 +12,27 @@
 
 #include "../includes/nsh.h"
 
-void print_tokens(t_lex *l)
+void	display_prompt(t_env *env, t_inp *inp)
 {
-	int i = 0;
-
-	while (i < l->nt)
-	{
-		printf("tok: %s  type: %d\n", l->t[i].data, l->t[i].type);
-		i++;
-	}
-}
-
-void	nsh_clear(t_sh *nsh)
-{
-	lex_reset(nsh->lex);
-	ast_reset(&(nsh->ast));
-}
-void	nsh_reset(t_sh *nsh)
-{
-	lex_reset(nsh->lex);
-	ast_reset(&(nsh->ast));
-}
-
-void inp_init(t_inp *inp)
-{
+	char **split;
+	t_env	*var;
 	int	i;
 
 	i = 0;
-	while (i < ARG_MAX)
-		inp->buf[i++] = 0;
-	inp->pos = 0;
-	inp->size = 0;
-	inp->cpy = NULL;
-	his_init(inp->his);
-}
-
-void	nsh_alloc(t_sh *nsh)
-{
-	nsh->lex = (t_lex*)malloc(sizeof(t_lex));
-	nsh->inp = (t_inp*)malloc(sizeof(t_inp));
-	nsh->inp->his = (t_his*)malloc(sizeof(t_his));
-}
-int	nsh_init(t_sh *nsh)
-{
-	nsh_alloc(nsh);
-	env_init(&nsh->env);
-	lex_init(nsh->lex);
-	inp_init(nsh->inp);
-	term_init();
-	
-	set_sig_behav();
-	return (1);
-}
-
-int	main(void)
-{
-	t_sh	nsh;
-
-	nsh_init(&nsh);
-	nsh_loop(&nsh);
-	return (0);
+	var = find_by_name(env, "PWD");
+	if (!var)
+		return;
+	split = ft_split(var->value, '/');
+	while (split[i])
+		i++;
+	inp->promptsize =  ft_strlen(split[i-1]) + 4;
+	write(1, SET_BLUE, COLOR_SIZE);
+	write(1, split[i-1], ft_strlen(split[i-1]));
+	write(1, SET_YELLOW, COLOR_SIZE);
+	write(1, " -> ", 4);
+	write(1, SET_WHITE, COLOR_SIZE-1);
+	i = 0;
+	while(split[i])
+		free(split[i++]);
+	free(split); 
 }

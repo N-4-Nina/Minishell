@@ -30,11 +30,6 @@ int exec_seq(t_inter *in, t_seq *s)
 	}
 }
 
-void sunder(t_seq *s)
-{
-	
-}
-
 /* IMPORTED FROM MAIN */
 
 int	nsh_launch(char **args)

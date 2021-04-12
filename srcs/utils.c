@@ -22,18 +22,18 @@ char *get_current_dir_name(void)
 		return (NULL);
 }
 
-
-void    toggle(int i, t_trans *trs)
+int	isSpec(char c)
 {
-    if (trs->quotes[i] == 0)
-        trs->quotes[i] = 1;
-    else if (trs->quotes[i] == 1)
-        trs->quotes[i] = 0;
-	trs->skip = 1;
-	trs->new = 1;
+	return (c == '>' || c == '<' || 
+		c == '|' || c == ';' ||
+		c == '\\' || c == '$');
+}
+int	isQuote(char c)
+{
+    return (c == '\'' || c == '"');
 }
 
-int		isBlank(char c)
+int	isBlank(char c)
 {
 	return (c == 32 || (c > 8 && c < 14));
 }
