@@ -26,10 +26,21 @@ int    dispatch_arrow(t_inp *inp, char c);
 void    move_cursor(t_inp *inp, int dir);
 void    gen_move(int nb, char dir);
 
+void    inp_clear(t_inp *inp, int buf);
+void    clear_one(void);
+
 int new_entry(char *new, t_his *h);
 
+void    ascii_handle(t_inp *inp, char c);
+void	ascii_del(t_inp *inp);
+void	ascii_del_last(t_inp *inp);
+
+
 void    utf_handle_char(t_inp *inp, char c);
-void    utf_del(t_inp *inp, char nul, char space);
+void    utf_del(t_inp *inp);
+void	utf_del_last(t_inp *inp);
+int		utf_rev_size(t_inp *inp, int pos);
 int    utf_size(char b);
+int		charnb(char *s);
 
 #endif

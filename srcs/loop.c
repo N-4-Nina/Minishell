@@ -10,11 +10,11 @@ int	nsh_loop(t_sh *nsh)
 		display_prompt(nsh->env, nsh->inp);
 
 		//status = get_next_line(0, &(nsh->lex->inp));
-		status = get_input(nsh);
-		
-		lex_build(nsh->lex);
+		if(!get_input(nsh))
+			continue;
+		if (!lex_build(nsh->lex))
+			continue;
 		parse(nsh);
-
 		nsh_reset(nsh);
 		
 	}

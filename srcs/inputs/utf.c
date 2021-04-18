@@ -10,10 +10,25 @@ void    utf_append(t_inp *inp, char *c, int size)
         write(1, &c[i], 1);
         inp->buf[inp->pos++] = c[i++];
     }
-    //inp->pos++;
     inp->size+=size;
 }
+int    charnb(char *s)
+{
+    int i;
+    int j;
 
+    i = 0;
+    j = 0;
+    while(s[i])
+    {
+        if (s[i] > 0)
+            i++;
+        else
+            i += utf_size(s[i]);
+        j++;
+    }
+    return (j);
+}
 void    utf_insert(t_inp *inp, char *c, int size)
 {
     int     i;
@@ -35,7 +50,7 @@ void    utf_insert(t_inp *inp, char *c, int size)
         i++;
     }
     write(1, prev, ft_strlen(prev));
-    gen_move(ft_strlen(prev), LEFT);
+    gen_move(charnb(prev), LEFT);
     free(prev);
     
     inp->size+=size;
@@ -59,24 +74,39 @@ int    utf_size(char b)
     return (j);
 }
 
-void    utf_del(t_inp *inp, char nul, char space)
+int     utf_rev_size(t_inp *inp, int pos)
 {
     int i;
 
-    i = 0;
-    while (inp->buf[inp->pos - i] < 0 && i < 4)
+    i = 1;
+    while (inp->buf[pos-i-1] < 0)
         i++;
-    write(0, "\b", i);
-    write(0, &space, i);
-    write(0, &nul, i);
-    write(0, "\b", i);
+    while (utf_size(inp->buf[pos-i]) < i)
+        i -= utf_size(inp->buf[pos-i]);
+    return (i);
+}
+
+void    utf_del(t_inp *inp)
+{
+    int i;
+
+    i = utf_rev_size(inp, inp->pos); // -1 ? 
+}
+
+void    utf_del_last(t_inp *inp)
+{
+    int i;
+
+    i = utf_rev_size(inp, inp->pos);
+    clear_one();
     while(i > 0)
     {
         inp->pos--;
         inp->size--;
-        inp->buf[inp->pos - i] = 0;
+        inp->buf[inp->pos] = 0;
         i--;
     }
+    inp->buf[inp->pos] = 0;
 }
 
 void    utf_handle_char(t_inp *inp, char c)

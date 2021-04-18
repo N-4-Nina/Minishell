@@ -33,6 +33,8 @@ SOURCES =  srcs/main.c \
 	   srcs/parser/parser.c \
 	   srcs/parser/astree.c \
 	   srcs/prompt/prompt.c \
+	   srcs/inputs/ascii.c \
+	   srcs/inputs/clear.c \
 	   srcs/inputs/get_input.c \
 	   srcs/inputs/history.c \
 	   srcs/inputs/arrows.c \
