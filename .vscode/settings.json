@@ -5,7 +5,8 @@
         "get_next_line.h": "c",
         "limits.h": "c",
         "keysym.h": "c",
-        "lexer.h": "c"
+        "lexer.h": "c",
+        "stat.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

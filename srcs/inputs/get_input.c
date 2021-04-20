@@ -19,6 +19,8 @@ void    gen_move(int nb, char dir)
 
 int handle_del(t_inp *inp)
 {
+    if (inp->pos == 0)
+        return (-1);
     if (inp->buf[inp->pos-1] > 0)
     {
         if (inp->pos == inp->size)
@@ -54,13 +56,36 @@ void    utf_skip(t_inp *inp, int dir)
     }
 
 }
+void    switch_row(t_inp *inp, int dir)
+{
+    if (dir == -1)
+    {    
+        inp->curY--;
+        inp->curX = inp->winX - 1;
+        gen_move(1, UP);
+        gen_move(inp->curX, RIGHT);
+    }
+    else
+    {
+        inp->curY++;
+        gen_move(inp->curX, LEFT);
+        inp->curX = 0;
+        gen_move(1, DOWN);
+        
+    }
+}
+
 void    move_cursor(t_inp *inp, int dir)
 {
-    //should check if char is > 0, if so do as usual
-    //else, should find the utf size and skip it. 
     if (inp->buf[inp->pos + dir] < 0)
         return (utf_skip(inp, dir));
     inp->pos += dir;
+    if ((inp->curX == 0 && dir == -1) || (inp->curX == inp->winX - 1 && dir == 1))
+    {
+        switch_row(inp, dir);
+        return;
+    }
+    inp->curX += dir;
     if (dir == -1)
         gen_move(dir, LEFT);
     else
@@ -86,8 +111,6 @@ int handle_spec_char(t_inp *inp, char c)
         return (handle_escape(inp));    
     return (0);
 }
-
-
 
 int inp_read(t_inp *inp)
 {

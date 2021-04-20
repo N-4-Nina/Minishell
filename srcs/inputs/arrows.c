@@ -13,8 +13,6 @@ void    handle_lat_arrow(t_inp *inp, int dir)
 
 void    handle_vert_arrow(t_inp *inp, int dir)
 {
-    (void)inp;
-    (void)dir;
      if (dir == -1)
         his_up(inp);
      if (dir == 1)

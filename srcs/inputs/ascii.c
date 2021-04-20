@@ -17,6 +17,7 @@ void    ascii_del(t_inp *inp)
     while (i-- > inp->pos)
         gen_move(1, LEFT);
 }
+
 void    ascii_del_last(t_inp *inp)
 {
     clear_one();
@@ -31,6 +32,13 @@ void    ascii_append(t_inp *inp, char c)
     write(1, &c, 1);
     inp->pos++;
     inp->size++;
+    if (inp->curX == inp->winX-1)
+    {
+        inp->curX = 0;
+        inp->curY++;
+    }
+    else
+        inp->curX++;
 }
 
 void    ascii_insert(t_inp *inp, char c)

@@ -35,7 +35,10 @@ SOURCES =  srcs/main.c \
 	   srcs/prompt/prompt.c \
 	   srcs/inputs/ascii.c \
 	   srcs/inputs/clear.c \
+	   srcs/inputs/cursor.c \
 	   srcs/inputs/get_input.c \
+	   srcs/inputs/his_navigate.c \
+	   srcs/inputs/his_new.c \
 	   srcs/inputs/history.c \
 	   srcs/inputs/arrows.c \
 	   srcs/inputs/utf.c

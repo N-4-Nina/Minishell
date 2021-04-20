@@ -19,6 +19,10 @@ typedef	struct s_input
 	t_his	*his;
 	int		pos;
 	int		size;
+	int		curX;
+	int 	curY;
+	int		winX;
+	int		winY;
 	int		promptsize;
 }				t_inp;
 
@@ -34,6 +38,9 @@ int new_entry(char *new, t_his *h);
 void    ascii_handle(t_inp *inp, char c);
 void	ascii_del(t_inp *inp);
 void	ascii_del_last(t_inp *inp);
+
+void    cursor_to_end(t_inp *inp);
+void    set_new_cur(t_inp *inp);
 
 
 void    utf_handle_char(t_inp *inp, char c);

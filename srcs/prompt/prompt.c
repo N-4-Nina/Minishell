@@ -26,6 +26,7 @@ void	display_prompt(t_env *env, t_inp *inp)
 	while (split[i])
 		i++;
 	inp->promptsize =  ft_strlen(split[i-1]) + 4;
+	inp-> curX = inp->promptsize;
 	write(1, SET_BLUE, COLOR_SIZE);
 	write(1, split[i-1], ft_strlen(split[i-1]));
 	write(1, SET_YELLOW, COLOR_SIZE);

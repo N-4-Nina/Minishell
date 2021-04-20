@@ -21,6 +21,7 @@
 
 #include <signal.h>
 #include <stdint.h>
+#include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -39,6 +40,8 @@
 #include "get_next_line.h"
 #include "../libft/libft.h"
 
+#define UP		'A'
+#define DOWN	'B'
 #define RIGHT	'C'
 #define LEFT	'D'
 
