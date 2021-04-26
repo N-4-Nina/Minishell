@@ -14,7 +14,8 @@ typedef	enum	e_node_type
 	N_IO_FILE,
 	N_PIPE_SEQ,
 	N_SIMPLE_CMD,
-	N_WORD
+	N_WORD,
+	N_RED
 }					t_ntype;
 
 typedef	struct	s_ast

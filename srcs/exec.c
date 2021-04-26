@@ -1,49 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: chpl <marvin@42.fr>                        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2020/11/25 16:28:28 by chpl             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/nsh.h"
 
-int exec_seq(t_inter *in, t_seq *s)
+int spawn(t_smpl smpl)
 {
-    int i;
-    int *fd[2];  //should probably be in seq
+    t_pid pid;
 
-    i = 0;
-	while (i < s -> rednb)
-	{
-    	fd[i] = (int*)malloc(sizeof(int) * 2);
-        pipe(fd[i++]);
-	}
-	i = 0;
-	while (i < s->cmdnb)
-	{
-
-	}
-}
-
-/* IMPORTED FROM MAIN */
-
-int	nsh_launch(char **args)
-{
-	int	status;
-	pid_t	pid;
-	pid_t	wpid;
-	char	*path;
-	char **env = env_to_array();
-
-	pid = fork();
-	if (pid == -1)
+    pid = fork();
+    if (pid == -1)
 		return(-1);
-	if (pid == 0)
+    if (pid == 0)
 	{
 		if (execve(args[0], args, env) == -1)
 		//	write(1, "couldn't exec, looking in PATH...\n", 25);
@@ -59,22 +23,81 @@ int	nsh_launch(char **args)
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
 	}
-	return (1);
 }
 
-
-int	nsh_execute(char **args)
+int cmd_execute(t_cmd cmd)
 {
-	int i;
 
-	if (args[0] == NULL)
-		return (1);
-	i = 0; 
-	while (i < 7)
-	{
-		if (ft_strncmp(args[0], g_builtin_str[i], 5) == 0)
-			return (*g_builtin_func[i])(args);
-		i++;
-	}
-	return nsh_launch(args);
+}
+
+int set_cmd_path(t_smpl *s, t_env *env, char *name)
+{
+    int     i;
+    char    **split;
+    char    *path;
+    struct  stat    buf;
+
+    i = 0;
+    name = ft_strjoin("/", name);
+    split = ft_split(find_by_name(env, "PATH")->value, ':');
+    while (split[i])
+    {
+        path = ft_strjoin(split[i], name);
+        if (!stat(path, &buf))
+        {
+            s->path = ft_strdup(path);
+            i = 0;
+            while (split[i])
+                free(split[i++]);
+            free(split);
+            free(path);
+    }
+    i = 0;
+    while (split[i])
+        free(split[i++]);
+    free(split);
+    free(path);
+    return (0);
+}
+
+void    handle_io(t_smpl *s, t_ast *node)
+{
+    
+}
+t_smpl build_simple(t_sh *nsh, t_ast *node)
+{
+    t_smpl s;
+
+    if (node->type == N_IO_FILE)
+        handle_io(&s, node);
+    else
+        identify_command_word();
+    if ((s.isbuiltin = is_builtin(node->data) == -1)
+        if (!set_cmd_path(&s, env, ))
+
+}
+int cmd_build(t_sh *nsh, t_ast *node)
+{
+    node = node->left;
+    while (node)
+    {
+        build_simple(node);
+        node = node->right;
+    }
+}
+
+int build_exec(t_sh *nsh)
+{
+    t_ast *cmd;
+
+    cmd = ast->right;
+    while (cmd)
+    {
+        cmd_build(nsh, cmd);
+        cmd_execute(nsh);
+        cmd_reset(nsh->)
+
+        cmd->right;
+    }
+
 }

@@ -6,7 +6,7 @@ void	sigint_handler(int signum)
 	// Cleanup and close up stuff here
 
 	// Terminate program
-    //exit(signum);
+    //nsh_exit(signum);
 }
 
 void    sigquit_handler(int signum)

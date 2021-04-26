@@ -12,7 +12,26 @@
 
 #include "../includes/nsh.h"
 
+void	remove_var(t_env *env, t_env *node)
+{
+	t_env	*lst;
 
+	lst = env;
+	if (lst == node)
+	{
+		env = lst->next;
+		free(lst->name);
+		free(lst->value);
+		free(lst);
+		return;
+	}
+	while (lst->next != node)
+		lst = lst->next;
+	lst->next = node->next;
+	free(node->name);
+	free(node->value);
+	free(node);
+}
 
 int	strmatch(char *s1, char *s2)
 {
@@ -129,7 +148,7 @@ void	env_init(t_env **env)
 	cdn = get_current_dir_name();
 	add_var(*env, "PWD", cdn);
 	free(cdn);
-	add_var(*env, "PATH", "/bin/");
+	add_var(*env, "PATH", "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin/");
 	//add_var("USER", execve("/usr/bin/id", ["id", "-u", "-n"], NULL));
 
 }

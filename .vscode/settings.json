@@ -6,7 +6,8 @@
         "limits.h": "c",
         "keysym.h": "c",
         "lexer.h": "c",
-        "stat.h": "c"
+        "stat.h": "c",
+        "colors.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

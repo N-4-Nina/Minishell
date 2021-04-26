@@ -31,6 +31,7 @@
 
 #include "astree.h"
 #include "environment.h"
+#include "exec.h"
 #include "builtins.h"
 #include "colors.h"
 #include "history.h"
@@ -52,9 +53,11 @@ typedef	struct	s_sh
 	t_env	*env;
 	t_bui	*bui;
 	t_inp	*inp;
+	t_cmd	*cmd;
 }				t_sh;
 
-int	get_next_line(int fd, char **line);
+int build_exec(t_sh *nsh);
+
 int get_input(t_sh *inp);
 int handleArrow(char *c);
 

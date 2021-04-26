@@ -3,7 +3,7 @@
 t_ntype convert_type(t_ttype type)
 {
     if (type >= 0 && type <= 2)
-        return (N_IO_FILE);
+        return (N_RED);
     if (type == 3)
         return (N_PIPE_SEQ);
     if (type == 4)
@@ -37,7 +37,7 @@ t_ast   *node_from_tok(t_tok tok)
     if (!(new = malloc(sizeof(t_ast))))
         return (NULL);
     
-    if (tok.type == 5)
+    if (tok.type == 5 || (tok.type >= 0 && tok.type < 4))
         new->data = ft_strdup(tok.data);
     else
         new->data = tok.data;

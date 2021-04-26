@@ -1,19 +1,26 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-int	nsh_echo(t_env *env, char **args);
-int	nsh_cd(t_env *env, char **args);
-int	nsh_pwd(t_env *env, char **args);
-int	nsh_export(t_env *env, char **args);
-int	nsh_unset(t_env *env, char **args);
-int	nsh_env(t_env *env, char **args);
-int	nsh_exit(t_env *env, char **args);
+#include "nsh.h"
+
+typedef struct  s_sh t_sh;
+typedef int (bi_func) (t_sh *nsh, char **args);
 
 typedef	struct	s_builtins
 {
-	char	*builtin_str[7];
-    int     (*builtin_func[7]) (char **);
+	char	*str[7];
+    bi_func *func[7];
 }               t_bui;
+
+int	is_builtin(char *s, t_bui b);
+
+int	nsh_echo(t_sh *nsh, char **args);
+int	nsh_cd(t_sh *nsh, char **args);
+int	nsh_pwd(t_sh *nsh, char **args);
+int	nsh_export(t_sh *nsh, char **args);
+int	nsh_unset(t_sh *nsh, char **args);
+int	nsh_env(t_sh *nsh, char **args);
+int	nsh_exit(t_sh *nsh, char **args);
 
 
 #endif

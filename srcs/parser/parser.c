@@ -12,6 +12,13 @@
 
 #include "../includes/nsh.h"
 
+/* two problems found: 
+
+    -  "something > | something" is considered valid, for some reason pipe is just ignored (redir pipe).
+    -  ">> file command suffix" is considered invalid, and is not (redir word). 
+*/
+
+
 int     validate(t_lex *l, t_ttype expected)
 {    
     if (l->i >= l->nt)
@@ -25,7 +32,7 @@ int     validate(t_lex *l, t_ttype expected)
     return (1);
 }
 
-int     is_redir(t_tok tok)
+int     tok_is_redir(t_tok tok)
 {
     return (tok.type == DGREAT || tok.type == GREAT || tok.type == LESS);
 }
@@ -55,7 +62,7 @@ int     parse_io_file(t_sh *nsh, t_ast **current)
     if (lex_isover(*nsh->lex))
         return (0);
     io = new_node(N_IO_FILE, ft_strdup("IO_FILE"));
-    if (is_redir(nsh->lex->t[nsh->lex->i]))
+    if (tok_is_redir(nsh->lex->t[nsh->lex->i]))
     {
         new = node_from_tok(nsh->lex->t[nsh->lex->i]);
         nsh->lex->i++;
@@ -103,7 +110,9 @@ int     parse_simple_cmd(t_sh *nsh, t_ast **current)
     if (parse_io_file(nsh, &new->left))
     {
         graft_node_left(current, new);
-        current = &(*current)->left;
+        //current = &(*current)->left;
+        while (parse_cmd_suffix(nsh, current) && !lex_isover(*nsh->lex))
+            current = &(*current)->right;
         return (1);
     }
     else if (parse_word(nsh, &new->left))

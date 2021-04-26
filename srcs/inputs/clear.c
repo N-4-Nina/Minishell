@@ -60,8 +60,7 @@ void    inp_clear(t_inp *inp, int buf)
         {
             clear_one();
             inp->curX--;
-        }
-    
+        }   
     }    
     if (buf)
         buf_clear(inp);

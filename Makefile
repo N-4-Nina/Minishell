@@ -21,6 +21,13 @@ CFLAGS	= -Wall -Wextra -Werror
 GNLBUFF = -D BUFFER_SIZE=100
 SOURCES =  srcs/main.c \
 	   srcs/builtins/builtins.c \
+	   srcs/builtins/nsh_cd.c \
+	   srcs/builtins/nsh_echo.c \
+	   srcs/builtins/nsh_env.c \
+	   srcs/builtins/nsh_exit.c \
+	   srcs/builtins/nsh_export.c \
+	   srcs/builtins/nsh_pwd.c \
+	   srcs/builtins/nsh_unset.c \
 	   srcs/lexer/lexer.c \
 	   srcs/lexer/count.c \
 	   srcs/lexer/set_len.c \
