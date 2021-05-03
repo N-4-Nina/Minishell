@@ -18,7 +18,6 @@ INCLUDES = -I includes/ -I ${LIBFT}
 CC = clang
 LIBS = -L libft/ -lft -lncurses -lX11
 CFLAGS	= -Wall -Wextra -Werror
-GNLBUFF = -D BUFFER_SIZE=100
 SOURCES =  srcs/main.c \
 	   srcs/builtins/builtins.c \
 	   srcs/builtins/nsh_cd.c \

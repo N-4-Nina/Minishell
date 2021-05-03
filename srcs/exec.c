@@ -54,14 +54,14 @@ int cmd_execute_single(t_sh *nsh, t_cmd *cmd)
 {
     int ret;
 
-    dup2(cmd->smpl[0]->input, 0);
     dup2(cmd->smpl[0]->input, 1);
+    dup2(cmd->smpl[0]->output, 0);
     if (cmd->smpl[0]->isbuiltin == -1)
         ret = spawn(cmd->smpl[0], nsh->env);
     else
         ret = (call_builtin(nsh, cmd->smpl[0]));
-    dup2(0, cmd->smpl[0]->input);
     dup2(1, cmd->smpl[0]->input);
+    dup2(0, cmd->smpl[0]->output);
     return (ret);
 }
 
@@ -140,7 +140,10 @@ void    handle_word_suf(t_smpl *s, t_ast *node)
 
 void    handle_io_suf(t_smpl *s, t_ast *node)
 {
-    s->output = open_file(s, node->left->data, get_flags(node->right->data));
+    if (node->left->data[0] == '>')
+        s->output = open_file(s, node->left->data, get_flags(node->right->data));
+    else
+        s->input = open_file(s, node->left->data, get_flags(node->right->data));
 }
 
 void    id_cmd_suffix(t_smpl *s, t_ast *node)
@@ -229,7 +232,8 @@ void    close_files(t_smpl *s)
     while (s->filesnb > 0)
     {
         s->filesnb--;
-        close(s->files[s->filesnb]);
+        printf("closing %d\n", s->files[s->filesnb]);
+        printf("ret = %d\n", close(s->files[s->filesnb]));
         free(&s->files[s->filesnb]); 
     }
 
@@ -241,6 +245,7 @@ void    cmd_reset(t_cmd *cmd)
     i = 0;
     while (i < cmd->smpnb)
     {
+        printf("reset\n");
         close_files(cmd->smpl[i]);
         //free_array(cmd->smpl[i]->argv);
         if (cmd->smpl[i])
