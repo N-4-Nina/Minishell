@@ -31,6 +31,8 @@ SOURCES =  srcs/main.c \
 	   srcs/lexer/lexer.c \
 	   srcs/lexer/count.c \
 	   srcs/lexer/set_len.c \
+	   srcs/exec.c \
+	   srcs/expand_word.c \
 	   srcs/utils.c \
 	   srcs/term.c \
 	   srcs/env.c \

@@ -15,7 +15,7 @@ int	nsh_loop(t_sh *nsh)
 		if (!lex_build(nsh->lex))
 			continue;
 		parse(nsh);
-		//build_exec(nsh);
+		exec(nsh);
 		nsh_reset(nsh);
 		
 	}

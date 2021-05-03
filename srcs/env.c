@@ -73,9 +73,11 @@ char	**env_to_array(t_env *env)
 			arr[i][j+1+ft_strlen(list->name)] = list->value[j];
 			j++;
 		}
+		arr[i][j] = 0;
 		i++;
 		list = list->next;
 	}
+	arr[i] = NULL;
 	return (arr);
 }
 

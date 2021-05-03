@@ -8,7 +8,9 @@ typedef struct s_simple
     int input;
     int output;
     int isbuiltin;
-    int builtin;
+    int argc;
+    int filesnb;
+    int *files;
     char *name;
     char *path;
     char **argv;
@@ -18,9 +20,10 @@ typedef struct s_simple
 typedef struct s_command
 {
     int smpnb;
-    t_smpl  *smpl;
+    t_smpl  **smpl;
 }               t_cmd;
 
+int exec(t_sh *nsh);
 
 
 #endif

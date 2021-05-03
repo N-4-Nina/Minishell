@@ -12,13 +12,6 @@
 
 #include "../includes/nsh.h"
 
-/* two problems found: 
-
-    -  "something > | something" is considered valid, for some reason pipe is just ignored (redir pipe).
-    -  ">> file command suffix" is considered invalid, and is not (redir word). 
-*/
-
-
 int     validate(t_lex *l, t_ttype expected)
 {    
     if (l->i >= l->nt)
@@ -74,7 +67,9 @@ int     parse_io_file(t_sh *nsh, t_ast **current)
             return (1);
         }      
         //free_node(new);
+        nsh->lex->i--;
     }
+    
     free_node(io);
     return (0);
 }

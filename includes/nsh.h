@@ -17,6 +17,7 @@
 #include <errno.h>  
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/types.h>
 #include <linux/limits.h>
 
 #include <signal.h>
@@ -31,7 +32,6 @@
 
 #include "astree.h"
 #include "environment.h"
-#include "exec.h"
 #include "builtins.h"
 #include "colors.h"
 #include "history.h"
@@ -46,6 +46,11 @@
 #define RIGHT	'C'
 #define LEFT	'D'
 
+#define FLAGS_LESS		O_RDONLY
+#define FLAGS_GREAT		O_WRONLY | O_CREAT | O_TRUNC
+#define FLAGS_DGREAT	O_WRONLY | O_CREAT | O_APPEND
+
+int		g_status;
 typedef	struct	s_sh
 {
 	t_ast	*ast;
@@ -53,10 +58,13 @@ typedef	struct	s_sh
 	t_env	*env;
 	t_bui	*bui;
 	t_inp	*inp;
-	t_cmd	*cmd;
+	struct s_cmd	*cmd;
 }				t_sh;
 
-int build_exec(t_sh *nsh);
+#include "exec.h"
+
+
+int build_exec(t_sh *nsh, t_ast *node);
 
 int get_input(t_sh *inp);
 int handleArrow(char *c);
@@ -76,6 +84,9 @@ void    write_dot(t_ast **node);
 /* 
 *utils.c
 */
+
+void    free_array(char **ar);
+
 
 int		isBlank(char c);
 int		isSpec(char c);

@@ -62,6 +62,7 @@ void	nsh_alloc(t_sh *nsh)
 	nsh->lex = (t_lex*)malloc(sizeof(t_lex));
 	nsh->inp = (t_inp*)malloc(sizeof(t_inp));
 	nsh->inp->his = (t_his*)malloc(sizeof(t_his));
+	nsh->bui = (t_bui*)malloc(sizeof(t_bui));
 }
 int	nsh_init(t_sh *nsh)
 {
@@ -69,7 +70,9 @@ int	nsh_init(t_sh *nsh)
 	env_init(&nsh->env);
 	lex_init(nsh->lex);
 	inp_init(nsh->inp);
+	bui_init(nsh);
 	term_init();
+
 	
 	set_sig_behav();
 	return (1);
