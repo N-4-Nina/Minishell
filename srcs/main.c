@@ -71,8 +71,7 @@ int	nsh_init(t_sh *nsh)
 	lex_init(nsh->lex);
 	inp_init(nsh->inp);
 	bui_init(nsh);
-	term_init();
-
+	term_init(nsh->term);
 	
 	set_sig_behav();
 	return (1);

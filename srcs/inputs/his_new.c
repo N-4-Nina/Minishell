@@ -32,18 +32,18 @@ int cycle_new_entry(char *new, t_his *h)
 
 int new_entry(char *new, t_his *h)
 {
-    int i;
+    // int i;
     
     if (h->size == HISTSIZE)
         cycle_new_entry(new, h);
     else
         add_new_entry(new, h);
 
-    i = 0;
-    while (i <= h->size)
-    {
-        printf("%s\n", h->tl[i]);
-        i++;
-    }
+    // i = 0;
+    // while (i <= h->size)
+    // {
+    //     printf("%s\n", h->tl[i]);
+    //     i++;
+    // }
     return (1);
 }

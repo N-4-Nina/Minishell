@@ -30,7 +30,15 @@ SOURCES =  srcs/main.c \
 	   srcs/lexer/lexer.c \
 	   srcs/lexer/count.c \
 	   srcs/lexer/set_len.c \
-	   srcs/exec.c \
+	   srcs/exec/exec.c \
+	   srcs/exec/cmd.c \
+	   srcs/exec/files.c \
+	   srcs/exec/io.c \
+	   srcs/exec/path.c \
+	   srcs/exec/pipe_seq.c \
+	   srcs/exec/redirect.c \
+	   srcs/exec/simple.c \
+	   srcs/exec/word.c \
 	   srcs/expand_word.c \
 	   srcs/utils.c \
 	   srcs/term.c \

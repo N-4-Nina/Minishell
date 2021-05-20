@@ -38,6 +38,7 @@
 #include "inputs.h"
 #include "lexer.h"
 #include "token.h"
+#include "termc.h"
 #include "get_next_line.h"
 #include "../libft/libft.h"
 
@@ -47,8 +48,8 @@
 #define LEFT	'D'
 
 #define FLAGS_LESS		O_RDONLY
-#define FLAGS_GREAT		O_WRONLY | O_CREAT | O_TRUNC
-#define FLAGS_DGREAT	O_WRONLY | O_CREAT | O_APPEND
+#define FLAGS_GREAT		O_WRONLY | O_CREAT | S_IRWXU | O_TRUNC
+#define FLAGS_DGREAT	O_WRONLY | O_CREAT | S_IRWXU | O_APPEND
 
 int		g_status;
 typedef	struct	s_sh
@@ -58,7 +59,8 @@ typedef	struct	s_sh
 	t_env	*env;
 	t_bui	*bui;
 	t_inp	*inp;
-	struct s_cmd	*cmd;
+	struct	s_cmd	*cmd;
+	struct	termios	*term;
 }				t_sh;
 
 #include "exec.h"
@@ -81,6 +83,9 @@ int		parse(t_sh *nsh);
 void	free_tokens(char **tokens);
 
 void    write_dot(t_ast **node);
+//expansion
+char    *expand_word(char *s, t_env *env);
+
 /* 
 *utils.c
 */
@@ -92,7 +97,6 @@ int		isBlank(char c);
 int		isSpec(char c);
 int		isQuote(char c);
 
-int		term_init(void);
 void	env_init(t_env **env);
 
 void	set_sig_behav(void);

@@ -106,6 +106,7 @@ void	token_init(t_tok *tok)
 	tok->len = 0;
 	tok->type = -1;
 }
+
 int	tokenize(t_lex *l)
 {
         l->i = 0; //both should be in lex_clear
@@ -121,7 +122,7 @@ int	tokenize(t_lex *l)
 				handle_spec(l);
             else if (!isSpec(l->inp[l->i]))
 				handle_word(l);
-;        }
+		}
         return (1);
 }  
 

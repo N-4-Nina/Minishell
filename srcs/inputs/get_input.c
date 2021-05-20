@@ -150,6 +150,7 @@ int get_input(t_sh *nsh)
     int r;
 
     r = 0;
+    enableRawMode(nsh->term);
     inp_read(nsh->inp);
     if ((*nsh->inp->buf))
     {
@@ -158,5 +159,6 @@ int get_input(t_sh *nsh)
         r = 1;
     }
     inp_reset(nsh->inp);
+    disableRawMode(nsh->term);
     return (r);
 }

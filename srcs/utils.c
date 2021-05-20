@@ -17,10 +17,11 @@ void    free_array(char **ar)
     int i;
 
     i = 0;
-    while (ar[i])
-        free(ar[i++]);
-    if (ar)
-        free(ar);
+	free(ar);
+    // while (ar[i])
+    //     free(ar[i++]);
+    // if (*ar)
+    //     free(ar);
 }
 
 char *get_current_dir_name(void)
@@ -37,7 +38,7 @@ int	isSpec(char c)
 {
 	return (c == '>' || c == '<' || 
 		c == '|' || c == ';' ||
-		c == '\\' || c == '$');
+		c == '\\');
 }
 int	isQuote(char c)
 {

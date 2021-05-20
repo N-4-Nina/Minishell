@@ -16,8 +16,8 @@ int     validate(t_lex *l, t_ttype expected)
 {    
     if (l->i >= l->nt)
         return (0);
-    if (l->t[l->i].data)
-        printf("validating token: %s with type %d. expecting type %d\n", l->t[l->i].data, l->t[l->i].type, expected);
+    // if (l->t[l->i].data)
+    //     printf("validating token: %s with type %d. expecting type %d\n", l->t[l->i].data, l->t[l->i].type, expected);
     if (l->t[l->i].type == expected)
         l->i++;
     else
@@ -42,7 +42,7 @@ int     parse_word(t_sh *nsh, t_ast **current)
         free_node(new);
         return (0);
     }
-    printf("grafting word \n");
+    // printf("grafting word \n");
     graft_node_left(current, new);
     return (1);
 }
@@ -113,7 +113,7 @@ int     parse_simple_cmd(t_sh *nsh, t_ast **current)
     else if (parse_word(nsh, &new->left))
     {
         graft_node_left(current, new);
-        printf("grafted simple cmd\n");
+        // printf("grafted simple cmd\n");
         while (parse_cmd_suffix(nsh, current) && !lex_isover(*nsh->lex))
             current = &(*current)->right;
         return (1);
@@ -134,8 +134,8 @@ int     add_pipe_seq(t_sh *nsh, t_ast **current, int dir)
             graft_node_left(current, new);
         else
             graft_node_right(current, new);
-        printf("grafted pipe seq\n");
-        printf("i = %d, nt = %d\n", nsh->lex->i, nsh->lex->nt);
+        // printf("grafted pipe seq\n");
+        // printf("i = %d, nt = %d\n", nsh->lex->i, nsh->lex->nt);
         if ((lex_isover(*(nsh->lex)) || (nsh->lex->t[nsh->lex->i].type == SEMI)))
             return (2);
         else if (validate(nsh->lex, PIPE))
@@ -157,7 +157,7 @@ int     add_command(t_sh *nsh, t_ast **current)
         current = &((*current)->left);
         while (check == 1)
         {
-            printf("adding another pipe sequence \n");
+            // printf("adding another pipe sequence \n");
             check = add_pipe_seq(nsh, current, 1);
             current = &(*current)->right;
         }
@@ -181,7 +181,7 @@ int     add_command(t_sh *nsh, t_ast **current)
         current = current->right;
         while (check && (validate(nsh->lex, SEMI)))
         {
-            printf("adding another command \n");
+            // printf("adding another command \n");
             new = new_node(N_CMD, ft_strdup("COMMAND"));
             check = add_command(nsh, &new);
             graft_node_right(&current, new);

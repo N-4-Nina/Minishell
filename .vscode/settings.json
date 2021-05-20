@@ -9,7 +9,11 @@
         "stat.h": "c",
         "colors.h": "c",
         "typeinfo": "c",
-        "inputs.h": "c"
+        "inputs.h": "c",
+        "signal.h": "c",
+        "term.h": "c",
+        "termio.h": "c",
+        "type_traits": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

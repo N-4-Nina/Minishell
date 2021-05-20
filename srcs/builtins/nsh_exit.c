@@ -1,10 +1,14 @@
 #include "../includes/nsh.h"
 
+void	free_everything(t_sh *nsh)
+{
+	free_array(nsh->bui->str);
+}
+
 int	nsh_exit(t_sh *nsh, char **args)
 {
-	//should free everything... maybe reconfigure builtins to accept nsh instead env
-	(void)nsh;
-	args[0][0] = args[0][0];
+	free_everything(nsh);
+	(void)args;
 	exit(EXIT_SUCCESS);
 	return (0);
 }

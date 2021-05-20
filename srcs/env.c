@@ -12,6 +12,21 @@
 
 #include "../includes/nsh.h"
 
+int		env_size(t_env *node)
+{
+	t_env	*origin;
+	int		i;
+
+	i = 0;
+	origin = node;
+	while (node)
+	{
+		i++;
+		node = node->next;
+	}
+	node = origin;
+	return (i);
+}
 void	remove_var(t_env *env, t_env *node)
 {
 	t_env	*lst;
@@ -51,29 +66,19 @@ char	**env_to_array(t_env *env)
 {
 	char	**arr;
 	int	i;
-	int	j;
+
 	t_env	*list;
 
 	list = env;
 	i = 0;
-	arr = (char**)malloc(sizeof(char*));
+	arr = (char**)malloc(sizeof(char*) * (env_size(list) + 1));
 	while (list)
 	{
-		j = 0;
-		arr[i] = malloc(ft_strlen(list->name) + ft_strlen(list->value) +2);
-		while(list->name[j])
-		{
-			arr[i][j] = list->name[j];
-			j++;
-		}
-		arr[i][j] = '=';
-		j = 0;
-		while(list->value[j])
-		{
-			arr[i][j+1+ft_strlen(list->name)] = list->value[j];
-			j++;
-		}
-		arr[i][j] = 0;
+
+		arr[i] = malloc(ft_strlen(list->name) + ft_strlen(list->value) + 2);
+		ft_strlcpy(&arr[i][0], list->name, ft_strlen(list->name)+ 1);
+		arr[i][ft_strlen(list->name)] = '=';
+		ft_strlcpy(&arr[i][ft_strlen(list->name) + 1], list->value, ft_strlen(list->value)+ 1);
 		i++;
 		list = list->next;
 	}
@@ -151,6 +156,11 @@ void	env_init(t_env **env)
 	add_var(*env, "PWD", cdn);
 	free(cdn);
 	add_var(*env, "PATH", "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin/");
+	add_var(*env, "TERM", getenv("TERM"));
+	add_var(*env, "PAGER", "less");
+	add_var(*env, "LANG", getenv("LANG"));
+
+	//add_var(*env, "LESS", "-R");
 	//add_var("USER", execve("/usr/bin/id", ["id", "-u", "-n"], NULL));
 
 }
