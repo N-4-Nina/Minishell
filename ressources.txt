@@ -1,6 +1,6 @@
 https://www.gnu.org/software/bash/manual/html_node/index.html
 https://stackoverflow.com/questions/6697753/difference-between-single-and-double-quotes-in-bash
 
-zeitoun.net/articles communication par tuyau
+http://www.zeitoun.net/articles/communication-par-tuyau/start
 
 gist.github.com/iomonad/a66f6e9cfb935dc12c0244c1e48db5c8

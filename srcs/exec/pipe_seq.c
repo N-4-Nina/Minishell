@@ -72,28 +72,35 @@ int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
     int     red[2];
     //int     origin[2];
     int     fd;
-    t_pid   pid;
+    pid_t   pid;
 
-    i = cmd->smpnb - 1;
+    i = 0;
     red[0] = 0;
     red[1] = 1;
     fd = 0;
-    while (i >= 0)
+    while (i < cmd->smpnb)
     {
         if (pipe(red))
             write(1, "pipe creation error", 18);
         pid = fork();
         if (!pid)
         {
-            dup2()
+            dup2(STDIN_FILENO, fd);
+            if (i < cmd->smpnb - 1)
+                dup2(STDOUT_FILENO, red[1]);
+            close(red[0]);
+            if (execve(cmd->smpl[i]->path, cmd->smpl[i]->argv, NULL) == -1)
+			    printf("couldn't exec %s\n", cmd->smpl[i]->path);
         }
         else
         {
-
+            wait(0);
+            //waitpid(0, NULL, 0);
+            close(red[1]);
+            fd =red[0];
         }
         i++;
-    }
-    waitpid(0);
+    } 
     (void)nsh;
     return (0);
 }
