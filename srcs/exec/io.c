@@ -2,6 +2,7 @@
 
 void    handle_io_suf(t_smpl *s, t_ast *node)
 {
+    // what the fuck is this condition doing ????
     if (node->right->data[0] == '>')
         s->output = open_file(s, node->left->data, get_flags(node->right->data));
     else
