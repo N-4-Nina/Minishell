@@ -19,7 +19,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <linux/limits.h>
-
+#include <string.h>
 #include <signal.h>
 #include <stdint.h>
 #include <sys/ioctl.h>

@@ -1,69 +1,23 @@
 #include "../../includes/nsh.h"
 
-pid_t    spawn_seq(t_sh *nsh, int pipe[2], t_smpl *smpl)
+int exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 {
-    pid_t   pid;
-
-    pid = fork();
-    if (pid == -1)
+    printf("%s =  %d, %d \n", s->path, s->input, s->output);
+    if (s->input != -1 && s->input != STDIN_FILENO)
+        dup2(s->input, STDIN_FILENO);
+    if (s->output != -1 && s->output != STDOUT_FILENO)
+        dup2(s->output, STDOUT_FILENO);
+    if (s->isbuiltin >= 0)
     {
-        //set status
-        nsh_exit(nsh, NULL);
+        call_builtin(nsh, s);
     }
-    if (pid)
-        return (pid);
     else
     {
-        dup2(STDOUT_FILENO, pipe[1]);
-        dup2(STDIN_FILENO, pipe[0]);
-        if (execve(smpl->path, smpl->argv, NULL) == -1)
-			printf("couldn't exec%s\n", smpl->path);
-        return (0);
+        execve(s->path, s->argv, NULL);
     }
-}
-
-pid_t    spawn_first(t_sh *nsh, int pipe[2], t_smpl *smpl)
-{
-    pid_t   pid;
-
-    pid = fork();
-    if (pid == -1)
-    {
-        //set status
-        nsh_exit(nsh, NULL);
-    }
-    if (pid)
-        return (pid);
-    else
-    {
-        close(pipe[0]);
-        dup2(STDOUT_FILENO, pipe[1]);
-        if (execve(smpl->path, smpl->argv, NULL) == -1)
-			printf("couldn't exec%s\n", smpl->path);
-        return (0);
-    }
-}
-
-pid_t    spawn_last(t_sh *nsh, int pipe[2], t_smpl *smpl)
-{
-    pid_t   pid;
-
-    pid = fork();
-    if (pid == -1)
-    {
-        //set status
-        nsh_exit(nsh, NULL);
-    }
-    if (pid)
-        return (pid);
-    else
-    {
-        close(pipe[1]);
-        dup2(STDIN_FILENO, pipe[0]);
-        if (execve(smpl->path, smpl->argv, NULL) == -1)
-			printf("couldn't exec %s\n", smpl->path);
-        return (0);
-    }
+    dup2(fd, STDIN_FILENO);
+    dup2(red[1], STDOUT_FILENO);
+    return (0);
 }
 
 int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
@@ -89,7 +43,8 @@ int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
             if (i < cmd->smpnb - 1)
                 dup2(red[1], 1);
             close(red[0]);
-            exec_single(nsh, cmd->smpl[i]);
+            //execve(cmd->smpl[i]->path, cmd->smpl[i]->argv, NULL);
+            exec_seq_part(nsh, cmd->smpl[i], red, fd);
         }
         else
         {

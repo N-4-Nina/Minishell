@@ -9,7 +9,7 @@ int spawn(t_smpl *smpl, t_env *env)
 
     pid = fork();
     if (pid == -1)
-		return(-1);
+		return (-1);
     if (pid == 0)
 	{
         

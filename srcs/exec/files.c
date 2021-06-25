@@ -5,6 +5,7 @@ void    close_files(t_smpl *s)
     while (s->filesnb > 0)
     {
         s->filesnb--;
+        close(s->files[s->filesnb]);
         // printf("closing %d\n", s->files[s->filesnb]);
         // printf("ret = %d\n", close(s->files[s->filesnb]));    
     }
@@ -26,6 +27,8 @@ int     open_file(t_smpl *s, char *file, int flags)
     int fd;
 
     fd = open(file, flags);
+    if (fd < 0)
+        printf("%s\n",strerror(errno));
     if (fd > -1)
     {
         s->files[s->filesnb] = (int)malloc(sizeof(int));
