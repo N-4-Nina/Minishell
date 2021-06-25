@@ -25,7 +25,7 @@ int term_init(struct termios *term)
         printf("TERM variable must be set ! \n");
         return (-1);
     }
-    term = NULL;
+    term = (struct termios*) NULL;
     if (tgetent(NULL, term_type) < 1)
     {
         printf("Terminal type is not defined or termcap database can't be accessed.\n");

@@ -26,7 +26,7 @@ int     open_file(t_smpl *s, char *file, int flags)
 {
     int fd;
 
-    fd = open(file, flags);
+    fd = open(file, flags, 0660);
     if (fd < 0)
         printf("%s\n",strerror(errno));
     if (fd > -1)

@@ -7,7 +7,8 @@ void	sigint_handler(int signum)
 
     //kill
 	// Terminate program
-    //nsh_exit(signum);
+    if (signum == 2)
+        exit(signum);
 }
 
 void    sigquit_handler(int signum)

@@ -2,7 +2,6 @@
 
 int exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 {
-    printf("%s =  %d, %d \n", s->path, s->input, s->output);
     if (s->input != -1 && s->input != STDIN_FILENO)
         dup2(s->input, STDIN_FILENO);
     if (s->output != -1 && s->output != STDOUT_FILENO)

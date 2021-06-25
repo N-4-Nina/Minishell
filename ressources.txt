@@ -4,3 +4,5 @@ https://stackoverflow.com/questions/6697753/difference-between-single-and-double
 http://www.zeitoun.net/articles/communication-par-tuyau/start
 
 gist.github.com/iomonad/a66f6e9cfb935dc12c0244c1e48db5c8
+
+https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios-termios3-and-stty/

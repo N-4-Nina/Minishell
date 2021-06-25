@@ -2,15 +2,16 @@
 
 int	nsh_export(t_sh *nsh, char **args)
 {
-	int	i;
+	int		i;
 	char	**split;
 	t_env	*node;
 
 	i = 1;
-	while(args[i])
+	while (args[i])
 	{
 		split = ft_split(args[i], '=');
-		if ((node = find_by_name(nsh->env, split[0])))
+		node = find_by_name(nsh->env, split[0]);
+		if (node)
 		{
 			free(node->value);
 			free(node->name);
