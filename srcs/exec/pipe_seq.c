@@ -85,12 +85,11 @@ int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
         pid = fork();
         if (!pid)
         {
-            dup2(STDIN_FILENO, fd);
+            dup2(fd, 0);
             if (i < cmd->smpnb - 1)
-                dup2(STDOUT_FILENO, red[1]);
+                dup2(red[1], 1);
             close(red[0]);
-            if (execve(cmd->smpl[i]->path, cmd->smpl[i]->argv, NULL) == -1)
-			    printf("couldn't exec %s\n", cmd->smpl[i]->path);
+            exec_single(nsh, cmd->smpl[i]);
         }
         else
         {
