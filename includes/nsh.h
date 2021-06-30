@@ -53,6 +53,7 @@
 #define FLAGS_LESS		O_RDONLY
 #define FLAGS_GREAT		O_CREAT | O_WRONLY | O_TRUNC
 #define FLAGS_DGREAT	O_CREAT | O_WRONLY | O_APPEND
+#define FLAGS_DLESS		0
 
 int		g_status;
 typedef	struct	s_sh

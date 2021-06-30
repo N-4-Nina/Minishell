@@ -39,7 +39,8 @@ int count_blank(t_lex *l)
 
 int	count_spec(t_lex *l)
 {
-	if (l->inp[l->i] == '>' && l->inp[l->i + 1] == '>')
+	if ((l->inp[l->i] == '>' && l->inp[l->i + 1] == '>')
+|| (l->inp[l->i] == '<' && l->inp[l->i + 1] == '<'))
 		l->i += 2;
 	else
 		l->i += 1;

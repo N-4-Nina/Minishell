@@ -2,16 +2,16 @@
 
 t_ntype convert_type(t_ttype type)
 {
-    if (type >= 0 && type <= 2)
+    if (type >= DGREAT && type <= LESS)
         return (N_RED);
-    if (type == 3)
+    if (type == PIPE)
         return (N_PIPE_SEQ);
-    if (type == 4)
+    if (type == SEMI)
         return (N_CMD);
-    if (type == 5)
+    if (type == WORD)
         return (N_WORD);
     else
-        return (6);
+        return (N_WORD);
 }
 
 t_ast   *new_node(t_ntype type, char *data)

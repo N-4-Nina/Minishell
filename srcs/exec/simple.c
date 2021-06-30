@@ -13,6 +13,14 @@ void    init_simple(t_smpl *s)
     s->path = NULL;
 }
 
+t_smpl *abort_simple(t_smpl *s)
+{
+    free(s->argv);
+    free(s->files);
+    free(s);
+    return (NULL);
+}
+
 t_smpl *build_simple(t_sh *nsh, t_ast *node)
 {
     t_smpl *s;
@@ -20,7 +28,10 @@ t_smpl *build_simple(t_sh *nsh, t_ast *node)
     s = (t_smpl*)malloc(sizeof(t_smpl));
     init_simple(s);
     if (node->left->type == N_IO_FILE)
-        handle_io_first(s, node, nsh);
+    {
+        if (handle_io_first(s, node, nsh) == -1)
+            return (abort_simple(s));
+    }
     else
         id_cmd_word(s, node, nsh);
     s->argv[s->argc + 1] = malloc(sizeof(char*));

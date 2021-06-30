@@ -19,4 +19,5 @@ typedef	struct s_token
 	t_ttype 		type;
 	char			*data;
 }				t_tok;
+
 #endif

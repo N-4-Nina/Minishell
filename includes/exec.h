@@ -51,8 +51,8 @@ void    id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh);
 void    handle_word_suf(t_smpl *s, t_ast *node, t_env *env);
 
 //io
-void    handle_io_suf(t_smpl *s, t_ast *node);
-void    handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh);
+int    handle_io_suf(t_smpl *s, t_ast *node);
+int    handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh);
 
 //path
 int set_cmd_path(t_smpl *s, t_env *env, char *name);

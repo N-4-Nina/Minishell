@@ -73,7 +73,7 @@ int	set_spec_type(t_lex *l)
 	int		i;
 	
 	i = 0;
-	while (i < 4)
+	while (i < 6)
 	{
 		if (!(ft_strncmp(l->t[l->j].data, types[i], 3)))
 			return (l->t[l->j].type = i);

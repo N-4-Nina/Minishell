@@ -41,7 +41,8 @@ int build_exec(t_sh *nsh, t_ast *node)
 
     while (node)
     {
-        cmd_build(nsh, node->left, &cmd);
+        if (cmd_build(nsh, node->left, &cmd) == -1)
+            break;
         cmd_execute(nsh, &cmd);
         cmd_reset(&cmd);
         node = node->right;

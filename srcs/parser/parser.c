@@ -100,7 +100,6 @@ int     parse_simple_cmd(t_sh *nsh, t_ast **current)
     if (parse_io_file(nsh, &new->left))
     {
         graft_node_left(current, new);
-        //current = &(*current)->left;
         while (parse_cmd_suffix(nsh, current) && !lex_isover(*nsh->lex))
             current = &(*current)->right;
         return (1);
@@ -209,7 +208,7 @@ int parse(t_sh *nsh)
     check = parse_cmd(nsh);
     if (!lex_isover(*nsh->lex) && lex_inbound(*nsh->lex))
     {
-        return(syntax_error(nsh->lex->t[nsh->lex->i]));
+        return (syntax_error(nsh->lex->t[nsh->lex->i]));
         //printf("i = %d,    nt = %d   \n", nsh->lex->i, nsh->lex->nt);
         //printf("Syntax Error, unexpected token: %s \n", nsh->lex->t[nsh->lex->i-1].data);
         return (0);
