@@ -6,6 +6,7 @@ typedef	enum	e_token_type
 {
 	DGREAT,
 	GREAT,
+	DLESS,
 	LESS,
 	PIPE,
 	SEMI,

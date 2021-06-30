@@ -26,7 +26,8 @@ void	set_quote_len(t_lex *l)
 
 void	set_spec_len(t_lex *l)
 {
-	if (l->inp[l->i] == '>' && l->inp[l->i + 1] == '>')
+	if ((l->inp[l->i] == '>' && l->inp[l->i + 1] == '>')
+|| (l->inp[l->i] == '<' && l->inp[l->i + 1] == '<'))
 		l->t[l->j].len = 2;
 	else
 		l->t[l->j].len = 1;

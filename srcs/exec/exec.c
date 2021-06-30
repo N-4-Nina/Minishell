@@ -11,8 +11,7 @@ int spawn(t_smpl *smpl, t_env *env)
     if (pid == -1)
 		return (-1);
     if (pid == 0)
-	{
-        
+	{       
         envArr = env_to_array(env);
 		if (execve(smpl->path, smpl->argv, envArr) == -1)
 			printf("couldn't exec%s\n", smpl->path);

@@ -2,20 +2,20 @@
 
 int exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 {
+    char    **envArr;
+
+    envArr = env_to_array(nsh->env);
     if (s->input != -1 && s->input != STDIN_FILENO)
         dup2(s->input, STDIN_FILENO);
     if (s->output != -1 && s->output != STDOUT_FILENO)
         dup2(s->output, STDOUT_FILENO);
     if (s->isbuiltin >= 0)
-    {
         call_builtin(nsh, s);
-    }
     else
-    {
-        execve(s->path, s->argv, NULL);
-    }
+        execve(s->path, s->argv, envArr);
     dup2(fd, STDIN_FILENO);
     dup2(red[1], STDOUT_FILENO);
+    free_array(envArr);
     return (0);
 }
 

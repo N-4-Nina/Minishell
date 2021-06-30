@@ -29,12 +29,15 @@
 #include <termios.h>
 #include <term.h>
 #include <X11/keysym.h>
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
 
 #include "astree.h"
 #include "environment.h"
 #include "builtins.h"
 #include "colors.h"
-#include "history.h"
 #include "inputs.h"
 #include "lexer.h"
 #include "token.h"
@@ -71,7 +74,7 @@ int build_exec(t_sh *nsh, t_ast *node);
 int get_input(t_sh *inp);
 int handleArrow(char *c);
 
-void display_prompt(t_env *env, t_inp *inp);
+void build_prompt(t_env *env, t_inp *inp);
 int	nsh_loop(t_sh *nsh);
 void	nsh_reset(t_sh *nsh);
 void	nsh_clear(t_sh *nsh);
@@ -85,6 +88,8 @@ void	free_tokens(char **tokens);
 void    write_dot(t_ast **node);
 //expansion
 char    *expand_word(char *s, t_env *env);
+
+int		strmatch(char *s1, char *s2);
 
 /* 
 *utils.c

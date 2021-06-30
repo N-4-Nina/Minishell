@@ -16,7 +16,7 @@ DIR_S = srcs
 DIR_O = objs
 INCLUDES = -I includes/ -I ${LIBFT}
 CC = clang
-LIBS = -L libft/ -lft -lncurses -lX11
+LIBS = -L libft/ -lft -lncurses -lX11 -lreadline
 CFLAGS	= -Wall -Wextra -Werror
 SOURCES =  srcs/main.c \
 	   srcs/builtins/builtins.c \
@@ -42,22 +42,23 @@ SOURCES =  srcs/main.c \
 	   srcs/expand_word.c \
 	   srcs/utils.c \
 	   srcs/term.c \
-	   srcs/env.c \
+	   srcs/env/env.c \
+	   srcs/env/env2.c \
 	   srcs/signals.c \
 	   srcs/loop.c \
 	   srcs/write_dot.c \
 	   srcs/parser/parser.c \
 	   srcs/parser/astree.c \
-	   srcs/prompt/prompt.c \
-	   srcs/inputs/ascii.c \
-	   srcs/inputs/clear.c \
-	   srcs/inputs/cursor.c \
-	   srcs/inputs/get_input.c \
-	   srcs/inputs/his_navigate.c \
-	   srcs/inputs/his_new.c \
-	   srcs/inputs/history.c \
-	   srcs/inputs/arrows.c \
-	   srcs/inputs/utf.c
+	   srcs/prompt/prompt.c 
+	#    srcs/inputs/ascii.c \
+	#    srcs/inputs/clear.c \
+	#    srcs/inputs/cursor.c \
+	#    srcs/inputs/get_input.c \
+	#    srcs/inputs/his_navigate.c \
+	#    srcs/inputs/his_new.c \
+	#    srcs/inputs/history.c \
+	#    srcs/inputs/arrows.c \
+	#    srcs/inputs/utf.c
 
 OBJS	= ${SOURCES:.c=.o}
 

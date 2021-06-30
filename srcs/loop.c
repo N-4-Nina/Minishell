@@ -7,11 +7,12 @@ int	nsh_loop(t_sh *nsh)
 	status = 1;
 	while (status)
 	{
-		display_prompt(nsh->env, nsh->inp);
-
-		//status = get_next_line(0, &(nsh->lex->inp));
-		if(!get_input(nsh))
+		build_prompt(nsh->env, nsh->inp);
+		nsh->lex->inp = readline(nsh->inp->prompt);
+		if(!nsh->lex->inp)
 			continue;
+		if (nsh->lex->inp[0])
+			add_history(nsh->lex->inp);
 		if (!lex_build(nsh->lex))
 			continue;
 		parse(nsh);

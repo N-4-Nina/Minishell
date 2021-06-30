@@ -34,10 +34,10 @@ t_ast   *node_from_tok(t_tok tok)
 {
     t_ast   *new;
 
-    if (!(new = malloc(sizeof(t_ast))))
+    new = malloc(sizeof(t_ast));
+    if (!new)
         return (NULL);
-    
-    if (tok.type == 5 || (tok.type >= 0 && tok.type < 4))
+    if (tok.type == WORD || (tok.type >= DGREAT && tok.type < SEMI))
         new->data = ft_strdup(tok.data);
     else
         new->data = tok.data;

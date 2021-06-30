@@ -16,8 +16,6 @@ int     validate(t_lex *l, t_ttype expected)
 {    
     if (l->i >= l->nt)
         return (0);
-    // if (l->t[l->i].data)
-    //     printf("validating token: %s with type %d. expecting type %d\n", l->t[l->i].data, l->t[l->i].type, expected);
     if (l->t[l->i].type == expected)
         l->i++;
     else
@@ -27,7 +25,8 @@ int     validate(t_lex *l, t_ttype expected)
 
 int     tok_is_redir(t_tok tok)
 {
-    return (tok.type == DGREAT || tok.type == GREAT || tok.type == LESS);
+    return (tok.type == DGREAT || tok.type == DLESS \
+|| tok.type == GREAT || tok.type == LESS);
 }
 
 int     parse_word(t_sh *nsh, t_ast **current)
@@ -42,7 +41,6 @@ int     parse_word(t_sh *nsh, t_ast **current)
         free_node(new);
         return (0);
     }
-    // printf("grafting word \n");
     graft_node_left(current, new);
     return (1);
 }
@@ -63,13 +61,10 @@ int     parse_io_file(t_sh *nsh, t_ast **current)
         {
             graft_node_left(current, io);
             graft_node_right(&io, new);
-            //nsh->lex->i++;
             return (1);
         }      
-        //free_node(new);
         nsh->lex->i--;
     }
-    
     free_node(io);
     return (0);
 }
@@ -195,7 +190,7 @@ int     add_command(t_sh *nsh, t_ast **current)
 
 int syntax_error(t_tok t)
 {
-    char *spec[5] = { ">>", ">", "<", "|", ";"};
+    static char *spec[6] = { ">>", ">", "<<", "<", "|", ";"};
 
     if (t.type == WORD)
         printf("Syntax Error, unexpected token: %s \n", t.data);

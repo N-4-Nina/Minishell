@@ -69,16 +69,14 @@ void	handle_quote(t_lex *l)
 	
 int	set_spec_type(t_lex *l)
 {
-	char 	types[4] = {'>', '<', '|', ';'};
+	static	char 	*types[6] = {">>", ">", "<<", "<", "|", ";"};
 	int		i;
 	
-	if (l->t[l->j].len == 2)
-		return (l->t[l->j].type = DGREAT);
 	i = 0;
 	while (i < 4)
 	{
-		if (l->t[l->j].data[0] == types[i])
-			return (l->t[l->j].type = i + 1);
+		if (!(ft_strncmp(l->t[l->j].data, types[i], 3)))
+			return (l->t[l->j].type = i);
 		i++;
 	}
 	return (-1);
