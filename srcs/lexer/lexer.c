@@ -135,8 +135,8 @@ void  lex_reset(t_lex *l)
 	
 	while (l->nt >= 0)
 	{
-		if (l->t[l->nt].type == PIPE)  
-			free(l->t[l->nt].data);
+		// if (l->t[l->nt].type == PIPE)  
+		// 	free(l->t[l->nt].data);
 		l->nt--;
 	}
 	l->nt = 0;

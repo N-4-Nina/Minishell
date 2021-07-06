@@ -38,7 +38,7 @@ int cmd_build(t_sh *nsh, t_ast *node, t_cmd *cmd)
         while (node->type != N_SIMPLE_CMD)
             node = node->left;
         cmd->smpl[cmd->smpnb] = build_simple(nsh, node);
-        if (!cmd->smpl[cmd->smpnb])
+        if (cmd->smpl[cmd->smpnb] == NULL)
         {
             cmd_reset(cmd);
             return (-1);

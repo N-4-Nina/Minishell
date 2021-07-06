@@ -33,8 +33,7 @@ int spawn(t_smpl *smpl, t_env *env)
 
 int call_builtin(t_sh *nsh, t_smpl *s)
 {
-    nsh->bui->func[s->isbuiltin](nsh, s->argv);
-    return (1);
+    return (nsh->bui->func[s->isbuiltin](nsh, s->argv));
 }
 
 int build_exec(t_sh *nsh, t_ast *node)

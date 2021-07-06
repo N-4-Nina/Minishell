@@ -16,7 +16,10 @@ int    id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
     if ((s->isbuiltin = is_builtin(xpd, nsh->bui)) != -1)
         free(xpd);
     else if (!set_cmd_path(s, nsh->env, xpd))
+    {
         printf("Nsh: Command not found: %s\n", node->left->data);
+        return (-1);
+    }
     s->argv[0] = ft_strdup(node->left->data);
     s->argc++;
     node = node->right;

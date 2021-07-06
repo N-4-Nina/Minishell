@@ -27,8 +27,10 @@ void    init_simple(t_smpl *s, int ac)
 
 t_smpl *abort_simple(t_smpl *s)
 {
-    free(s->argv);
-    free(s->files);
+    if (s->argv)
+        free(s->argv);
+    if (s->files)
+        free(s->files);
     free(s);
     return (NULL);
 }
@@ -52,6 +54,5 @@ t_smpl *build_simple(t_sh *nsh, t_ast *node)
             return (abort_simple(s));
     }
     s->argv[s->argc] = NULL;
-    //s->argv[s->argc] = malloc(sizeof(char*));
     return (s);
 }
