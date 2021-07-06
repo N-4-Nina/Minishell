@@ -55,6 +55,10 @@
 #define FLAGS_DGREAT	O_CREAT | O_WRONLY | O_APPEND
 #define FLAGS_DLESS		0
 
+#define INTERACTIVE		1
+#define RESET			2
+#define IGNORE			3
+
 int		g_status;
 typedef	struct	s_sh
 {
@@ -96,7 +100,7 @@ int		strmatch(char *s1, char *s2);
 *utils.c
 */
 
-void    free_array(char **ar);
+void    free_array(char **ar, int size);
 
 
 int		isBlank(char c);
@@ -105,7 +109,7 @@ int		isQuote(char c);
 
 void	env_init(t_env **env);
 
-void	set_sig_behav(void);
+void	set_sig_behav(int mode);
 void	signal_callback_handler(int signum);
 
 #endif

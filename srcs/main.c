@@ -25,13 +25,18 @@ void print_tokens(t_lex *l)
 
 void	nsh_clear(t_sh *nsh)
 {
-	lex_reset(nsh->lex);
-	ast_reset(&(nsh->ast));
+	free(nsh->lex);
+	free(nsh->inp);
+	free_array(nsh->bui->str, 7);
+	free(nsh->bui);
+	env_clear(nsh->env);
 }
+
 void	nsh_reset(t_sh *nsh)
 {
-	lex_reset(nsh->lex);
+	free(nsh->inp->prompt);
 	ast_reset(&(nsh->ast));
+	lex_reset(nsh->lex);
 }
 void	win_init(t_inp *inp)
 {
@@ -63,9 +68,9 @@ void	nsh_alloc(t_sh *nsh)
 {
 	nsh->lex = (t_lex*)malloc(sizeof(t_lex));
 	nsh->inp = (t_inp*)malloc(sizeof(t_inp));
-	//nsh->inp->his = (t_his*)malloc(sizeof(t_his));
 	nsh->bui = (t_bui*)malloc(sizeof(t_bui));
 }
+
 int	nsh_init(t_sh *nsh)
 {
 	nsh_alloc(nsh);
@@ -75,7 +80,6 @@ int	nsh_init(t_sh *nsh)
 	bui_init(nsh);
 	term_init(nsh->term);
 	
-	set_sig_behav();
 	return (1);
 }
 

@@ -12,16 +12,15 @@
 
 #include "../includes/nsh.h"
 
-void    free_array(char **ar)
+void    free_array(char **ar, int size)
 {
     int i;
 
     i = 0;
-	free(ar);
-    // while (ar[i])
-    //     free(ar[i++]);
-    // if (*ar)
-    //     free(ar);
+    while (i < size)
+        free(ar[i++]);
+    if (ar)
+        free(ar);
 }
 
 char *get_current_dir_name(void)

@@ -57,7 +57,9 @@ void    cmd_reset(t_cmd *cmd)
     while (i < cmd->smpnb)
     {
         close_files(cmd->smpl[i]);
-        //free_array(cmd->smpl[i]->argv);
+        free_array(cmd->smpl[i]->argv, cmd->smpl[i]->argc);
+        if (cmd->smpl[i]->path)
+            free(cmd->smpl[i]->path);
         if (cmd->smpl[i])
             free(cmd->smpl[i]);
         i++; 

@@ -38,7 +38,7 @@ int     parse_word(t_sh *nsh, t_ast **current)
     new = node_from_tok(nsh->lex->t[nsh->lex->i]);
     if (!validate(nsh->lex, WORD))
     {
-        free_node(new);
+        free_node(new, 0);
         return (0);
     }
     graft_node_left(current, new);
@@ -65,7 +65,7 @@ int     parse_io_file(t_sh *nsh, t_ast **current)
         }      
         nsh->lex->i--;
     }
-    free_node(io);
+    free_node(io, 1);
     return (0);
 }
 
@@ -86,7 +86,7 @@ int     parse_cmd_suffix(t_sh *nsh, t_ast **current)
         graft_node_right(current, new);
         return (1);
     }
-    free_node(new);
+    free_node(new, 1);
     return (0);
 }
 
@@ -112,6 +112,7 @@ int     parse_simple_cmd(t_sh *nsh, t_ast **current)
             current = &(*current)->right;
         return (1);
     }
+    free_node(new, 1);
     return (0);
 }
 
@@ -135,7 +136,7 @@ int     add_pipe_seq(t_sh *nsh, t_ast **current, int dir)
         else if (validate(nsh->lex, PIPE))
             return (1);
     }
-    free_node(new);
+    free_node(new, 1);
     return (0);
 }
 

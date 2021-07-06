@@ -1,24 +1,35 @@
 #include "../includes/nsh.h"
 
-void	sigint_handler(int signum)
+void	interactive_handler(int signum)
 {
-	printf("Caught signal %d\n",signum);
-	// Cleanup and close up stuff here
-
-    //kill
-	// Terminate program
-    if (signum == 2)
-        exit(signum);
+    if (signum == SIGINT)
+    {
+        write(1, "\n", 1);
+        rl_on_new_line();
+        rl_replace_line("", 0);
+        rl_redisplay();
+    }
+    else if (signum == SIGQUIT)
+    {
+        NULL;
+    }
 }
 
-void    sigquit_handler(int signum)
+void    set_sig_behav(int mode)
 {
-    // CTRL + \""
-    printf("Caught signal %d\n",signum);
-}
-
-void    set_sig_behav(void)
-{
-    signal(SIGINT, sigint_handler);
-    signal(SIGQUIT, sigquit_handler);
+    if (mode == INTERACTIVE)
+    {
+        signal(SIGINT, interactive_handler);
+        signal(SIGQUIT, interactive_handler);
+    }
+    else if (mode == RESET)
+    {
+        signal(SIGINT, SIG_DFL);
+        signal(SIGQUIT, SIG_DFL);
+    }
+    else if (mode == IGNORE)
+    {
+        signal(SIGINT, SIG_IGN);
+        signal(SIGQUIT, SIG_IGN);
+    }
 }

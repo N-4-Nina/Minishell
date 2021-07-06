@@ -37,7 +37,7 @@ int     get_flags(char *red);
 void    close_files(t_smpl *s);
 
 //simple
-void    init_simple(t_smpl *s);
+void    init_simple(t_smpl *s, int ac);
 t_smpl *build_simple(t_sh *nsh, t_ast *node);
 
 //pipe_seq
@@ -47,8 +47,8 @@ int call_builtin(t_sh *nsh, t_smpl *s);
 int spawn(t_smpl *smpl, t_env *env);
 
 //word
-void    id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh);
-void    handle_word_suf(t_smpl *s, t_ast *node, t_env *env);
+int    id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh);
+int    handle_word_suf(t_smpl *s, t_ast *node, t_env *env);
 
 //io
 int    handle_io_suf(t_smpl *s, t_ast *node);

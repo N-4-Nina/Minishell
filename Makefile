@@ -39,7 +39,7 @@ SOURCES =  srcs/main.c \
 	   srcs/exec/redirect.c \
 	   srcs/exec/simple.c \
 	   srcs/exec/word.c \
-	   srcs/expand_word.c \
+	   srcs/exec/expand_word.c \
 	   srcs/utils.c \
 	   srcs/term.c \
 	   srcs/env/env.c \

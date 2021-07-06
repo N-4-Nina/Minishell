@@ -32,9 +32,7 @@ char	*get_dir_name(t_env *env)
 		while (split[i])
 			i++;
 		ret = ft_strdup(split[i - 1]);
-		while (split[i])
-			free(split[i++]);
-		free(split);
+		free_array(split, i);
 	}
 	return (ret);
 }
@@ -50,15 +48,17 @@ void	build_prompt(t_env *env, t_inp *inp)
 	j = 0;
 	s = get_dir_name(env);
 	len = ft_strlen(s);
-	inp->prompt = malloc(len + 10 + (COLOR_SIZE + 1 * 3));
-	ft_bzero(inp->prompt, len + 10 + (COLOR_SIZE + 1 * 3));
+	inp->prompt = malloc(len + 10 + BOLD_SIZE * 2 + (COLOR_SIZE + 1 * 3));
+	ft_bzero(inp->prompt, len + 10 + BOLD_SIZE * 2 + (COLOR_SIZE + 1 * 3));
+	j += ft_strlcat(&inp->prompt[j], SET_BOLD, BOLD_SIZE + 1);
 	j += ft_strlcat(&inp->prompt[j], SET_BLUE, COLOR_SIZE + 1);
 	j += ft_strlcat(&inp->prompt[j], s, len + 1);
 	j += ft_strlcat(&inp->prompt[j], SET_YELLOW, COLOR_SIZE + 1);
 	j += ft_strlcat(&inp->prompt[j], " -> ", 5);
 	j += ft_strlcat(&inp->prompt[j], SET_WHITE, COLOR_SIZE);
+	j += ft_strlcat(&inp->prompt[j], SET_LIGHT, BOLD_SIZE + 1);
 	i = 0;
-	
+	free(s);
 }
 
 // void	display_prompt(t_env *env)

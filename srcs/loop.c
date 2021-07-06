@@ -7,10 +7,14 @@ int	nsh_loop(t_sh *nsh)
 	status = 1;
 	while (status)
 	{
+		set_sig_behav(INTERACTIVE);
 		build_prompt(nsh->env, nsh->inp);
 		nsh->lex->inp = readline(nsh->inp->prompt);
 		if(!nsh->lex->inp)
-			continue;
+		{
+			free(nsh->inp->prompt);
+			break;
+		}
 		if (nsh->lex->inp[0])
 			add_history(nsh->lex->inp);
 		if (!lex_build(nsh->lex))

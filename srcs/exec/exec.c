@@ -6,20 +6,24 @@ int spawn(t_smpl *smpl, t_env *env)
     pid_t   wpid;
     char    **envArr;
     int     status;
+    int     envSize;
 
     pid = fork();
     if (pid == -1)
 		return (-1);
     if (pid == 0)
-	{       
-        envArr = env_to_array(env);
+	{
+        signal(SIGINT, SIG_DFL);
+        envArr = env_to_array(env, &envSize);
 		if (execve(smpl->path, smpl->argv, envArr) == -1)
-			printf("couldn't exec%s\n", smpl->path);
-		free_array(envArr);
+            NULL;
+			//printf("couldn't exec%s\n", smpl->path);
+		free_array(envArr, envSize);
 		exit(EXIT_SUCCESS);
 	}
 	else
 	{
+        signal(SIGINT, SIG_IGN);
 		wpid = waitpid(pid, &status, WUNTRACED);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
@@ -29,10 +33,8 @@ int spawn(t_smpl *smpl, t_env *env)
 
 int call_builtin(t_sh *nsh, t_smpl *s)
 {
-    //printf("builtin number= %d, ret =%d\n", s->isbuiltin, nsh->bui->func[s->isbuiltin](nsh, s->argv));
     nsh->bui->func[s->isbuiltin](nsh, s->argv);
     return (1);
-    //return(nsh->bui->func[s->isbuiltin](nsh, s->argv));
 }
 
 int build_exec(t_sh *nsh, t_ast *node)
@@ -42,7 +44,10 @@ int build_exec(t_sh *nsh, t_ast *node)
     while (node)
     {
         if (cmd_build(nsh, node->left, &cmd) == -1)
-            break;
+        {
+            node = node->right;
+            continue;
+        }
         cmd_execute(nsh, &cmd);
         cmd_reset(&cmd);
         node = node->right;

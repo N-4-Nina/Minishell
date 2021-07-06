@@ -51,7 +51,7 @@ int	strmatch(char *s1, char *s2)
 	return (0);
 }
 
-char	**env_to_array(t_env *env)
+char	**env_to_array(t_env *env, int *size)
 {
 	char	**arr;
 	int		i;
@@ -70,6 +70,7 @@ ft_strlen(list->value) + 1);
 		i++;
 		list = list->next;
 	}
+	*size = i;
 	arr[i] = NULL;
 	return (arr);
 }

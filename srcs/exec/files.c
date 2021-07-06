@@ -9,7 +9,7 @@ void    close_files(t_smpl *s)
         // printf("closing %d\n", s->files[s->filesnb]);
         // printf("ret = %d\n", close(s->files[s->filesnb]));    
     }
-    free(&s->files[s->filesnb]);
+    free(s->files);
 }
 
 int     get_flags(char *red)

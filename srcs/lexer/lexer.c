@@ -54,7 +54,8 @@ void	handle_blank(t_lex *l)
 
 void	copy_data(t_lex *l, int add)
 {
-	if(!(l->t[l->j].data = (char *)malloc(l->t[l->j].len + add)))
+	l->t[l->j].data = (char *)malloc(l->t[l->j].len + add);
+	if (!l->t[l->j].data)
 	 	return (abort_token(l));
 	ft_strlcpy(l->t[l->j].data, &l->inp[l->i], l->t[l->j].len + add);
 }
@@ -130,15 +131,15 @@ void  lex_reset(t_lex *l)
 	l->j = 0;
 	if (l->inp)
 		free(l->inp);
-	//l->nt--;
+	l->nt--;
 	
-	// while (l->nt > 0)
-	// {
-	// 	if (l->t[l->nt].type == WORD)
-	// 		free(l->t[l->nt].data);
-	// 	l->nt--;
-	// }
-	l->nt = 0; //should be unecessary ??
+	while (l->nt >= 0)
+	{
+		if (l->t[l->nt].type == PIPE)  
+			free(l->t[l->nt].data);
+		l->nt--;
+	}
+	l->nt = 0;
 	if (l->t)
 		free(l->t);
 }
@@ -164,8 +165,8 @@ int	lex_isover(t_lex lex)
 
 int  lex_build(t_lex *l)
 {
-	//if (!l->inp)
-	//	return (0);
+	if (!l->inp)
+		return (0);
     if (count_tokens(l) <= 0)
 		return (0);
 	l->t = malloc(sizeof(t_tok) * l->nt);

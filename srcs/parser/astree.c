@@ -18,7 +18,8 @@ t_ast   *new_node(t_ntype type, char *data)
 {
     t_ast   *new;
 
-    if (!(new = malloc(sizeof(t_ast))))
+    new = malloc(sizeof(t_ast));
+    if (!new)
         return (NULL);
     new->data = data;
     new->type = type;
@@ -37,9 +38,9 @@ t_ast   *node_from_tok(t_tok tok)
     new = malloc(sizeof(t_ast));
     if (!new)
         return (NULL);
-    if (tok.type == WORD || (tok.type >= DGREAT && tok.type < SEMI))
-        new->data = ft_strdup(tok.data);
-    else
+    //if (tok.type == WORD || (tok.type >= DGREAT && tok.type < SEMI))
+    //    new->data = ft_strdup(tok.data);
+    //else
         new->data = tok.data;
     new->len = tok.len;
     new->type = convert_type(tok.type);
@@ -49,9 +50,9 @@ t_ast   *node_from_tok(t_tok tok)
     return (new);
 }
 
-void    free_node(t_ast *node)
+void    free_node(t_ast *node, int free_data)
 {
-    if (node->data)
+    if (node->data && free_data)
         free(node->data);
     if (node)
         free(node);
@@ -100,19 +101,20 @@ void    graft_node_right(t_ast **node, t_ast *new)
 
 void    ast_reset(t_ast **node)
 {
-    if (node || !*node)
+    if (!node || !*node)
         return;
     if ((*node)->left)
         ast_reset(&(*node)->left);
     if ((*node)->right)
         ast_reset(&(*node)->right);
 
-    free_node((*node));  
+    free_node((*node), 1);
 }
 
 int     tree_init(t_sh *nsh)
-{ 
-    if (!(nsh->ast = new_node(N_PROGRAM, ft_strdup("Program"))))
+{
+    nsh->ast = new_node(N_PROGRAM, ft_strdup("Program"));
+    if (!nsh->ast)
         return (0);
     return (1);
 }
