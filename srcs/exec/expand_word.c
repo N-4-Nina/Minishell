@@ -19,14 +19,23 @@ void    do_cat(char **dst, char *src)
     free(tmp);
 }
 
+int     replace_status(char **dst, char *src, int status)
+{
+    char    *astat;
+
+    (void)src;
+    astat = ft_itoa(status);
+    do_cat(dst, astat);
+    free(astat);
+    return (2);
+}
+
 int     replace_var(char **dst, char *src, t_env *env)
 {
     t_env   *var;
     int     i;
 
     i = 1;
-    if (src[i + 1])
-        return (replace_status());
     while (src[i] && !(isBlank(src[i])) && src[i] != '"')
         i++;
     var = find_by_name(env, ft_substr(src, 1 , i - 1));
@@ -73,7 +82,7 @@ int     replace_weak(char **dst, char *src, t_env *env)
     return (i + 1);
 }
 
-char    *expand_word(char *s, t_env *env)
+char    *expand_word(char *s, t_env *env, int *status)
 {
     int     i;
     char    *new;
@@ -88,6 +97,8 @@ char    *expand_word(char *s, t_env *env)
             i += replace_strong(&new, &s[i]);
         else if (s[i] == '"')
             i += replace_weak(&new, &s[i], env);
+        else if (s[i] == '$' && s[i + 1] == '?')
+            i += replace_status(&new, &s[i], *status);
         else if (s[i] == '$')
             i += replace_var(&new, &s[i], env);
         else if (s[i] == '\\')

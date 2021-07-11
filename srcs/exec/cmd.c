@@ -8,7 +8,7 @@ int exec_single(t_sh *nsh, t_smpl *s)
     ret = 0;
     redirect(s, &origin[0], &origin[1]);
     if (s->isbuiltin == -1)
-        ret = spawn(s, nsh->env);
+        ret = fork_single(s, nsh->env, nsh->last_status);
     else
         ret = (call_builtin(nsh, s));
     recover_origin(origin);

@@ -46,14 +46,14 @@ t_smpl *build_simple(t_sh *nsh, t_ast *node);
 int exec_pipe_seq(t_sh *nsh, t_cmd *cmd);
 
 int call_builtin(t_sh *nsh, t_smpl *s);
-int fork_single(t_smpl *smpl, t_env *env);
+int fork_single(t_smpl *smpl, t_env *env, int *status);
 
 //word
 int    id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh);
-int    handle_word_suf(t_smpl *s, t_ast *node, t_env *env);
+int    handle_word_suf(t_smpl *s, t_ast *node, t_env *env, int *status);
 
 //io
-int    handle_io_suf(t_smpl *s, t_ast *node, t_env *env);
+int    handle_io_suf(t_smpl *s, t_ast *node, t_env *env, int *status);
 int    handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh);
 
 //path

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chpl <marvin@42.fr>                        +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:45:13 by chpl              #+#    #+#              #
-#    Updated: 2021/03/24 10:37:33 by chpl             ###   ########.fr        #
+#    Updated: 2021/07/11 18:38:49 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,10 @@ SOURCES =  srcs/main.c \
 	   srcs/builtins/nsh_pwd.c \
 	   srcs/builtins/nsh_unset.c \
 	   srcs/lexer/lexer.c \
+	   srcs/lexer/lex_spec.c \
+	   srcs/lexer/lex_token.c \
+	   srcs/lexer/lex_utils.c \
+	   srcs/lexer/lex_word.c \
 	   srcs/lexer/count.c \
 	   srcs/lexer/set_len.c \
 	   srcs/exec/exec.c \
@@ -47,8 +51,13 @@ SOURCES =  srcs/main.c \
 	   srcs/signals.c \
 	   srcs/loop.c \
 	   srcs/write_dot.c \
-	   srcs/parser/parser.c \
-	   srcs/parser/astree.c \
+	   srcs/parser/parser_main.c \
+	   srcs/parser/parser_utils.c \
+	   srcs/parser/parse_core.c \
+	   srcs/parser/parse_cmd.c \
+	   srcs/parser/ast_main.c \
+	   srcs/parser/ast_graft.c \
+	   srcs/parser/ast_nodes.c \
 	   srcs/prompt/prompt.c 
 	#    srcs/inputs/ascii.c \
 	#    srcs/inputs/clear.c \

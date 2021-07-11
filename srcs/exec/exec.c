@@ -3,7 +3,9 @@
 int	single_child(t_smpl *smpl, t_env *env)
 {
 	char	**envArr;
+	int		envSize;
 
+	envSize = 0;
 	signal(SIGINT, SIG_DFL);
 	envArr = env_to_array(env, &envSize);
 	if (execve(smpl->path, smpl->argv, envArr) == -1)
@@ -12,26 +14,24 @@ int	single_child(t_smpl *smpl, t_env *env)
 	exit(EXIT_SUCCESS);
 }
 
-int	fork_single(t_smpl *smpl, t_env *env)
+int	fork_single(t_smpl *smpl, t_env *env, int *status)
 {
 	pid_t	pid;
 	pid_t	wpid;
-	int		status;
-	int		envSize;
 
 	pid = fork();
 	if (pid == -1)
 		return (-1);
 	if (pid == 0)
-		single_child(t_smpl *smpl, t_env *env)	
+		single_child(smpl, env);
 	else
 	{
 		signal(SIGINT, SIG_IGN);
-		wpid = waitpid(pid, &status, WUNTRACED);
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			wpid = waitpid(pid, &status, WUNTRACED);
+		wpid = waitpid(pid, status, WUNTRACED);
+		while (!WIFEXITED(*status) && !WIFSIGNALED(*status))
+			wpid = waitpid(pid, status, WUNTRACED);
 	}
-	return (status);
+	return (*status);
 }
 
 int	call_builtin(t_sh *nsh, t_smpl *s)
@@ -42,7 +42,9 @@ int	call_builtin(t_sh *nsh, t_smpl *s)
 int	exec(t_sh *nsh)
 {
 	t_cmd	cmd;
+	t_ast	*node;
 
+	node = nsh->ast;
 	while (node)
 	{
 		if (cmd_build(nsh, node->left, &cmd) == -1)

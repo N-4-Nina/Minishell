@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nsh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:40:11 by chpl              #+#    #+#             */
-/*   Updated: 2020/11/25 15:35:40 by chpl             ###   ########.fr       */
+/*   Updated: 2021/07/11 18:46:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef	struct	s_sh
 	t_env	*env;
 	t_bui	*bui;
 	t_inp	*inp;
-	int		last_status;
+	int		*last_status;
 	struct	s_cmd	*cmd;
 	struct	termios	*term;
 }				t_sh;
@@ -89,8 +89,18 @@ int		parse(t_sh *nsh);
 void	free_tokens(char **tokens);
 
 void    write_dot(t_ast **node);
+
+int	parse_cmd(t_sh *nsh);
+int	validate(t_lex *l, t_ttype expected);
+int	tok_is_redir(t_tok tok);
+int	syntax_error(t_tok t);
+int	parse_cmd_suffix(t_sh *nsh, t_ast **current);
+int	parse_io_file(t_sh *nsh, t_ast **current);
+int	parse_word(t_sh *nsh, t_ast **current);
+
+
 //expansion
-char    *expand_word(char *s, t_env *env);
+char    *expand_word(char *s, t_env *env, int *status);
 
 int		strmatch(char *s1, char *s2);
 
