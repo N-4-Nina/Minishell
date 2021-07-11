@@ -2,12 +2,11 @@
 
 void	free_everything(t_sh *nsh)
 {
-	cmd_reset((t_cmd*)nsh->cmd);
+	cmd_reset((t_cmd *)nsh->cmd);
 	free_array(nsh->bui->str, 7);
 	ast_reset(&nsh->ast);
 	free(nsh->inp->prompt);
-	//free(nsh->inp->line);
-	//free(nsh->lex->inp);
+	env_clear(nsh->env);
 	lex_reset(nsh->lex);
 	free(nsh->lex);
 	free(nsh->inp);

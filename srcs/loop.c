@@ -25,5 +25,5 @@ int	nsh_loop(t_sh *nsh)
 		
 	}
 	nsh_clear(nsh);
-	return(status);
+	return (status);
 }

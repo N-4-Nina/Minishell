@@ -16,7 +16,6 @@ void    do_cat(char **dst, char *src)
     *dst = malloc(len);
     ft_strlcpy(*dst, tmp, ft_strlen(tmp) + 1) ;
     ft_strlcat(*dst, src, len);
-    //dst[len] = 0;
     free(tmp);
 }
 
@@ -26,9 +25,11 @@ int     replace_var(char **dst, char *src, t_env *env)
     int     i;
 
     i = 1;
+    if (src[i + 1])
+        return (replace_status());
     while (src[i] && !(isBlank(src[i])) && src[i] != '"')
         i++;
-    var = find_by_name(env, ft_substr(src, 1 , i-1));
+    var = find_by_name(env, ft_substr(src, 1 , i - 1));
     if (!var)
         return (i);
     do_cat(dst, var->value);

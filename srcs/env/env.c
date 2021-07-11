@@ -41,18 +41,17 @@ void	add_var(t_env *env, char *name, char *value)
 	}
 }
 
-t_env	*find_by_name(t_env *env, char *str)
+void	add_heredoc_path(t_env **env)
 {
-	t_env	*current;
+	char	*tmp;
+	char	*str;
 
-	current = env;
-	while (current)
-	{
-		if (strmatch(str, current->name))
-			return (current);
-		current = current->next;
-	}
-	return (NULL);
+	tmp = getenv("USER");
+	str = ft_strjoin("/home/", tmp);
+	tmp = ft_strjoin(str, "/nsh_heredoc");
+	add_var(*env, "HEREDOC", tmp);
+	free(str);
+	free(tmp);
 }
 
 void	env_clear(t_env *env)
@@ -63,7 +62,8 @@ void	env_clear(t_env *env)
 	current = env;
 	while (current)
 	{
-		tmp = current-> next;
+		printf("%s\n", current->name);
+		tmp = current->next;
 		free(current->name);
 		free(current->value);
 		free(current);
@@ -87,4 +87,6 @@ void	env_init(t_env **env)
 	add_var(*env, "TERM", getenv("TERM"));
 	add_var(*env, "PAGER", "less");
 	add_var(*env, "LANG", getenv("LANG"));
+	add_var(*env, "USER", getenv("USER"));
+	add_heredoc_path(env);
 }

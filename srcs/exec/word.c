@@ -3,7 +3,7 @@
 int    id_cmd_suffix(t_smpl *s, t_ast *node, t_env *env)
 {
     if (node->left->type == N_IO_FILE)
-        return (handle_io_suf(s, node->left));
+        return (handle_io_suf(s, node->left, env));
     else
         return (handle_word_suf(s, node->left, env));
 }

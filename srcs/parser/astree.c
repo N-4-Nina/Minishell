@@ -41,7 +41,7 @@ t_ast   *node_from_tok(t_tok tok)
     //if (tok.type == WORD || (tok.type >= DGREAT && tok.type < SEMI))
     //    new->data = ft_strdup(tok.data);
     //else
-        new->data = tok.data;
+    new->data = tok.data;
     new->len = tok.len;
     new->type = convert_type(tok.type);
     new->left = NULL;
@@ -54,6 +54,7 @@ void    free_node(t_ast *node, int free_data)
 {
     if (node->data && free_data)
         free(node->data);
+    node->data = NULL;
     if (node)
         free(node);
 }

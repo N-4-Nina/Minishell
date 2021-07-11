@@ -53,7 +53,7 @@
 #define FLAGS_LESS		O_RDONLY
 #define FLAGS_GREAT		O_CREAT | O_WRONLY | O_TRUNC
 #define FLAGS_DGREAT	O_CREAT | O_WRONLY | O_APPEND
-#define FLAGS_DLESS		0
+#define FLAGS_DLESS		-1
 
 #define INTERACTIVE		1
 #define RESET			2
@@ -67,14 +67,12 @@ typedef	struct	s_sh
 	t_env	*env;
 	t_bui	*bui;
 	t_inp	*inp;
+	int		last_status;
 	struct	s_cmd	*cmd;
 	struct	termios	*term;
 }				t_sh;
 
 #include "exec.h"
-
-
-int build_exec(t_sh *nsh, t_ast *node);
 
 int get_input(t_sh *inp);
 int handleArrow(char *c);

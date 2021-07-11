@@ -7,6 +7,8 @@ typedef struct s_simple
 {
     int input;
     int output;
+    char    *heredoc;
+    int     hasheredoc;
     int isbuiltin;
     int argc;
     int filesnb;
@@ -32,7 +34,7 @@ int cmd_build(t_sh *nsh, t_ast *node, t_cmd *cmd);
 void    cmd_reset(t_cmd *cmd);
 
 //files
-int     open_file(t_smpl *s, char *file, int flags);
+int     open_file(t_smpl *s, char *file, char *hd, int flags);
 int     get_flags(char *red);
 void    close_files(t_smpl *s);
 
@@ -44,14 +46,14 @@ t_smpl *build_simple(t_sh *nsh, t_ast *node);
 int exec_pipe_seq(t_sh *nsh, t_cmd *cmd);
 
 int call_builtin(t_sh *nsh, t_smpl *s);
-int spawn(t_smpl *smpl, t_env *env);
+int fork_single(t_smpl *smpl, t_env *env);
 
 //word
 int    id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh);
 int    handle_word_suf(t_smpl *s, t_ast *node, t_env *env);
 
 //io
-int    handle_io_suf(t_smpl *s, t_ast *node);
+int    handle_io_suf(t_smpl *s, t_ast *node, t_env *env);
 int    handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh);
 
 //path

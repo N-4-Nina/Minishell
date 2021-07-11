@@ -13,7 +13,18 @@
         "signal.h": "c",
         "term.h": "c",
         "termio.h": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "cctype": "c",
+        "climits": "c",
+        "cmath": "c",
+        "cstdarg": "c",
+        "cstdint": "c",
+        "cstdio": "c",
+        "cstdlib": "c",
+        "cwchar": "c",
+        "limits": "c",
+        "*.tcc": "c",
+        "cstdbool": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
