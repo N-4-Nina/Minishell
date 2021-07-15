@@ -8,7 +8,7 @@ typedef struct s_simple
     int input;
     int output;
     char    *heredoc;
-    int     hasheredoc;
+    int hasheredoc;
     int isbuiltin;
     int argc;
     int filesnb;
@@ -46,7 +46,7 @@ t_smpl *build_simple(t_sh *nsh, t_ast *node);
 int exec_pipe_seq(t_sh *nsh, t_cmd *cmd);
 
 int call_builtin(t_sh *nsh, t_smpl *s);
-int fork_single(t_smpl *smpl, t_env *env, int *status);
+int spawn(t_smpl *smpl, t_env *env);
 
 //word
 int    id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh);

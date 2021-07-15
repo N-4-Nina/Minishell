@@ -51,20 +51,6 @@ int	strmatch(char *s1, char *s2)
 	return (0);
 }
 
-t_env	*find_by_name(t_env *env, char *str)
-{
-	t_env	*current;
-
-	current = env;
-	while (current)
-	{
-		if (strmatch(str, current->name))
-			return (current);
-		current = current->next;
-	}
-	return (NULL);
-}
-
 char	**env_to_array(t_env *env, int *size)
 {
 	char	**arr;

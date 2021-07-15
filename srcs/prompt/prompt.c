@@ -23,6 +23,7 @@ char	*get_dir_name(t_env *env)
 	var = find_by_name(env, "PWD");
 	if (!var)
 		return (NULL);
+	
 	if (!(ft_strncmp(var->value, "/", 2)))
 		ret = ft_strdup("/");
 	else
