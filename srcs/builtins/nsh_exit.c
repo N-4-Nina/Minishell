@@ -18,6 +18,6 @@ int	nsh_exit(t_sh *nsh, char **args)
 {
 	free_everything(nsh);
 	(void)args;
-	exit(EXIT_SUCCESS);
+	exit(*nsh->last_status);
 	return (0);
 }

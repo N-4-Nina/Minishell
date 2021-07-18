@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nsh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:40:11 by chpl              #+#    #+#             */
-/*   Updated: 2020/11/25 15:35:40 by chpl             ###   ########.fr       */
+/*   Updated: 2021/07/18 19:14:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@
 #define RESET			2
 #define IGNORE			3
 
-int		g_status;
 typedef	struct	s_sh
 {
 	t_ast	*ast;
@@ -98,6 +97,7 @@ char    *expand_word(char *s, t_env *env, int *status);
 
 int		strmatch(char *s1, char *s2);
 
+int		g_status(int set, int val);
 /* 
 *utils.c
 */

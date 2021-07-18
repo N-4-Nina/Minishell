@@ -30,50 +30,51 @@ int	fork_single(t_smpl *smpl, t_env *env, int *status)
 		wpid = waitpid(pid, status, WUNTRACED);
 		while (!WIFEXITED(*status) && !WIFSIGNALED(*status))
 			wpid = waitpid(pid, status, WUNTRACED);
+		*status = *status >> 8;
 	}
 	return (*status);
 }
 
 int exec_single(t_sh *nsh, t_smpl *s)
 {
-    int ret;
-    int origin[2];
+	int ret;
+	int origin[2];
 
-    ret = 0;
-    redirect(s, &origin[0], &origin[1]);
-    if (s->isbuiltin == -1)
-        ret = fork_single(s, nsh->env, nsh->last_status);
-    else
-        ret = (call_builtin(nsh, s));
-    recover_origin(origin);
-    return (ret);
+	ret = 0;
+	redirect(s, &origin[0], &origin[1]);
+	if (s->isbuiltin == -1)
+		ret = fork_single(s, nsh->env, nsh->last_status);
+	else
+		ret = (call_builtin(nsh, s));
+	recover_origin(origin);
+	return (ret);
 }
 
 int call_builtin(t_sh *nsh, t_smpl *s)
 {
-    return (nsh->bui->func[s->isbuiltin](nsh, s->argv));
+	return (nsh->bui->func[s->isbuiltin](nsh, s->argv));
 }
 
 int build_exec(t_sh *nsh, t_ast *node)
 {
-    t_cmd   cmd;
+	t_cmd   cmd;
 
-    while (node)
-    {
-        if (cmd_build(nsh, node->left, &cmd) == -1)
-        {
-            node = node->right;
-            continue;
-        }
-        cmd_execute(nsh, &cmd);
-        cmd_reset(&cmd);
-        node = node->right;
-    }
-    return (0);
+	while (node)
+	{
+		if (cmd_build(nsh, node->left, &cmd) == -1)
+		{
+			node = node->right;
+			continue;
+		}
+		cmd_execute(nsh, &cmd);
+		cmd_reset(&cmd);
+		node = node->right;
+	}
+	return (0);
 }
 
 int exec(t_sh *nsh)
 {
-    build_exec(nsh, nsh->ast->right);
-    return (0);
+	build_exec(nsh, nsh->ast->right);
+	return (0);
 }

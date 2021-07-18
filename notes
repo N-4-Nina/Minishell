@@ -1,0 +1,9 @@
+
+les files ont ete consolides, notamment en comptant tout les files en amont pour faire une seule alloc
+
+ je comprend encore mal les exit statusi je crois
+
+cat | > file fonctionne comme zsh et pas bash...
+
+rien n'est norme
+

@@ -40,7 +40,7 @@ int     get_flags(char *red);
 void    close_files(t_smpl *s);
 
 //simple
-void    init_simple(t_smpl *s, int ac);
+void    init_simple(t_smpl *s, int ac, int fc);
 t_smpl *build_simple(t_sh *nsh, t_ast *node);
 
 //pipe_seq

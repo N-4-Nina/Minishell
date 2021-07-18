@@ -54,6 +54,7 @@ int     here_doc(t_smpl *s, char *hd, char *end)
 		if (max < endsize)
 			max = endsize;
 	}
+	free(line);
 	s->hasheredoc = 1;
 	close(fd);
 	fd = open(hd, FLAGS_LESS, 0660);
@@ -68,7 +69,7 @@ void    close_files(t_smpl *s)
 	while (s->filesnb > 0)
 	{
 		s->filesnb--;
-		close(s->files[s->filesnb]); 
+		close(s->files[s->filesnb]);
 	}
 	free(s->files);
 }
@@ -91,15 +92,15 @@ int     open_file(t_smpl *s, char *file, char *hd, int flags)
 
 	if (flags < 0)
         return (here_doc(s, hd, file));
+
 	fd = open(file, flags, 0660);
 	if (fd < 0)
 	{
-		printf("%s\n",strerror(errno));
+		printf("%s \n",strerror(errno));
 		return (-1);
 	}
 	if (fd > -1)
 	{
-		s->files[s->filesnb] = (int)malloc(sizeof(int));
 		s->files[s->filesnb] = fd;
 		s->filesnb++;
 		if (flags == (FLAGS_DGREAT) || flags == (FLAGS_GREAT))

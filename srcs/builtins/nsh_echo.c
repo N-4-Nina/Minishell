@@ -8,16 +8,19 @@ int	nsh_echo(t_sh *nsh, char **args)
 	i = 1;
 	n = 1;
 	(void)nsh;
-	if (args[i][0] == '-' && args[i][1] == 'n')
+	if (args[i])
 	{
-		n = 0;
-		i++;
-	}
-	while (args[i] != NULL)
-	{
-		write(1, args[i], ft_strlen(args[i]));
-		write(1, " ", 1);
-		i++;
+		if (args[i][0] == '-' && args[i][1] == 'n')
+		{
+			n = 0;
+			i++;
+		}
+		while (args[i] != NULL)
+		{
+			write(1, args[i], ft_strlen(args[i]));
+			write(1, " ", 1);
+			i++;
+		}
 	}
 	if (n)
 		write(1, "\n", 1);

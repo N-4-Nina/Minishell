@@ -72,8 +72,10 @@ void    write_empty_right(int fd, t_ast **node)
 
 void write_redir(int fd, char *data)
 {
-    if (ft_strlen(data) == 2)
+    if (ft_strlen(data) == 2 && data[0] == '>')
         write(fd, "DGREAT", 6);
+    else if (ft_strlen(data) == 2)
+        write(fd, "DLESS", 5);
     else if (data[0] == '>')
         write(fd, "GREAT", 5);
     else
