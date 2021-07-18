@@ -3,89 +3,80 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chpl <marvin@42.fr>                        +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:45:13 by chpl              #+#    #+#              #
-#    Updated: 2021/03/24 10:37:33 by chpl             ###   ########.fr        #
+#    Updated: 2021/07/18 15:43:18 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+#Compiler and Linker
+CC          := clang
+
+#The Target Binary Program
+TARGET      := minishell
+
+#The Directories, Source, Includes, Objects, Binary and Resources
+SRCDIR      := srcs
+INCDIR      := includes
+BUILDDIR    := objs
+TARGETDIR   := .
+#RESDIR      := res
+SRCEXT      := c
+DEPEXT      := d
+OBJEXT      := o
+
 LIBFT = libft/
-DIR_S = srcs
-DIR_O = objs
-INCLUDES = -I includes/ -I ${LIBFT}
-CC = clang
-LIBS = -L libft/ -lft -lncurses -lX11 -lreadline
-CFLAGS	= -Wall -Wextra -Werror
-SOURCES =  srcs/main.c \
-	   srcs/builtins/builtins.c \
-	   srcs/builtins/nsh_cd.c \
-	   srcs/builtins/nsh_echo.c \
-	   srcs/builtins/nsh_env.c \
-	   srcs/builtins/nsh_exit.c \
-	   srcs/builtins/nsh_export.c \
-	   srcs/builtins/nsh_pwd.c \
-	   srcs/builtins/nsh_unset.c \
-	   srcs/lexer/lexer.c \
-	   srcs/lexer/count.c \
-	   srcs/lexer/set_len.c \
-	   srcs/exec/exec.c \
-	   srcs/exec/cmd.c \
-	   srcs/exec/files.c \
-	   srcs/exec/io.c \
-	   srcs/exec/path.c \
-	   srcs/exec/pipe_seq.c \
-	   srcs/exec/redirect.c \
-	   srcs/exec/simple.c \
-	   srcs/exec/word.c \
-	   srcs/exec/expand_word.c \
-	   srcs/utils.c \
-	   srcs/term.c \
-	   srcs/env/env.c \
-	   srcs/env/env2.c \
-	   srcs/signals.c \
-	   srcs/loop.c \
-	   srcs/write_dot.c \
-	   srcs/parser/parser.c \
-	   srcs/parser/astree.c \
-	   srcs/prompt/prompt.c 
-	#    srcs/inputs/ascii.c \
-	#    srcs/inputs/clear.c \
-	#    srcs/inputs/cursor.c \
-	#    srcs/inputs/get_input.c \
-	#    srcs/inputs/his_navigate.c \
-	#    srcs/inputs/his_new.c \
-	#    srcs/inputs/history.c \
-	#    srcs/inputs/arrows.c \
-	#    srcs/inputs/utf.c
 
-OBJS	= ${SOURCES:.c=.o}
+#Flags, Libraries and Includes
+CFLAGS      := -Wall -Wextra -Werror
+LIB         := -L libft/ -lft -lncurses -lX11 -lreadline
+INC         := -I$(INCDIR) -I ${LIBFT}
+INCDEP      := -I$(INCDIR)
 
-.c.o:
-	${CC} ${CFLAGS} ${GNLBUFF} -c $< -o ${<:.c=.o} ${INCLUDES}
-	mv ${<:.c=.o} ${DIR_O}
+#---------------------------------------------------------------------------------
+#DO NOT EDIT BELOW THIS LINE
+#---------------------------------------------------------------------------------
+SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 
-all : $(NAME)
+#Defauilt Make
+all: ft directories $(TARGET)
 
-${NAME}: ${OBJS} ft 
-	
-	${CC} ${CFLAGS} ${INCLUDES} ${DIR_O}/*.o ${LIBS} -o ${NAME}
-
-ft:
-	@make -C libft
-
-graph:
-	dot -Tjpg graph.dot > graph.jpg
-
-clean :
-	@rm -f $(DIR_O)/*.o
-	@make clean -C $(LIBFT)
-
-fclean: clean
-	@rm -f $(NAME)
-	@make fclean -C $(LIBFT)
-
+#Remake
 re: fclean all
 
-.PHONY:	clean fclean all re mlx ft
+ft:
+	@make libft
+
+#Make the Directories
+directories:
+	@mkdir -p $(BUILDDIR)
+
+#Clean only Objecst
+clean:
+	@$(RM) -rf $(BUILDDIR)
+
+#Full Clean, Objects and Binaries
+fclean: clean
+	@$(RM) -rf $(TARGETDIR)/$(TARGET)
+
+#Pull in dependency info for *existing* .o files
+-include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
+
+#Link
+$(TARGET): $(OBJECTS)
+	$(CC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
+
+#Compile
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
+	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
+	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+
+#Non-File Targets
+.PHONY: all remake clean cleaner resources

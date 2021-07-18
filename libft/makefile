@@ -31,10 +31,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-all:	${OBJS} 
-	ar rc ${NAME} ${OBJS}
+all: $(NAME)
 
-$(NAME): all
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
+
 
 clean:
 		${RM} ${OBJS} ${BNSOBJ}

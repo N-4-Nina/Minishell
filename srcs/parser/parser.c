@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                             :+:      :+:    :+: */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2020/11/25 16:28:28 by chpl             ###   ########.fr       */
+/*   Updated: 2021/07/18 15:44:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,9 +193,9 @@ int syntax_error(t_tok t)
     static char *spec[6] = { ">>", ">", "<<", "<", "|", ";"};
 
     if (t.type == WORD)
-        printf("Syntax Error, unexpected token: %s \n", t.data);
+        printf("Syntax Error, unexpected token near %s \n", t.data);
     else
-        printf("Syntax Error, unexpected token: \"%s\" \n", spec[t.type]);
+        printf("Syntax Error, unexpected token near \"%s\" \n", spec[t.type]);
     return (0);
 }
 
