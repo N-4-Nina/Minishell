@@ -14,5 +14,6 @@ int	nsh_env(t_sh *nsh, char **args)
 		write(1, "\n", 1);
 		lst = lst->next;
 	}
+	*(nsh->last_status) = 0;
 	return (0);
 }

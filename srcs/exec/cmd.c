@@ -1,20 +1,5 @@
 #include "../../includes/nsh.h"
 
-int exec_single(t_sh *nsh, t_smpl *s)
-{
-    int ret;
-    int origin[2];
-
-    ret = 0;
-    redirect(s, &origin[0], &origin[1]);
-    if (s->isbuiltin == -1)
-        ret = spawn(s, nsh->env);
-    else
-        ret = (call_builtin(nsh, s));
-    recover_origin(origin);
-    return (ret);
-}
-
 int cmd_execute(t_sh *nsh, t_cmd *cmd)
 {
     if (cmd->smpnb == 0)

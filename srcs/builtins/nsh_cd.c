@@ -9,5 +9,6 @@ int	nsh_cd(t_sh *nsh, char **args)
 		var = find_by_name(nsh->env, "PWD");
 		getcwd(var->value, 4096);
 	}
+	*(nsh->last_status) = 0;
 	return (0);
 }

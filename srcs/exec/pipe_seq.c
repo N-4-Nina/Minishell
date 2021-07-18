@@ -17,7 +17,7 @@ int exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
     dup2(fd, STDIN_FILENO);
     dup2(red[1], STDOUT_FILENO);
     free_array(envArr, envSize);
-    return (0);
+    exit(0);
 }
 
 int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
@@ -26,6 +26,7 @@ int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
     int     red[2];
     int     fd;
     pid_t   pid;
+    pid_t	wpid;
 
     i = 0;
     red[0] = 0;
@@ -36,6 +37,8 @@ int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
         if (pipe(red))
             write(1, "pipe creation error\n", 20);
         pid = fork();
+        if (pid < 0)
+            return (-1);
         if (!pid)
         {
             close(red[0]);
@@ -49,8 +52,9 @@ int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
         {
             close(red[1]);
             set_sig_behav(IGNORE);
-            wait(0);
-            //waitpid(0, NULL, 0);
+            wpid = waitpid(pid, nsh->last_status, WUNTRACED);
+		    //while (!WIFEXITED(*nsh->last_status) && !WIFSIGNALED(*nsh->last_status))
+			//    wpid = waitpid(pid, nsh->last_status, WUNTRACED);
             fd = red[0];
         }
         i++;

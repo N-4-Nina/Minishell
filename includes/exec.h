@@ -28,6 +28,7 @@ typedef struct s_command
 int exec(t_sh *nsh);
 
 //cmd
+int	fork_single(t_smpl *smpl, t_env *env, int *status);
 int exec_single(t_sh *nsh, t_smpl *s);
 int cmd_execute(t_sh *nsh, t_cmd *cmd);
 int cmd_build(t_sh *nsh, t_ast *node, t_cmd *cmd);

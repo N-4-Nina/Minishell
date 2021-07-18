@@ -8,5 +8,6 @@ int	nsh_pwd(t_sh *nsh, char **args)
 	var = find_by_name(nsh->env, "PWD");
 	write(1, var->value, ft_strlen(var->value));
 	write(1, "\n", 1);
+	*(nsh->last_status) = 0;
 	return (0);
 }

@@ -1,5 +1,25 @@
 #include "../../includes/nsh.h"
 
+int check_heredoc(char *hd)
+{
+    int fd;
+
+    fd = 0;
+    if (!hd)
+	{
+		printf("Please set the HEREDOC variable.\n");
+		return (0);
+	}    
+    fd = open(hd, FLAGS_DGREAT,  0660);
+    if (fd < 0)
+	{
+		printf("HEREDOC file must be accessible to this program.\n");
+		return (0);
+	}  
+    close(fd);
+    return (1);
+}
+
 int     here_doc(t_smpl *s, char *hd, char *end)
 {
 	char	*line;
@@ -7,6 +27,8 @@ int     here_doc(t_smpl *s, char *hd, char *end)
 	size_t	endsize;
 	size_t	max;
 
+	if (!check_heredoc(hd))
+		return (0);
 	if (s->hasheredoc)
 		unlink(hd);
 	endsize = ft_strlen(end);
@@ -46,9 +68,7 @@ void    close_files(t_smpl *s)
 	while (s->filesnb > 0)
 	{
 		s->filesnb--;
-		close(s->files[s->filesnb]);
-		// printf("closing %d\n", s->files[s->filesnb]);
-		// printf("ret = %d\n", close(s->files[s->filesnb]));    
+		close(s->files[s->filesnb]); 
 	}
 	free(s->files);
 }

@@ -108,9 +108,9 @@ void	token_init(t_tok *tok)
 
 int	tokenize(t_lex *l)
 {
-        l->i = 0; //both should be in lex_clear
+        l->i = 0;
         l->j = 0;
-        while (l->inp[l->i])
+        while (l->inp[l->i] && l->j < l->nt)
         {
 			token_init(&l->t[l->j]);
 			if (isQuote(l->inp[l->i]))
@@ -135,8 +135,8 @@ void  lex_reset(t_lex *l)
 	
 	while (l->nt >= 0)
 	{
-		// if (l->t[l->nt].type == PIPE)  
-		// 	free(l->t[l->nt].data);
+		if (l->t[l->nt].type == PIPE)  
+			free(l->t[l->nt].data);
 		l->nt--;
 	}
 	l->nt = 0;

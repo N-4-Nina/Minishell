@@ -21,5 +21,6 @@ int	nsh_echo(t_sh *nsh, char **args)
 	}
 	if (n)
 		write(1, "\n", 1);
+	*(nsh->last_status) = 0; 
 	return (0);
 }

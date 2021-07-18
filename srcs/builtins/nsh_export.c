@@ -22,5 +22,6 @@ int	nsh_export(t_sh *nsh, char **args)
 			add_var(nsh->env, split[0], split[1]);
 		i++;
 	}
+	*(nsh->last_status) = 0;
 	return (0);
 }
