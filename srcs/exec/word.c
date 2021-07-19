@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:32:38 by user42            #+#    #+#             */
-/*   Updated: 2021/07/18 18:24:51 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/19 11:47:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 	else if (!set_cmd_path(s, nsh->env, xpd))
 	{
 		printf("Nsh: Command not found: %s\n", node->left->data);
+		*nsh->last_status = 127;
 		return (-1);
 	}
 	s->argv[0] = ft_strdup(node->left->data);

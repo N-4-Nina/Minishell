@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/07/11 17:59:40 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/19 16:10:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,44 @@ int	seek_in_path(t_smpl *s, char **split, char *name, int splitSize)
 			return (1);
 		}
 		else
+		{
 			free(path);
+			printf("%s\n", strerror(errno));
+		}
 		i++;
 	}
 	return (0);
 }
 
+char **get_split(t_env *env)
+{
+	t_env	*node;
+	char	*str;
+	char	**split;
+
+	node = find_by_name(env, "PATH");
+	if (!node)
+		return (NULL);
+	str = node->value;
+	split = ft_split(str, ':');
+	return (split);
+}
+
 int	set_cmd_path(t_smpl *s, t_env *env, char *name)
 {
 	int			j;
-	char		**split;
 	char		*new;
+	char		**split;
 
 	j = 0;
-	if (name[0] == '/')
+	if (ft_strchr(name, '/'))
 		return (set_abs_path(s, name));
 	new = ft_strjoin("/", name);
 	free(name);
 	name = new;
-	split = ft_split(find_by_name(env, "PATH")->value, ':');
+	split = get_split(env);
+	if (!split)
+		return (0);
 	while (split[j])
 		j++;
 	if (seek_in_path(s, split, name, j))

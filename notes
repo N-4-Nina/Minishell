@@ -7,3 +7,25 @@ cat | > file fonctionne comme zsh et pas bash...
 
 rien n'est norme
 
+
+" Ce qui retourne bash quand un signal est intercepté et qu'il arrête un processus enfant, c'est 128 + SIG_NUMBER SIG_NUMBER étant ce nombre qui correspond au signal.
+
+1
+[15:52]
+par exemple, SIGINT vaut 2, donc bash te retournera 128 + 2
+
+1
+[15:52]
+C'est cette constante que signal attend en premier arg
+[15:52]
+130 c'est un signal qui existe pas"
+(Abrabant)
+
+
+should learn to use lldb.
+base = lldb ./program
+b {function}
+(set a breakpoint)
+run
+
+compile with g to see lines and not assembly

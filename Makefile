@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:45:13 by chpl              #+#    #+#              #
-#    Updated: 2021/07/18 15:43:18 by user42           ###   ########.fr        #
+#    Updated: 2021/07/19 16:40:49 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ all: ft directories $(TARGET)
 re: fclean all
 
 ft:
-	@make libft
+	@make -C libft
 
 #Make the Directories
 directories:
@@ -56,10 +56,12 @@ directories:
 #Clean only Objecst
 clean:
 	@$(RM) -rf $(BUILDDIR)
+	make -C libft clean
 
 #Full Clean, Objects and Binaries
 fclean: clean
 	@$(RM) -rf $(TARGETDIR)/$(TARGET)
+	make -C libft fclean
 
 #Pull in dependency info for *existing* .o files
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
@@ -71,7 +73,7 @@ $(TARGET): $(OBJECTS)
 #Compile
 $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	$(CC) $(CFLAGS) $(INC) -g -c -o $@ $<
 	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
 	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
 	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)

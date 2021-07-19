@@ -2,12 +2,11 @@
 
 void	free_everything(t_sh *nsh)
 {
-	cmd_reset((t_cmd*)nsh->cmd);
+	cmd_reset((t_cmd *)nsh->cmd);
 	free_array(nsh->bui->str, 7);
 	ast_reset(&nsh->ast);
 	free(nsh->inp->prompt);
-	//free(nsh->inp->line);
-	//free(nsh->lex->inp);
+	free(nsh->inp->line);
 	lex_reset(nsh->lex);
 	free(nsh->lex);
 	free(nsh->inp);
@@ -16,8 +15,13 @@ void	free_everything(t_sh *nsh)
 
 int	nsh_exit(t_sh *nsh, char **args)
 {
+	int	exit_status;
+
 	free_everything(nsh);
-	(void)args;
-	exit(*nsh->last_status);
-	return (0);
+	if (args[1])
+		exit_status = ft_atoi(args[1]);
+	else
+		exit_status = *nsh->last_status;
+	free(nsh->last_status);
+	exit(exit_status);
 }

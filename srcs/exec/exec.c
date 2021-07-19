@@ -10,6 +10,8 @@ int	single_child(t_smpl *smpl, t_env *env)
 	envArr = env_to_array(env, &envSize);
 	if (execve(smpl->path, smpl->argv, envArr) == -1)
 		NULL;
+		//if (errno == EAGAIN);
+		//should set exit status to 126, same in pipe seq
 	free_array(envArr, envSize);
 	exit(EXIT_SUCCESS);
 }
