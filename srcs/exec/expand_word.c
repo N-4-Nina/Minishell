@@ -52,7 +52,7 @@ int     replace_strong(char **dst, char *src)
 	i = 1;
 	while (src[i] && src[i] != '\'')
 		i++;
-	do_cat(dst, ft_substr(src, 1, i));
+	do_cat(dst, ft_substr(src, 1, i - 1));
 	return (i + 1);
 }
 
@@ -65,12 +65,12 @@ int     replace_weak(char **dst, char *src, t_env *env)
 	single[1] = 0;
 	while (src[i] && src[i] != '"')
 	{
-		if (src[i] == '\\')
-		{
-			do_cat(dst, ft_substr(src, i, 1));
-			i += 2;
-		}
-		else if (src[i] == '$')
+		//if (src[i] == '\\')
+		//{
+		//	do_cat(dst, ft_substr(src, i, 1));
+		//	i += 2;
+		//}
+		if (src[i] == '$')
 			i += replace_var(dst, &src[i], env);
 		else
 		{

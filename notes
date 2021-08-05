@@ -3,6 +3,11 @@ les files ont ete consolides, notamment en comptant tout les files en amont pour
 
  je comprend encore mal les exit statusi je crois
 
+
+05/07:
+les exit status speciaux (126 127) devraient etre geres maintenant, reste a gerer les interruptions par signaux... 128 + signal.
+
+
 cat | > file fonctionne comme zsh et pas bash...
 
 rien n'est norme
@@ -21,7 +26,7 @@ C'est cette constante que signal attend en premier arg
 130 c'est un signal qui existe pas"
 (Abrabant)
 
-
+__________________________________________________________________
 should learn to use lldb.
 base = lldb ./program
 b {function}
@@ -29,3 +34,4 @@ b {function}
 run
 
 compile with g to see lines and not assembly
+__________________________________________________________________

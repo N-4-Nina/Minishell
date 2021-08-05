@@ -4,7 +4,9 @@ int exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 {
 	char    **envArr;
 	int     envSize;
+	int		error;
 
+	error = 0;
 	envArr = env_to_array(nsh->env, &envSize);
 	if (s->input != -1 && s->input != STDIN_FILENO)
 		dup2(s->input, STDIN_FILENO);
@@ -13,11 +15,16 @@ int exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 	if (s->isbuiltin >= 0)
 		call_builtin(nsh, s);
 	else
-		execve(s->path, s->argv, envArr);
+		if (execve(s->path, s->argv, envArr) == -1)
+			if (errno == EACCES)
+			{
+				printf("nsh: %s: Permission non accordée\n", s->path);
+				error = 126;
+			}
 	dup2(fd, STDIN_FILENO);
 	dup2(red[1], STDOUT_FILENO);
 	free_array(envArr, envSize);
-	exit(0);
+	exit(EXIT_SUCCESS + error);
 }
 
 int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
@@ -53,6 +60,7 @@ int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
 			close(red[1]);
 			set_sig_behav(IGNORE);
 			wpid = waitpid(pid, nsh->last_status, WUNTRACED);
+			*nsh->last_status = *nsh->last_status >> 8;
 			//while (!WIFEXITED(*nsh->last_status) && !WIFSIGNALED(*nsh->last_status))
 			//    wpid = waitpid(pid, nsh->last_status, WUNTRACED);
 			fd = red[0];

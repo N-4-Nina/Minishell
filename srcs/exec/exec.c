@@ -4,16 +4,20 @@ int	single_child(t_smpl *smpl, t_env *env)
 {
 	char	**envArr;
 	int		envSize;
+	int		error;
 
 	envSize = 0;
+	error = 0;
 	signal(SIGINT, SIG_DFL);
 	envArr = env_to_array(env, &envSize);
 	if (execve(smpl->path, smpl->argv, envArr) == -1)
-		NULL;
-		//if (errno == EAGAIN);
-		//should set exit status to 126, same in pipe seq
+		if (errno == EACCES)
+		{
+			printf("nsh: %s: Permission non accordée\n", smpl->path);
+			error = 126;
+		}
 	free_array(envArr, envSize);
-	exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS + error);
 }
 
 int	fork_single(t_smpl *smpl, t_env *env, int *status)

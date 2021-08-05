@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/07/19 16:10:49 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/05 13:45:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ int	seek_in_path(t_smpl *s, char **split, char *name, int splitSize)
 			return (1);
 		}
 		else
-		{
 			free(path);
-			printf("%s\n", strerror(errno));
-		}
 		i++;
 	}
 	return (0);
