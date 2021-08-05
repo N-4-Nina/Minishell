@@ -6,9 +6,11 @@ les files ont ete consolides, notamment en comptant tout les files en amont pour
 
 05/07:
 les exit status speciaux (126 127) devraient etre geres maintenant, reste a gerer les interruptions par signaux... 128 + signal.
-
+maybe le mieux c'est de catch le signal plutot que de l'ignorer dans le parent ??? mais comment ??? static ? le signal handler peut pas retourner... ou alors une globale finalement
 
 cat | > file fonctionne comme zsh et pas bash...
+OR DOES IT ???
+
 
 rien n'est norme
 
