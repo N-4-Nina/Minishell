@@ -58,7 +58,7 @@ int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
 		else
 		{
 			close(red[1]);
-			set_sig_behav(IGNORE);
+			set_sig_behav(CATCH);
 			wpid = waitpid(pid, nsh->last_status, WUNTRACED);
 			*nsh->last_status = *nsh->last_status >> 8;
 			//while (!WIFEXITED(*nsh->last_status) && !WIFSIGNALED(*nsh->last_status))
@@ -67,6 +67,5 @@ int exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
 		}
 		i++;
 	} 
-	(void)nsh;
 	return (0);
 }

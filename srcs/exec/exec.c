@@ -32,11 +32,14 @@ int	fork_single(t_smpl *smpl, t_env *env, int *status)
 		single_child(smpl, env);
 	else
 	{
-		signal(SIGINT, SIG_IGN);
+		set_sig_behav(CATCH);
 		wpid = waitpid(pid, status, WUNTRACED);
 		while (!WIFEXITED(*status) && !WIFSIGNALED(*status))
 			wpid = waitpid(pid, status, WUNTRACED);
-		*status = *status >> 8;
+		if (g_sig_catcher[0])
+			set_sig_status(status);
+		else
+			*status = *status >> 8;
 	}
 	return (*status);
 }

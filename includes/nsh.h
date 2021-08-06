@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:40:11 by chpl              #+#    #+#             */
-/*   Updated: 2021/07/18 19:14:16 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/06 16:04:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,6 @@
 #include "get_next_line.h"
 #include "../libft/libft.h"
 
-#define UP		'A'
-#define DOWN	'B'
-#define RIGHT	'C'
-#define LEFT	'D'
-
 #define FLAGS_LESS		O_RDONLY
 #define FLAGS_GREAT		O_CREAT | O_WRONLY | O_TRUNC
 #define FLAGS_DGREAT	O_CREAT | O_WRONLY | O_APPEND
@@ -57,7 +52,10 @@
 
 #define INTERACTIVE		1
 #define RESET			2
-#define IGNORE			3
+#define CATCH			3
+#define HEREDOC			4
+
+int	g_sig_catcher[2];
 
 typedef	struct	s_sh
 {
@@ -73,6 +71,10 @@ typedef	struct	s_sh
 
 #include "exec.h"
 
+
+int     here_doc(t_smpl *s, char *hd, char *end);
+void	reset_sig_catcher(void);
+void	set_sig_status(int *status);
 
 int build_exec(t_sh *nsh, t_ast *node);
 
@@ -101,7 +103,6 @@ int		g_status(int set, int val);
 /* 
 *utils.c
 */
-
 void    free_array(char **ar, int size);
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2020/11/26 10:11:49 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/06 15:12:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,13 @@ void	add_heredoc_path(t_env **env)
 
 	tmp = getenv("USER");
 	str = ft_strjoin("/home/", tmp);
-	tmp = ft_strjoin(str, "/nsh_heredoc");
+	tmp = ft_strjoin(str, "/.nsh_heredoc");
 	add_var(*env, "HEREDOC", tmp);
 	free(str);
 	free(tmp);
 }
 
+//init must be secured : should return something if a getenv returns NULL.
 void	env_init(t_env **env)
 {
 	char	*cdn;

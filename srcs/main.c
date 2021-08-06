@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2020/11/25 16:28:28 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/06 12:01:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ void inp_init(t_inp *inp)
 	win_init(inp);
 }
 
+void	reset_sig_catcher(void)
+{
+	g_sig_catcher[0] = 0;
+	g_sig_catcher[1] = 0;
+}
+
 void	nsh_alloc(t_sh *nsh)
 {
 	nsh->lex = (t_lex *)malloc(sizeof(t_lex));
@@ -79,8 +85,7 @@ int	nsh_init(t_sh *nsh)
 	lex_init(nsh->lex);
 	inp_init(nsh->inp);
 	bui_init(nsh);
-	term_init(nsh->term);
-	
+	term_init(nsh->term);	
 	return (1);
 }
 
