@@ -12,11 +12,11 @@
 
 #include "libft.h"
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	int	start;
-	int end;
-	int i;
+	int	end;
+	int	i;
 
 	if (!s1 || !set)
 		return (NULL);

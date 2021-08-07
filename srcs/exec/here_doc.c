@@ -119,6 +119,7 @@ int     here_doc(t_smpl *s, char *hd, char *end)
         fd = open(hd, FLAGS_LESS, 0660);
 	    s->files[s->filesnb++] = fd;
 	    s->input = fd;
+		free(hd);
 	    unlink(hd);
     }
 	

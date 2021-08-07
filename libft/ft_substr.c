@@ -12,17 +12,18 @@
 
 #include "libft.h"
 
-static	char		*empty_alloc(void)
+static	char	*empty_alloc(void)
 {
-	char *p;
+	char	*p;
 
-	if (!(p = (char *)malloc(sizeof(char))))
+	p = (char *)malloc(sizeof(char));
+	if (!p)
 		return (NULL);
 	p[0] = '\0';
 	return (p);
 }
 
-char				*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*newstring;
 	size_t	i;
@@ -32,7 +33,8 @@ char				*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start >= ft_strlen(s))
 		return (empty_alloc());
-	if (!(newstring = malloc(len + 1 * sizeof(char))))
+	newstring = malloc(len + 1 * sizeof(char));
+	if (!newstring)
 		return (NULL);
 	while (s[start + i] && i < len)
 	{

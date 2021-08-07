@@ -20,7 +20,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	char	*haystackcopy;
 
 	i = 0;
-	haystackcopy = (char*)haystack;
+	haystackcopy = (char *)haystack;
 	if (!(needle[0]))
 		return (haystackcopy);
 	while (haystack[i] && i < len)

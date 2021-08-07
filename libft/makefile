@@ -31,10 +31,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+all:	${NAME} 
+	
+$(NAME): ${OBJS}
+	ar rc ${NAME} ${OBJS}
+	ranlib $(NAME)
 
 
 clean:

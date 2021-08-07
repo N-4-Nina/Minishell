@@ -14,7 +14,7 @@
 
 static	int	count_white_spaces(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
@@ -22,7 +22,7 @@ static	int	count_white_spaces(const char *str)
 	return (i);
 }
 
-int			ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int		minus_signs;
 	int		i;

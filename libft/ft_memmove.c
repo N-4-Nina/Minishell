@@ -33,11 +33,11 @@ static	void	do_copy(unsigned char *dest,
 	}
 }
 
-void			*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t				i;
-	unsigned	char	*destcast;
-	unsigned	char	*sourcast;
+	unsigned char		*destcast;
+	unsigned char		*sourcast;
 
 	destcast = (unsigned char *)dst;
 	sourcast = (unsigned char *)src;

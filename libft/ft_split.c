@@ -12,26 +12,26 @@
 
 #include "libft.h"
 
-static int		count_words(char const *str, char c)
+static int	count_words(char const *str, char c)
 {
-	int i;
+	int	i;
 	int	words;
 
 	i = 0;
 	words = 0;
 	while (str[i])
 	{
-		if ((!i && (str[i] != c)) ||
-			(i > 0 && (str[i - 1] == c) && (str[i] != c)))
+		if ((!i && (str[i] != c))
+			|| (i > 0 && (str[i - 1] == c) && (str[i] != c)))
 			words++;
 		i++;
 	}
 	return (words);
 }
 
-static	int		string_length(char *str, int i, char c)
+static	int	string_length(char *str, int i, char c)
 {
-	int length;
+	int	length;
 
 	length = 0;
 	while (str[i] && (str[i] != c))
@@ -78,7 +78,7 @@ static	char	**empty_array(void)
 	return (res);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**split;
 	char	*str;
@@ -91,7 +91,8 @@ char			**ft_split(char const *s, char c)
 	words = count_words(str, c);
 	if (!words)
 		return (empty_array());
-	if (!(split = malloc(sizeof(char*) * (words + 1))))
+	split = malloc(sizeof(char *) * (words + 1));
+	if (!split)
 		return (NULL);
 	split[words] = NULL;
 	split = fill_array(split, str, c);

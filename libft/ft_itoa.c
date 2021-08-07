@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int			get_size(int n)
+static int	get_size(int n)
 {
 	int				size;
 
@@ -30,7 +30,7 @@ static int			get_size(int n)
 	return (size);
 }
 
-static char			*get_converted_str(char *str, unsigned int res, int *i)
+static char	*get_converted_str(char *str, unsigned int res, int *i)
 {
 	if (res >= 10)
 		get_converted_str(str, res / 10, i);
@@ -38,7 +38,7 @@ static char			*get_converted_str(char *str, unsigned int res, int *i)
 	return (str);
 }
 
-char				*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int				i;
 	unsigned int	res;
@@ -46,7 +46,8 @@ char				*ft_itoa(int n)
 
 	i = 0;
 	res = n;
-	if (!(str = (char *)malloc(get_size(n) + 1)))
+	str = (char *)malloc(get_size(n) + 1);
+	if (!str)
 		return (NULL);
 	if (n < 0)
 	{

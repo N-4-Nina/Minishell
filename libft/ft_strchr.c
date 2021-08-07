@@ -19,7 +19,7 @@ char	*ft_strchr(const char *s, int c)
 	char	*ptr;
 
 	i = 0;
-	ptr = (char*)s;
+	ptr = (char *)s;
 	tofind = (char)c;
 	while (s[i])
 	{

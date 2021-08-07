@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:40:11 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/06 16:04:30 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/07 12:10:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef	struct	s_sh
 
 #include "exec.h"
 
-
+int		nsh_init(t_sh *nsh);
 int     here_doc(t_smpl *s, char *hd, char *end);
 void	reset_sig_catcher(void);
 void	set_sig_status(int *status);
