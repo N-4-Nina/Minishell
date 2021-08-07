@@ -5,9 +5,10 @@ int     args_count(t_ast *node)
 	int ac;
 
 	ac = 0;
-	while (node && (node->left->type == N_WORD || (node->type == N_CMD_SUFFIX && node->left->type != N_IO_FILE)))
+	while (node && (node->left->type == N_WORD || node->type == N_CMD_SUFFIX))
 	{
-		ac++;
+		if (node->left->type != N_IO_FILE)
+			ac++;
 		node = node->right;
 	}
 	return (ac);

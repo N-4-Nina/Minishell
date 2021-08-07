@@ -39,7 +39,7 @@ int	nsh_init(t_sh *nsh)
 	nsh_alloc(nsh);
 	env_init(&nsh->env);
 	lex_init(nsh->lex);
-	//inp_init(nsh->inp);
+	inp_init(nsh->inp);
 	bui_init(nsh);
 	term_init(nsh->term);	
 	return (1);

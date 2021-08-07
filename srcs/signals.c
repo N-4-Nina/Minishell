@@ -19,7 +19,8 @@ void	catch_signal(int signum)
 {
 	g_sig_catcher[0] = 1;
 	g_sig_catcher[1] = signum;
-	if (signum == 3 || signum == 4 || signum == 6 || signum == 8 || signum == 11)
+	if (signum == 3 || signum == 4 || signum == 6
+		||signum == 8 || signum == 11)
 		printf("Core Dumped.\n");
 }
 
@@ -29,7 +30,7 @@ void	set_sig_status(int *status)
 	reset_sig_catcher();
 }
 
-void    set_sig_behav(int mode)
+void	set_sig_behav(int mode)
 {
 	int	i;
 
@@ -37,33 +38,20 @@ void    set_sig_behav(int mode)
 	if (mode == INTERACTIVE)
 	{
 		while (i < _NSIG)
-		{
-			signal(i, SIG_DFL);
-			i++;
-		}
+			signal(i++, SIG_DFL);
 		signal(SIGINT, interactive_handler);
 		signal(SIGQUIT, interactive_handler);
 	}
 	else if (mode == RESET)
 	{
 		while (i < 15)
-		{
-			signal(i, SIG_DFL);
-			i++;
-		}
+			signal(i++, SIG_DFL);
 	}
 	else if (mode == CATCH)
 	{
 		while (i < 15)
-		{
-			signal(i, catch_signal);
-			i++;
-		}
-		//signal(SIGINT, SIG_IGN);
-		//signal(SIGQUIT, SIG_IGN);
+			signal(i++, catch_signal);
 	}
 	else if (mode == HEREDOC)
-	{
 		signal(SIGINT, SIG_DFL);
-	}
 }
