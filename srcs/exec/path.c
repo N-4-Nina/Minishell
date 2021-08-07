@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/08/05 13:45:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/07 15:30:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	seek_in_path(t_smpl *s, char **split, char *name, int splitSize)
 	return (0);
 }
 
-char **get_split(t_env *env)
+char	**get_split(t_env *env)
 {
 	t_env	*node;
 	char	*str;

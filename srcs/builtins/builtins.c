@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 09:26:49 by chpl              #+#    #+#             */
-/*   Updated: 2020/11/25 16:35:12 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/07 17:34:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nsh.h"
+
+int	call_builtin(t_sh *nsh, t_smpl *s)
+{
+	return (nsh->bui->func[s->isbuiltin](nsh, s->argv));
+}
 
 int	is_builtin(char *s, t_bui *b)
 {

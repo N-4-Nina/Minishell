@@ -32,12 +32,17 @@ void    init_simple(t_smpl *s, int ac, int fc)
 	s->input = STDIN_FILENO;
 	s->output = STDOUT_FILENO;
 	s->filesnb = 0;
+	s->has_cmd_word = 0;
 	s->isbuiltin = -1;
 	s->path = NULL;
 }
 
 t_smpl *abort_simple(t_smpl *s)
 {
+	if (s->argv[0])
+		free(s->argv[0]);
+	if (s->path)
+		free(s->path);
 	if (s->argv)
 		free(s->argv);
 	if (s->files)

@@ -10,20 +10,19 @@ int	nsh_loop(t_sh *nsh)
 		set_sig_behav(INTERACTIVE);
 		build_prompt(nsh->env, nsh->inp);
 		nsh->lex->inp = readline(nsh->inp->prompt);
-		if(!nsh->lex->inp)
+		if (!nsh->lex->inp)
 		{
 			free(nsh->inp->prompt);
-			break;
+			break ;
 		}
 		if (nsh->lex->inp[0])
 			add_history(nsh->lex->inp);
 		if (!lex_build(nsh->lex))
-			continue;
+			continue ;
 		parse(nsh);
 		exec(nsh);
 		nsh_reset(nsh);
-		
 	}
 	nsh_clear(nsh);
-	return(status);
+	return (status);
 }

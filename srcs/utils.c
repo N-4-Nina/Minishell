@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:21:06 by chpl              #+#    #+#             */
-/*   Updated: 2020/11/24 10:26:24 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/07 14:18:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nsh.h"
 
-void    free_array(char **ar, int size)
+void	free_array(char **ar, int size)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < size)
-        free(ar[i++]);
-    if (ar)
-        free(ar);
+	i = 0;
+	while (i < size)
+		free(ar[i++]);
+	if (ar)
+		free(ar);
 }
 
-char *get_current_dir_name(void)
+char	*get_current_dir_name(void)
 {
 	char	pwd[PATH_MAX];
-	
+
 	if (getcwd(pwd, sizeof(pwd)))
 		return (ft_strdup(pwd));
 	else
@@ -35,13 +35,14 @@ char *get_current_dir_name(void)
 
 int	isSpec(char c)
 {
-	return (c == '>' || c == '<' || 
-		c == '|' || c == ';' ||
-		c == '\\');
+	return (c == '>' || c == '<'
+		|| c == '|' || c == ';'
+		|| c == '\\');
 }
+
 int	isQuote(char c)
 {
-    return (c == '\'' || c == '"');
+	return (c == '\'' || c == '"');
 }
 
 int	isBlank(char c)

@@ -10,9 +10,7 @@ void	interactive_handler(int signum)
 		rl_redisplay();
 	}
 	else if (signum == SIGQUIT)
-	{
 		write(1, "\b\b  \b\b", 6);
-	}
 }
 
 void	catch_signal(int signum)
@@ -22,6 +20,12 @@ void	catch_signal(int signum)
 	if (signum == 3 || signum == 4 || signum == 6
 		||signum == 8 || signum == 11)
 		printf("Core Dumped.\n");
+}
+
+void	hd_catch_sig(int signum)
+{
+	g_sig_catcher[0] = 1;
+	g_sig_catcher[1] = signum;
 }
 
 void	set_sig_status(int *status)
@@ -52,6 +56,9 @@ void	set_sig_behav(int mode)
 		while (i < 15)
 			signal(i++, catch_signal);
 	}
-	else if (mode == HEREDOC)
-		signal(SIGINT, SIG_DFL);
+	//else if (mode == HEREDOC)
+	//	signal(SIGINT, SIG_DFL);
+	else if (mode == HD_CATCH)
+		while (i < 15)
+			signal(i++, hd_catch_sig);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:40:11 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/07 12:10:29 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/07 16:51:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 #define RESET			2
 #define CATCH			3
 #define HEREDOC			4
+#define HD_CATCH		5
 
 int	g_sig_catcher[2];
 

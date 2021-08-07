@@ -11,11 +11,13 @@ int	single_child(t_smpl *smpl, t_env *env)
 	signal(SIGINT, SIG_DFL);
 	envArr = env_to_array(env, &envSize);
 	if (execve(smpl->path, smpl->argv, envArr) == -1)
+	{
 		if (errno == EACCES)
 		{
 			printf("nsh: %s: Permission non accordée\n", smpl->path);
 			error = 126;
 		}
+	}
 	free_array(envArr, envSize);
 	exit(EXIT_SUCCESS + error);
 }
@@ -44,10 +46,10 @@ int	fork_single(t_smpl *smpl, t_env *env, int *status)
 	return (*status);
 }
 
-int exec_single(t_sh *nsh, t_smpl *s)
+int 	exec_single(t_sh *nsh, t_smpl *s)
 {
-	int ret;
-	int origin[2];
+	int	ret;
+	int	origin[2];
 
 	ret = 0;
 	redirect(s, &origin[0], &origin[1]);
@@ -57,11 +59,6 @@ int exec_single(t_sh *nsh, t_smpl *s)
 		ret = (call_builtin(nsh, s));
 	recover_origin(origin);
 	return (ret);
-}
-
-int call_builtin(t_sh *nsh, t_smpl *s)
-{
-	return (nsh->bui->func[s->isbuiltin](nsh, s->argv));
 }
 
 int build_exec(t_sh *nsh, t_ast *node)

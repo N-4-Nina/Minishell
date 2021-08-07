@@ -6,16 +6,17 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/07 12:36:06 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/07 14:13:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nsh.h"
 
-void print_tokens(t_lex *l)
+void	print_tokens(t_lex *l)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (i < l->nt)
 	{
 		printf("tok: %s  type: %d\n", l->t[i].data, l->t[i].type);

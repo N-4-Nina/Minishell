@@ -69,20 +69,27 @@ void    hd_read(t_smpl *s, int fd, char *end)
     size_t endsize;
     char *line;
 
+	set_sig_behav(RESET);
     endsize = ft_strlen(end);
-    //set_sig_behav(HEREDOC);
-	line = readline(">");
+	line = readline("> ");
+	if (!line)
+		printf("\nnsh: Warning: here-document ended \
+with EOF instead of \"%s\"\n", end);
 	max = ft_strlen(line);
 	if (max < endsize)
 		max = endsize;
 	while (ft_strncmp(line, end, max))
 	{
-		if (!line)
-			break;
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
-		line = readline(">");
+		line = readline("> ");
+		if (!line)
+		{
+			printf("\nnsh: Warning: here-document ended \
+with EOF instead of \"%s\"\n", end);
+			break;
+		}
 		max = ft_strlen(line);
 		if (max < endsize)
 			max = endsize;
@@ -101,27 +108,32 @@ int     here_doc(t_smpl *s, char *hd, char *end)
     pid_t   wpid;
 
 	if (!check_heredoc(&hd))
-		return (0);
+		return (-1);
 	if (s->hasheredoc)
 		unlink(hd);
 	fd = open(hd, O_CREAT | O_WRONLY | O_APPEND, 0660);
 	if (fd < 0)
-	{
-		printf("%d\n", fd);
 		printf("%s\n", strerror(errno));
-	}
     pid = fork();
     if (!pid)
         hd_read(s, fd, end);
     else
     {
+		set_sig_behav(HD_CATCH);
         wpid = waitpid(0, &status, WUNTRACED);
         fd = open(hd, FLAGS_LESS, 0660);
 	    s->files[s->filesnb++] = fd;
 	    s->input = fd;
+		unlink(hd);
+		if (g_sig_catcher[0])
+		{
+			write(1, "\n", 1);
+			close(fd);
+		}
+		if (g_sig_catcher[0] && g_sig_catcher[1] == SIGINT)
+			s->output = -1;
+		reset_sig_catcher();
 		free(hd);
-	    unlink(hd);
     }
-	
 	return (1);
 }

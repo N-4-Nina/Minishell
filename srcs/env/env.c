@@ -6,16 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/06 15:12:54 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/07 15:28:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nsh.h"
-
-int	env_is_empty(t_env *env)
-{
-	return (env->name == NULL && env->value == NULL && env->next == NULL);
-}
 
 void	add_var(t_env *env, char *name, char *value)
 {

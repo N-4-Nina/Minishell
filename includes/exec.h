@@ -10,6 +10,7 @@ typedef struct s_simple
     char    *heredoc;
     int hasheredoc;
     int isbuiltin;
+    int has_cmd_word;
     int argc;
     int filesnb;
     int *files;
@@ -52,6 +53,7 @@ int spawn(t_smpl *smpl, t_env *env);
 //word
 int    id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh);
 int    handle_word_suf(t_smpl *s, t_ast *node, t_env *env, int *status);
+int     id_cmd_suffix(t_smpl *s, t_ast *node, t_sh *nsh);
 
 //io
 int    handle_io_suf(t_smpl *s, t_ast *node, t_env *env, int *status);

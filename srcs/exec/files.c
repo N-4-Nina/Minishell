@@ -33,7 +33,6 @@ int     open_file(t_smpl *s, char *file, char *hd, int flags)
 		hdcopy = ft_strdup(hd);
         return (here_doc(s, hdcopy, file));
 	}
-
 	fd = open(file, flags, 0660);
 	if (fd < 0)
 	{

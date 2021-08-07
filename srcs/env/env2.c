@@ -1,5 +1,10 @@
 #include "../includes/nsh.h"
 
+int	env_is_empty(t_env *env)
+{
+	return (env->name == NULL && env->value == NULL && env->next == NULL);
+}
+
 int	env_size(t_env *node)
 {
 	t_env	*origin;

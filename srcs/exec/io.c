@@ -22,7 +22,9 @@ int	handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh)
 	t_ast	*io_node;
 	char	*hd;
 	char	*xpd;
+	int		check;
 
+	check = 0;
 	hd = find_by_name(nsh->env, "HEREDOC")->value;
 	io_node = node->left;
 	if (ft_strncmp(io_node->right->data, "<<", 3))
@@ -35,11 +37,15 @@ int	handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh)
 		return (-1);
 	node = node->right;
 	while (node)
-	{	
-		if (node->left->type == N_WORD)
-			id_cmd_word(s, node, nsh);
+	{
+		if (node->left->type == N_WORD && !s->has_cmd_word)
+			check = id_cmd_word(s, node, nsh);
+		else if (node->left->type == N_WORD)
+			check = id_cmd_suffix(s, node->left, nsh);
 		else if (node->left->type == N_IO_FILE)
-			handle_io_suf(s, node->left, nsh->env, nsh->last_status);
+			check = handle_io_suf(s, node->left, nsh->env, nsh->last_status);
+		if (check < 0)
+			return (-1);
 		node = node->right;
 	}
 	return (1);
