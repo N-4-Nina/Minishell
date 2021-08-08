@@ -196,6 +196,8 @@ int syntax_error(t_tok t)
 		printf("Syntax Error, unexpected token near %s \n", t.data);
 	else if (t.type > -1 && t.type < 6)
 		printf("Syntax Error, unexpected token near \"%s\" \n", spec[t.type]);
+	else
+		printf("Syntax Error: couldn't set token type.\n");
 	return (0);
 }
 
@@ -214,6 +216,5 @@ int parse(t_sh *nsh)
 		//printf("Syntax Error, unexpected token: %s \n", nsh->lex->t[nsh->lex->i-1].data);
 		return (0);
 	}
-	write_dot(&nsh->ast);
 	return (check);
  }

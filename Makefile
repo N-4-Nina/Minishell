@@ -35,8 +35,7 @@ INC         := -I$(INCDIR) -I ${LIBFT}
 INCDEP      := -I$(INCDIR)
 
 #---------------------------------------------------------------------------------
-#DO NOT EDIT BELOW THIS LINE
-#---------------------------------------------------------------------------------
+
 SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 

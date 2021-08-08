@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/08 10:10:02 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/08 10:11:29 by chpl             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nsh.h"
 
-int     args_count(t_ast *node)
+int	args_count(t_ast *node)
 {
-	int ac;
+	int	ac;
 
 	ac = 0;
 	while (node && (node->left->type == N_WORD || node->type == N_CMD_SUFFIX))
@@ -14,7 +26,7 @@ int     args_count(t_ast *node)
 	return (ac);
 }
 
-void     files_count(t_ast *node, int *c)
+void	files_count(t_ast *node, int *c)
 {
 	if (node->type == N_IO_FILE)
 		(*c)++;
@@ -24,10 +36,10 @@ void     files_count(t_ast *node, int *c)
 		files_count(node->left, c);
 }
 
-void    init_simple(t_smpl *s, int ac, int fc)
+void	init_simple(t_smpl *s, int ac, int fc)
 {
-	s->argv = (char **)malloc(sizeof(char*) * (ac + 1));
-	s->files = (int*)malloc(sizeof(int*) * (fc + 1));
+	s->argv = (char **)malloc(sizeof(char *) * (ac + 1));
+	s->files = (int *)malloc(sizeof(int *) * (fc + 1));
 	s->argc = 0;
 	s->input = STDIN_FILENO;
 	s->output = STDOUT_FILENO;
@@ -37,7 +49,7 @@ void    init_simple(t_smpl *s, int ac, int fc)
 	s->path = NULL;
 }
 
-t_smpl *abort_simple(t_smpl *s)
+t_smpl	*abort_simple(t_smpl *s)
 {
 	if (s->argv[0])
 		free(s->argv[0]);
@@ -51,13 +63,13 @@ t_smpl *abort_simple(t_smpl *s)
 	return (NULL);
 }
 
-t_smpl *build_simple(t_sh *nsh, t_ast *node)
+t_smpl	*build_simple(t_sh *nsh, t_ast *node)
 {
-	t_smpl *s;
-	int     ac;
-	int     fc;
+	t_smpl	*s;
+	int		ac;
+	int		fc;
 
-	s = (t_smpl*)malloc(sizeof(t_smpl));
+	s = (t_smpl *)malloc(sizeof(t_smpl));
 	fc = 0;
 	ac = args_count(node);
 	files_count(node, &fc);

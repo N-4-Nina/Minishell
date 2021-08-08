@@ -20,6 +20,7 @@ typedef struct s_simple
 
 typedef struct s_command
 {
+    int     i;
     int     smpnb;
     int     *red[2];
     int     *ori[2];

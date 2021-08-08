@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   files.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/08 10:11:45 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/08 10:16:34 by chpl             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nsh.h"
 
-void    close_files(t_smpl *s)
+void	close_files(t_smpl *s)
 {
 	while (s->filesnb > 0)
 	{
@@ -10,33 +22,32 @@ void    close_files(t_smpl *s)
 	free(s->files);
 }
 
-int     get_flags(char *red)
+int	get_flags(char *red)
 {
 	if (ft_strlen(red) == 2 && red[0] == '>')
-		return(FLAGS_DGREAT);
+		return (FLAGS_DGREAT);
 	else if (red[0] == '>')
-		return(FLAGS_GREAT);
+		return (FLAGS_GREAT);
 	else if (ft_strlen(red) == 2 && red[0] == '<')
-		return(FLAGS_DLESS);
+		return (FLAGS_DLESS);
 	else
-		return(FLAGS_LESS);
+		return (FLAGS_LESS);
 }
 
-int     open_file(t_smpl *s, char *file, char *hd, int flags)
+int	open_file(t_smpl *s, char *file, char *hd, int flags)
 {
-	int fd;
+	int		fd;
 	char	*hdcopy;
 
-	
 	if (flags < 0)
 	{
 		hdcopy = ft_strdup(hd);
-        return (here_doc(s, hdcopy, file));
+		return (here_doc(s, hdcopy, file));
 	}
 	fd = open(file, flags, 0660);
 	if (fd < 0)
 	{
-		printf("%s \n",strerror(errno));
+		printf("%s \n", strerror(errno));
 		return (-1);
 	}
 	if (fd > -1)
@@ -44,9 +55,9 @@ int     open_file(t_smpl *s, char *file, char *hd, int flags)
 		s->files[s->filesnb] = fd;
 		s->filesnb++;
 		if (flags == (FLAGS_DGREAT) || flags == (FLAGS_GREAT))
-            s->output = fd;
-        else
-            s->input = fd;
+			s->output = fd;
+		else
+			s->input = fd;
 	}
-	return(fd);
+	return (fd);
 }

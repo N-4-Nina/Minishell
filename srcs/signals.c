@@ -56,8 +56,6 @@ void	set_sig_behav(int mode)
 		while (i < 15)
 			signal(i++, catch_signal);
 	}
-	//else if (mode == HEREDOC)
-	//	signal(SIGINT, SIG_DFL);
 	else if (mode == HD_CATCH)
 		while (i < 15)
 			signal(i++, hd_catch_sig);
