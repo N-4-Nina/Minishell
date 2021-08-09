@@ -40,6 +40,7 @@ void    cmd_reset(t_cmd *cmd);
 int     open_file(t_smpl *s, char *file, char *hd, int flags);
 int     get_flags(char *red);
 void    close_files(t_smpl *s);
+char	*update_heredoc_name(char *hd);
 
 //simple
 void    init_simple(t_smpl *s, int ac, int fc);
@@ -67,5 +68,13 @@ int set_cmd_path(t_smpl *s, t_env *env, char *name);
 void    redirect(t_smpl *s, int *ori_in, int *ori_out);
 void    recover_origin(int origin[2]);
 
+//expansion
+void	do_cat(char **dst, char *src);
+int	replace_weak(char **dst, char *src, t_env *env);
+int	replace_strong(char **dst, char *src);
+int	replace_var(char **dst, char *src, t_env *env);
+int	replace_status(char **dst, char *src, int status);
+
+char	*expand_word(char *s, t_env *env, int *status);
 
 #endif

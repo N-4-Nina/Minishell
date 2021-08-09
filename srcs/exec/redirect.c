@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chappelle <chappelle@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/09 13:13:17 by chappelle         #+#    #+#             */
+/*   Updated: 2021/08/09 13:13:48 by chappelle        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nsh.h"
 
-void    recover_origin(int origin[2])
+void	recover_origin(int origin[2])
 {
 	dup2(origin[0], STDIN_FILENO);
 	dup2(origin[1], STDOUT_FILENO);
 }
 
-void    redirect(t_smpl *s, int *ori_in, int *ori_out)
+void	redirect(t_smpl *s, int *ori_in, int *ori_out)
 {
 	*ori_in = dup(STDIN_FILENO);
 	*ori_out = dup(STDOUT_FILENO);

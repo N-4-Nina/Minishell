@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chappelle <chappelle@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:21:06 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/07 14:18:28 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/09 14:08:04 by chappelle        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ char	*get_current_dir_name(void)
 int	isSpec(char c)
 {
 	return (c == '>' || c == '<'
-		|| c == '|' || c == ';'
-		|| c == '\\');
+		|| c == '|' || c == ';');
 }
 
 int	isQuote(char c)
