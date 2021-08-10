@@ -6,11 +6,13 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:10:02 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/08 10:11:29 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 15:01:45 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
 
 int	args_count(t_ast *node)
 {

@@ -6,11 +6,14 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:01:16 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 10:03:19 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 18:05:53 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
+#include "../includes/utils.h"
 
 int	cmd_execute(t_sh *nsh, t_cmd *cmd)
 {

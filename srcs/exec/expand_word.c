@@ -6,11 +6,13 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 14:49:34 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 09:30:47 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 15:00:58 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
 
 void	do_cat(char **dst, char *src)
 {

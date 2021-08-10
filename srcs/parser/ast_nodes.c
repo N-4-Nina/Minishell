@@ -6,11 +6,12 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:18:38 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 11:24:11 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:55:19 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
 
 /*I got two functions for adding nodes
 which is not great and not very logical.

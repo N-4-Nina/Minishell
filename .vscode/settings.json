@@ -15,7 +15,16 @@
         "termio.h": "c",
         "type_traits": "c",
         "token.h": "c",
-        "parser.h": "c"
+        "parser.h": "c",
+        "libs.h": "c",
+        "libft.h": "c",
+        "structures.h": "c",
+        "utils.h": "c",
+        "defines.h": "c",
+        "signals.h": "c",
+        "prompt.h": "c",
+        "builtins.h": "c",
+        "astree.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

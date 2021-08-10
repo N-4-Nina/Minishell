@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nsh_env.c                                          :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/10 15:09:43 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 15:09:49 by chpl             ###   ########.fr       */
+/*   Created: 2021/08/10 14:39:36 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/10 16:49:23 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/builtins.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-int	nsh_env(t_sh *nsh, char **args)
-{
-	t_env	*lst;
+void	free_array(char **ar, int size);
+int		isBlank(char c);
+int		isSpec(char c);
+int		isQuote(char c);
+char	*get_current_dir_name(void);
 
-	args[0][0] = 'e';
-	lst = nsh->env;
-	while (lst)
-	{
-		write(1, lst->name, ft_strlen(lst->name));
-		write(1, "=", 1);
-		write(1, lst->value, ft_strlen(lst->value));
-		write(1, "\n", 1);
-		lst = lst->next;
-	}
-	*(nsh->last_status) = 0;
-	return (0);
-}
+#endif

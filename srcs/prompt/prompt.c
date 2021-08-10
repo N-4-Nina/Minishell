@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/07 15:28:21 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/10 15:19:53 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/environment.h"
+#include "../includes/utils.h"
+#include "../includes/defines.h"
 
 char	*get_dir_name(t_env *env)
 {

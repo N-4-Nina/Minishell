@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/07 15:28:52 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/10 16:51:46 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/environment.h"
+#include "../includes/utils.h"
 
 void	add_var(t_env *env, char *name, char *value)
 {

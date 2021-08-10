@@ -6,11 +6,15 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:15:10 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/10 08:49:25 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 15:03:16 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
+#include "../includes/environment.h"
+#include "../includes/utils.h"
 
 int	replace_status(char **dst, char *src, int status)
 {

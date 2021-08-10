@@ -6,11 +6,13 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:27:05 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/08 09:55:41 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:53:36 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/lexer.h"
 
 void	lex_reset(t_lex *l)
 {

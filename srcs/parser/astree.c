@@ -6,11 +6,14 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:12:50 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 11:18:44 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:57:59 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/astree.h"
+#include "../includes/parser.h"
 
 void	ast_reset(t_ast **node)
 {

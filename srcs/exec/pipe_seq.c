@@ -6,11 +6,17 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:17:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/08 14:12:00 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 15:06:19 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
+#include "../includes/environment.h"
+#include "../includes/signals.h"
+#include "../includes/defines.h"
+#include "../includes/utils.h"
 
 void	pipe_seq_redir(t_smpl *s)
 {

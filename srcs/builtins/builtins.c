@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 09:26:49 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/07 17:34:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/10 15:14:15 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/environment.h"
+#include "../includes/builtins.h"
 
 int	call_builtin(t_sh *nsh, t_smpl *s)
 {

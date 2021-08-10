@@ -6,23 +6,18 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 12:07:16 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 17:32:45 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/utils.h"
+#include "../includes/environment.h"
+#include "../includes/astree.h"
 #include "../includes/nsh.h"
-
-void	print_tokens(t_lex *l)
-{
-	int	i;
-
-	i = 0;
-	while (i < l->nt)
-	{
-		printf("tok: %s  type: %d\n", l->t[i].data, l->t[i].type);
-		i++;
-	}
-}
+#include "../includes/lexer.h"
+#include "../includes/signals.h"
 
 void	nsh_clear(t_sh *nsh)
 {

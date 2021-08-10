@@ -6,11 +6,15 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 11:08:41 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:59:13 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/astree.h"
+#include "../includes/parser.h"
+#include "../includes/lexer.h"
 
 int	validate(t_lex *l, t_ttype expected)
 {

@@ -1,4 +1,18 @@
-#include "../includes/nsh.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   nsh_pwd.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/10 15:15:15 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/10 15:15:16 by chpl             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/environment.h"
 
 int	nsh_pwd(t_sh *nsh, char **args)
 {

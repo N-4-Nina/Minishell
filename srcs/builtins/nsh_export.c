@@ -6,11 +6,13 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 08:31:14 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 15:15:31 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/environment.h"
 
 int	nsh_export_env(t_sh *nsh)
 {

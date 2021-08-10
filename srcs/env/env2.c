@@ -1,4 +1,18 @@
-#include "../includes/nsh.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env2.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/10 15:07:09 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/10 15:07:42 by chpl             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/environment.h"
 
 int	env_is_empty(t_env *env)
 {

@@ -6,11 +6,15 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:04:44 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 11:06:43 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:58:40 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/astree.h"
+#include "../includes/parser.h"
+#include "../includes/lexer.h"
 
 /*Obviously we need to check the presence of
 both the redirection operator and the file

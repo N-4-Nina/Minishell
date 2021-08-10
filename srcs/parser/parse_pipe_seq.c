@@ -6,11 +6,15 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:29 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 10:59:42 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:59:02 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/astree.h"
+#include "../includes/parser.h"
+#include "../includes/lexer.h"
 
 /*the important part here is the return value:
 a pipe sequence is actually not define by the 

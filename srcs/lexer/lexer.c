@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/08 09:59:39 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:53:58 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@
  * are still open at the end of the command
  */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/lexer.h"
+#include "../includes/utils.h"
+#include "../includes/lexer.h"
 
 void	copy_data(t_lex *l, int add)
 {

@@ -6,11 +6,15 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:09:45 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 11:11:11 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:58:55 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/astree.h"
+#include "../includes/parser.h"
+#include "../includes/lexer.h"
 
 /*Very simple as we should already
 know if the token is a word or not

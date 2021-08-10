@@ -1,4 +1,19 @@
-#include "../../includes/nsh.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   io.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/10 15:01:22 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/10 16:51:25 by chpl             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
+#include "../includes/environment.h"
 
 int	handle_io_suf(t_smpl *s, t_ast *node, t_env *env, int *status)
 {

@@ -1,4 +1,22 @@
-#include "../../includes/nsh.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/10 15:05:10 by chpl             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
+#include "../includes/environment.h"
+#include "../includes/utils.h"
+#include "../includes/signals.h"
+#include "../includes/defines.h"
 
 int	single_child(t_smpl *smpl, t_env *env)
 {

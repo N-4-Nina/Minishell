@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chappelle <chappelle@student.42.fr>        +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:13:17 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/09 13:13:48 by chappelle        ###   ########.fr       */
+/*   Updated: 2021/08/10 15:01:39 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
 
 void	recover_origin(int origin[2])
 {

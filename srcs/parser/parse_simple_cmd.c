@@ -6,11 +6,15 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:00:58 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 11:08:17 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:58:17 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/lexer.h"
+#include "../includes/astree.h"
+#include "../includes/parser.h"
 
 /*pretty straight-forward: grammar
 specify a simple cmd can be an io file

@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:32:38 by user42            #+#    #+#             */
-/*   Updated: 2021/07/19 11:47:39 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/10 15:05:34 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
+#include "../includes/builtins.h"
 
 int	id_cmd_suffix(t_smpl *s, t_ast *node, t_sh *nsh)
 {

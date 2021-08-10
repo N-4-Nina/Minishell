@@ -6,11 +6,15 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:45:34 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 10:50:37 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:59:21 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/astree.h"
+#include "../includes/parser.h"
+#include "../includes/lexer.h"
 
 /*Grammatically speaking, a command is one or a
 serie of pipe_sequence, so we need to check if

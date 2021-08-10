@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chappelle <chappelle@student.42.fr>        +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:21:06 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/09 14:08:04 by chappelle        ###   ########.fr       */
+/*   Updated: 2021/08/10 14:38:48 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nsh.h"
+#include "../includes/libs.h"
 
 void	free_array(char **ar, int size)
 {

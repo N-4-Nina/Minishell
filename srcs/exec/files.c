@@ -6,11 +6,14 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:11:45 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/08 10:16:34 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 15:06:29 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/exec.h"
+#include "../includes/defines.h"
 
 void	close_files(t_smpl *s)
 {

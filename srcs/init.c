@@ -1,4 +1,22 @@
-#include "../includes/nsh.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/10 15:21:53 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/10 16:51:59 by chpl             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/structures.h"
+#include "../includes/libs.h"
+#include "../includes/lexer.h"
+#include "../includes/parser.h"
+#include "../includes/exec.h"
+#include "../includes/environment.h"
+#include "../includes/builtins.h"
 
 void	nsh_alloc(t_sh *nsh)
 {
@@ -14,6 +32,5 @@ int	nsh_init(t_sh *nsh)
 	env_init(&nsh->env);
 	lex_init(nsh->lex);
 	bui_init(nsh);
-	term_init(nsh->term);
 	return (1);
 }

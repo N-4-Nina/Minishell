@@ -6,11 +6,12 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:17:10 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 11:17:11 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 14:55:11 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/nsh.h"
+#include "../includes/structures.h"
+#include "../includes/libs.h"
 
 void	graft_node_left(t_ast **node, t_ast *new)
 {
