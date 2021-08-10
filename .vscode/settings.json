@@ -14,7 +14,8 @@
         "term.h": "c",
         "termio.h": "c",
         "type_traits": "c",
-        "token.h": "c"
+        "token.h": "c",
+        "parser.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

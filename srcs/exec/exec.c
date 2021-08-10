@@ -61,16 +61,16 @@ int 	exec_single(t_sh *nsh, t_smpl *s)
 	return (ret);
 }
 
-int build_exec(t_sh *nsh, t_ast *node)
+int	build_exec(t_sh *nsh, t_ast *node)
 {
-	t_cmd   cmd;
+	t_cmd	cmd;
 
 	while (node)
 	{
 		if (cmd_build(nsh, node->left, &cmd) == -1)
 		{
 			node = node->right;
-			continue;
+			continue ;
 		}
 		cmd_execute(nsh, &cmd);
 		cmd_reset(&cmd);
@@ -79,7 +79,7 @@ int build_exec(t_sh *nsh, t_ast *node)
 	return (0);
 }
 
-int exec(t_sh *nsh)
+int	exec(t_sh *nsh)
 {
 	build_exec(nsh, nsh->ast->right);
 	return (0);

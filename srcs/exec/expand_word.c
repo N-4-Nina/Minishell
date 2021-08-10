@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chappelle <chappelle@student.42.fr>        +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 14:49:34 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/09 14:12:58 by chappelle        ###   ########.fr       */
+/*   Updated: 2021/08/10 09:30:47 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,35 @@ void	do_cat(char **dst, char *src)
 	free(tmp);
 }
 
+int	append_single(char **dst, char c)
+{
+	int		len;
+	char	*tmp;
+	char	src[2];
+
+	src[0] = c;
+	src[1] = 0;
+	if (!*dst)
+	{
+		*dst = ft_strdup(src);
+		return (1);
+	}
+	len = ft_strlen(*dst) + 2;
+	tmp = ft_strdup(*dst);
+	free(*dst);
+	*dst = malloc(len);
+	ft_strlcpy(*dst, tmp, ft_strlen(tmp) + 1);
+	ft_strlcat(*dst, src, len);
+	free(tmp);
+	return (1);
+}
+
 char	*expand_word(char *s, t_env *env, int *status)
 {
 	int		i;
 	char	*new;
-	char	single[2];
 
 	i = 0;
-	single[1] = 0;
 	new = NULL;
 	while (s[i])
 	{
@@ -56,11 +77,7 @@ char	*expand_word(char *s, t_env *env, int *status)
 			i += 2;
 		}
 		else
-		{
-			single[0] = s[i];
-			do_cat(&new, &single[0]);
-			i++;
-		}
+			i += append_single(&new, s[i]);
 	}
 	return (new);
 }

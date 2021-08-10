@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/10 10:01:16 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/10 10:03:19 by chpl             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nsh.h"
 
-int cmd_execute(t_sh *nsh, t_cmd *cmd)
+int	cmd_execute(t_sh *nsh, t_cmd *cmd)
 {
 	if (cmd->smpnb == 0)
-		return(0);
+		return (0);
 	if (cmd->smpnb == 1)
 		exec_single(nsh, cmd->smpl[0]);
 	else
@@ -11,9 +23,9 @@ int cmd_execute(t_sh *nsh, t_cmd *cmd)
 	return (0);
 }
 
-int cmd_build(t_sh *nsh, t_ast *node, t_cmd *cmd)
+int	cmd_build(t_sh *nsh, t_ast *node, t_cmd *cmd)
 {
-	t_ast   *pipenode;
+	t_ast	*pipenode;
 
 	pipenode = node;
 	cmd->smpnb = 0;
@@ -34,9 +46,9 @@ int cmd_build(t_sh *nsh, t_ast *node, t_cmd *cmd)
 	return (0);
 }
 
-void    cmd_reset(t_cmd *cmd)
+void	cmd_reset(t_cmd *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < cmd->smpnb)
@@ -47,6 +59,6 @@ void    cmd_reset(t_cmd *cmd)
 			free(cmd->smpl[i]->path);
 		if (cmd->smpl[i])
 			free(cmd->smpl[i]);
-		i++; 
+		i++;
 	}
 }

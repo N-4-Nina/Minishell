@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   environment.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/10 11:58:28 by chpl              #+#    #+#             */
+/*   Updated: 2021/08/10 11:58:29 by chpl             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENVIRONMENT_H
 # define ENVIRONMENT_H
 
-#include "nsh.h"
+# include "nsh.h"
 
-typedef	struct	s_env
+typedef struct s_env
 {
-	char	*name;
-	char	*value;
-	struct	s_env	*next;
-}		t_env;
-
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
 t_env	*find_by_name(t_env *env, char *str);
 int		env_is_empty(t_env *env);
