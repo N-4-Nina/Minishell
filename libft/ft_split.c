@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouchau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 12:59:23 by abouchau          #+#    #+#             */
-/*   Updated: 2019/11/14 16:54:28 by abouchau         ###   ########.fr       */
+/*   Updated: 2021/08/10 21:53:10 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static	char	**fill_array(char **array, char *str, char c)
 		{
 			length = string_length(str, i, c);
 			array[j] = (char *)malloc(length + 1);
+			if (!array[j])
+				return (NULL);
 			while (str[i] && (str[i] != c))
 				array[j][k++] = str[i++];
 			array[j][k] = '\0';

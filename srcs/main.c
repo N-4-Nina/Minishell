@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 17:32:45 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/10 21:57:46 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	nsh_clear(t_sh *nsh)
 	free(nsh->inp);
 	free_array(nsh->bui->str, 7);
 	free(nsh->bui);
+	free(nsh->last_status);
 	env_clear(nsh->env);
 }
 
