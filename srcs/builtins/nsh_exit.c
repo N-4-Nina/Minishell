@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:45 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 18:18:53 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/11 16:19:04 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	free_everything(t_sh *nsh)
 	free_array(nsh->bui->str, 7);
 	ast_reset(&nsh->ast);
 	free(nsh->inp->prompt);
-	free(nsh->inp->line);
+	if (nsh->inp->line)
+		free(nsh->inp->line);
 	lex_reset(nsh->lex);
 	free(nsh->lex);
 	free(nsh->inp);

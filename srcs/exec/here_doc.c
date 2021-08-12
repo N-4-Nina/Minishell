@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 10:39:49 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/10 15:03:58 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/11 15:57:23 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,24 @@
 #include "../includes/signals.h"
 #include "../includes/defines.h"
 
-int	check_heredoc(char **hd)
+int	check_heredoc(t_smpl *s, char **hd)
 {
 	int	fd;
 
 	fd = 0;
 	*hd = update_heredoc_name(*hd);
-	printf("from check = %s \n", *hd);
 	if (!*hd)
 	{
+		s->output = -1;
 		printf("Please set the HEREDOC variable.\n");
 		return (0);
 	}
 	fd = open(*hd, FLAGS_DGREAT, 0660);
 	if (fd < 0)
 	{
-		printf("%s\n", *hd);
+		s->output = -1;
 		printf("HEREDOC file must be accessible to this program.\n");
+		free((*hd));
 		return (0);
 	}
 	close(fd);
@@ -111,7 +112,7 @@ int	here_doc(t_smpl *s, char *hd, char *end)
 	int		fd;
 	pid_t	pid;
 
-	if (!check_heredoc(&hd))
+	if (!check_heredoc(s, &hd))
 		return (-1);
 	if (s->hasheredoc)
 		unlink(hd);

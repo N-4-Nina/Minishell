@@ -1,0 +1,2 @@
+i somehow deleted the old notes file but whatever.
+commented lines 56/57 in simple because of segfault. should be careful about leaks. theres a fex but mainly when a big input is pasted. should i try and wait in the loop ?

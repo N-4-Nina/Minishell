@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 16:51:46 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/11 15:28:37 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	add_heredoc_path(t_env **env)
 	char	*str;
 
 	tmp = getenv("USER");
+	if (!tmp)
+		tmp = ft_strdup("user42");
 	str = ft_strjoin("/home/", tmp);
 	tmp = ft_strjoin(str, "/.nsh_heredoc");
 	add_var(*env, "HEREDOC", tmp);
@@ -96,8 +98,8 @@ void	env_init(t_env **env)
 	free(cdn);
 	add_var(*env, "PATH", \
 "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin/");
-	add_var(*env, "TERM", getenv("TERM"));
+	add_var(*env, "TERM", "xterm-256color");
 	add_var(*env, "PAGER", "less");
-	add_var(*env, "LANG", getenv("LANG"));
+	add_var(*env, "LANG", "en_US.UTF-8");
 	add_heredoc_path(env);
 }

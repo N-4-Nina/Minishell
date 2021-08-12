@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:01:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 16:51:25 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/11 14:55:52 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	handle_io_suf(t_smpl *s, t_ast *node, t_env *env, int *status)
 	char	*hd;
 	char	*xpd;
 
+	if (!find_by_name(env, "HEREDOC"))
+	{
+		printf("Please set a valid HEREDOC variable.\n");
+		return (-1);
+	}
 	hd = find_by_name(env, "HEREDOC")->value;
 	if (ft_strncmp(node->right->data, "<<", 3))
 		xpd = expand_word(node->left->data, env, status);
@@ -53,9 +58,9 @@ int	handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh)
 	t_ast	*io_node;
 	char	*hd;
 	char	*xpd;
-	int		check;
 
-	check = 0;
+	if (!find_by_name(nsh->env, "HEREDOC"))
+		return (printf("Please set a valid HEREDOC variable.\n") - 39);
 	hd = find_by_name(nsh->env, "HEREDOC")->value;
 	io_node = node->left;
 	if (ft_strncmp(io_node->right->data, "<<", 3))

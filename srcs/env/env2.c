@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:07:09 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 15:07:42 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/11 18:20:10 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ int	env_size(t_env *node)
 	return (i);
 }
 
-void	remove_var(t_env *env, t_env *node)
+void	remove_var(t_env **env, t_env *node)
 {
 	t_env	*lst;
 
-	lst = env;
+	lst = *env;
 	if (lst == node)
 	{
-		env = lst->next;
+		write(1, "hello\n", 7);
+		*env = lst->next;
 		free(lst->name);
 		free(lst->value);
 		free(lst);

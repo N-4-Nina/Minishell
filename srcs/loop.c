@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:20:15 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 21:57:01 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/11 16:25:04 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,22 @@
 #include "../includes/nsh.h"
 #include "../includes/defines.h"
 #include "../includes/prompt.h"
+#include "../includes/utils.h"
+#include "../includes/builtins.h"
+
+int	is_empty(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!isBlank(s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	nsh_loop(t_sh *nsh)
 {
@@ -35,7 +51,7 @@ int	nsh_loop(t_sh *nsh)
 			free(nsh->inp->prompt);
 			break ;
 		}
-		if (nsh->lex->inp[0])
+		if (!is_empty(nsh->lex->inp))
 			add_history(nsh->lex->inp);
 		if (!lex_build(nsh->lex))
 			continue ;

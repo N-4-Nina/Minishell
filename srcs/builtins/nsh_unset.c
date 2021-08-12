@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:15:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 15:15:49 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/11 18:22:12 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	nsh_unset(t_sh *nsh, char **args)
 		node = NULL;
 		node = find_by_name(nsh->env, args[i]);
 		if (node)
-			remove_var(nsh->env, node);
+			remove_var(&nsh->env, node);
 		i++;
 	}
 	return (0);
