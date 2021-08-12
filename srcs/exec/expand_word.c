@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 14:49:34 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 15:00:58 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 14:57:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*expand_word(char *s, t_env *env, int *status)
 		if (s[i] == '\'')
 			i += replace_strong(&new, &s[i]);
 		else if (s[i] == '"')
-			i += replace_weak(&new, &s[i], env);
+			i += replace_weak(&new, &s[i], env, status);
 		else if (s[i] == '$' && s[i + 1] == '?')
 			i += replace_status(&new, &s[i], *status);
 		else if (s[i] == '$')

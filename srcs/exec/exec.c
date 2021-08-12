@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 16:54:45 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 12:53:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	build_exec(t_sh *nsh, t_ast *node)
 {
 	t_cmd	cmd;
 
+	nsh->cmd = &cmd;
 	while (node)
 	{
 		if (cmd_build(nsh, node->left, &cmd) == -1)

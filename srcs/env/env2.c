@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:07:09 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 18:20:10 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 15:27:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	remove_var(t_env **env, t_env *node)
 	lst = *env;
 	if (lst == node)
 	{
-		write(1, "hello\n", 7);
 		*env = lst->next;
 		free(lst->name);
 		free(lst->value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 10:39:49 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/11 15:57:23 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 14:41:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 #include "../includes/exec.h"
 #include "../includes/signals.h"
 #include "../includes/defines.h"
+
+/*I was wondering why valgrind reported some
+still reachables when using heredoc but it is
+simply because of the fork... in this case 
+only the last report of valgrind is relevant.
+*/
 
 int	check_heredoc(t_smpl *s, char **hd)
 {

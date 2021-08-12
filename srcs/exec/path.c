@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/08/11 18:01:05 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 18:13:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	set_abs_path(t_smpl *s, char *name)
 		free(name);
 		return (1);
 	}
+	printf("Nsh: Command not found: %s\n", name + 1);
+	free(name);
 	return (0);
 }
 
@@ -89,7 +91,8 @@ int	set_cmd_path(t_smpl *s, t_env *env, char *name)
 		j++;
 	if (seek_in_path(s, split, name, j))
 		return (1);
-	free(name);
 	free_array(split, j);
+	printf("Nsh: Command not found: %s\n", name + 1);
+	free(name);
 	return (0);
 }

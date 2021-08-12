@@ -27,7 +27,7 @@ CC	= gcc
 CFLAGS = -Wall -Wextra -Werror
 
 .c.o:
-	${CC}  ${CFLAGS} -c $< -o ${<:.c=.o}
+	${CC}  ${CFLAGS} -g -c $< -o ${<:.c=.o}
 
 RM = rm -f
 

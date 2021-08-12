@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 15:28:37 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 14:50:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	add_heredoc_path(t_env **env)
 	tmp = getenv("USER");
 	if (!tmp)
 		tmp = ft_strdup("user42");
+	add_var(*env, "USER", tmp);
 	str = ft_strjoin("/home/", tmp);
 	tmp = ft_strjoin(str, "/.nsh_heredoc");
 	add_var(*env, "HEREDOC", tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:10:02 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 14:37:14 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 12:52:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,10 @@ t_smpl	*abort_simple(t_smpl *s)
 {
 	if (s->path)
 		free(s->path);
+	if (s->has_cmd_word)
+		free(s->argv[0]);
 	if (s->argv)
-	{
-		if (s->argv[0])
-			free(s->argv[0]);
 		free(s->argv);
-	}
 	if (s->files)
 		free(s->files);
 	free(s);

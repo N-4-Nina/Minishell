@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:32:38 by user42            #+#    #+#             */
-/*   Updated: 2021/08/10 15:05:34 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 18:00:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 		free(xpd);
 	else if (!set_cmd_path(s, nsh->env, xpd))
 	{
-		printf("Nsh: Command not found: %s\n", node->left->data);
 		*nsh->last_status = 127;
 		return (-1);
 	}

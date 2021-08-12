@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:45 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 16:19:04 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 13:47:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	free_everything(t_sh *nsh)
 	free(nsh->lex);
 	free(nsh->inp);
 	free(nsh->bui);
+	free(nsh->last_status);
 	env_clear(nsh->env);
 }
 
@@ -37,11 +38,10 @@ int	nsh_exit(t_sh *nsh, char **args)
 {
 	int	exit_status;
 
-	free_everything(nsh);
 	if (args[1])
 		exit_status = ft_atoi(args[1]);
 	else
 		exit_status = *nsh->last_status;
-	free(nsh->last_status);
+	free_everything(nsh);
 	exit(exit_status);
 }

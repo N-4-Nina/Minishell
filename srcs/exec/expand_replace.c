@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_replace.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:15:10 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/10 15:03:16 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 17:06:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	replace_var(char **dst, char *src, t_env *env)
 	int		i;
 
 	i = 1;
-	while (src[i] && !(isBlank(src[i])) && src[i] != '"')
+	while (src[i] && src[i] != '/' && !(isBlank(src[i])) && !isQuote(src[i]))
 		i++;
 	sub = ft_substr(src, 1, i - 1);
 	var = find_by_name(env, sub);
@@ -56,7 +56,7 @@ int	replace_strong(char **dst, char *src)
 	return (i + 1);
 }
 
-int	replace_weak(char **dst, char *src, t_env *env)
+int	replace_weak(char **dst, char *src, t_env *env, int *status)
 {
 	int		i;
 	char	single[2];
@@ -65,6 +65,8 @@ int	replace_weak(char **dst, char *src, t_env *env)
 	single[1] = 0;
 	while (src[i] && src[i] != '"')
 	{
+		if (src[i] == '$' && src[i + 1] == '?')
+			i += replace_status(dst, &src[i], *status);
 		if (src[i] == '$')
 			i += replace_var(dst, &src[i], env);
 		else

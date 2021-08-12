@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:38 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 19:12:12 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 15:10:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/libs.h"
 #include "../includes/environment.h"
 #include "../includes/builtins.h"
+#include "../includes/utils.h"
 
 int	cd_mulitples_args(char **args)
 {
@@ -33,7 +34,6 @@ int	cd_mulitples_args(char **args)
 int	nsh_cd(t_sh *nsh, char **args)
 {
 	t_env	*var;
-	char	*buf;
 
 	if (cd_mulitples_args(args))
 	{
@@ -41,11 +41,10 @@ int	nsh_cd(t_sh *nsh, char **args)
 		return (*(nsh->last_status));
 	}
 	var = find_by_name(nsh->env, "PWD");
-	if (var)
-		buf = var->value;
 	if (!chdir(args[1]))
 	{
-		getcwd(buf, 4096);
+		if (var)
+			var->value = get_current_dir_name();
 		*(nsh->last_status) = 0;
 		return (*(nsh->last_status));
 	}

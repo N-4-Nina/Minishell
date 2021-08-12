@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 14:59:13 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 14:08:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include "../includes/astree.h"
 #include "../includes/parser.h"
 #include "../includes/lexer.h"
+
+/* If yo want to check out the graph writer
+you should call write_dot just before 
+parse returns.
+*/
 
 int	validate(t_lex *l, t_ttype expected)
 {
@@ -61,9 +66,6 @@ int	parse(t_sh *nsh)
 	check = tree_init(nsh);
 	check = parse_input(nsh);
 	if (!lex_isover(*nsh->lex) && lex_inbound(*nsh->lex))
-	{
 		return (syntax_error(nsh->lex->t[nsh->lex->i]));
-		return (0);
-	}
 	return (check);
 }

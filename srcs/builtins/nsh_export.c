@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 15:15:31 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 17:20:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,31 @@ int	nsh_export_env(t_sh *nsh)
 
 int	is_valid_idenfier(t_sh *nsh, char *s)
 {
-	if (ft_isdigit(s[0]) || s[0] == '=')
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	if (ft_isdigit(s[0]))
 	{
 		printf("Nsh: export: \'%s\': not a valid identifier\n", s);
 		*(nsh->last_status) = 1;
 		return (0);
 	}
-	return (1);
+	while (s[i])
+	{
+		if (ft_isalpha(s[i]) || ft_isdigit(s[i]) || s[i] == '_')
+			ret = 1;
+		else
+		{
+			printf("Nsh: export: \'%s\': not a valid identifier\n", s);
+			*(nsh->last_status) = 1;
+			ret = 0;
+			break ;
+		}
+		i++;
+	}
+	return (ret);
 }
 
 void	actually_export(t_sh *nsh, char *var, char *val)

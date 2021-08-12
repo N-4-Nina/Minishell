@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 14:53:58 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/12 13:53:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	lex_build(t_lex *l)
 	if (count_tokens(l) <= 0)
 		return (0);
 	l->t = malloc(sizeof(t_tok) * l->nt);
+	if (!l->t)
+		return (0);
 	tokenize(l);
 	l->i = 0;
 	return (l->nt);
