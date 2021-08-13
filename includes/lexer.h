@@ -5,7 +5,7 @@
 
 void	lex_init(t_lex *l);
 void	lex_reset(t_lex *l);
-int		lex_build(t_lex *l);
+int		lex_build(t_lex *l, char *prompt);
 int		count_tokens(t_lex *l);
 void	set_quote_len(t_lex *l);
 void	set_spec_len(t_lex *l);

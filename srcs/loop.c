@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:20:15 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 16:25:04 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/13 07:49:21 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	nsh_loop(t_sh *nsh)
 		}
 		if (!is_empty(nsh->lex->inp))
 			add_history(nsh->lex->inp);
-		if (!lex_build(nsh->lex))
+		if (!lex_build(nsh->lex, nsh->inp->prompt))
 			continue ;
 		parse(nsh);
 		exec(nsh);

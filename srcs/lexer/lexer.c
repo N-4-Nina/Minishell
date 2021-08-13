@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 13:53:36 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/13 08:22:37 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ void	copy_data(t_lex *l, int add)
 	if (!l->t[l->j].data)
 		return (abort_token(l));
 	ft_strlcpy(l->t[l->j].data, &l->inp[l->i], l->t[l->j].len + add);
+}
+
+int	check_multiline(t_lex *l)
+{
+	if (l->inp[ft_strlen(l->inp) - 1] == '\\')
+	{
+		printf("Multiline is not supported.\n");
+		return (1);
+	}
+	return (0);
 }
 
 int	set_spec_type(t_lex *l)
@@ -74,15 +84,23 @@ int	tokenize(t_lex *l)
 	return (1);
 }
 
-int	lex_build(t_lex *l)
+int	lex_build(t_lex *l, char *prompt)
 {
 	if (!l->inp)
 		return (0);
-	if (count_tokens(l) <= 0)
+	if (check_multiline(l) || count_tokens(l) <= 0)
+	{
+		free(prompt);
+		free(l->inp);
 		return (0);
+	}
 	l->t = malloc(sizeof(t_tok) * l->nt);
 	if (!l->t)
+	{
+		free(prompt);
+		free(l->inp);
 		return (0);
+	}
 	tokenize(l);
 	l->i = 0;
 	return (l->nt);

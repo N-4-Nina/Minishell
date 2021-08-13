@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_manage.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:27:05 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 17:44:23 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/13 08:38:04 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	lex_reset(t_lex *l)
 	l->nt--;
 	while (l->nt >= 0)
 	{
-		if (l->t[l->nt].type == PIPE)
+		if (l->t[l->nt].type == PIPE || l->t[l->nt].type == SEMI)
 			free(l->t[l->nt].data);
 		l->nt--;
 	}

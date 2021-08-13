@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:44:04 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 14:54:17 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/13 08:24:17 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	count_quote(t_lex *l)
 		l->i++;
 	if (!l->inp[l->i])
 	{
-		printf("did not find matching %c quote. \n", matching);
+		printf("Nsh: did not find matching %c quote. \n", matching);
 		return (-1);
 	}
 	l->i++;
@@ -53,7 +53,8 @@ int	count_spec(t_lex *l)
 
 int	count_word(t_lex *l)
 {
-	while (l->inp[l->i] && !(isBlank(l->inp[l->i])) && !(isSpec(l->inp[l->i])))
+	while (l->inp[l->i] && !(isBlank(l->inp[l->i]))
+		&& !(isSpec(l->inp[l->i])) && !(isQuote(l->inp[l->i])))
 		l->i++;
 	l->nt++;
 	return (1);
@@ -73,8 +74,12 @@ int	count_tokens(t_lex *l)
 			r = count_spec(l);
 		else if (l->inp[l->i] && !isSpec(l->inp[l->i]))
 			r = count_word(l);
+		if (r < 0)
+		{
+			l->i = 0;
+			l->nt = 0;
+			return (-1);
+		}
 	}
-	if (r < 0)
-		return (-1);
 	return (r);
 }
