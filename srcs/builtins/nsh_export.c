@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 17:20:25 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/20 10:55:20 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,34 @@ int	nsh_export_env(t_sh *nsh)
 	return (0);
 }
 
-int	is_valid_idenfier(t_sh *nsh, char *s)
+int	not_valid(t_sh *nsh, char *var, char *val)
+{
+	if (!var[0])
+		printf("Nsh: export: \'=%s\': not a valid identifier\n", val);
+	else
+		printf("Nsh: export: \'%s\': not a valid identifier\n", var);
+	*(nsh->last_status) = 1;
+	free(var);
+	free(val);
+	return (0);
+}
+
+int	is_valid_idenfier(t_sh *nsh, char *var, char *val)
 {
 	int	i;
-	int	ret;
 
 	i = 0;
-	ret = 0;
-	if (ft_isdigit(s[0]))
+	if (!var[i])
+		return (not_valid(nsh, var, val));
+	if (ft_isdigit(var[0]))
+		return (not_valid(nsh, var, val));
+	while (var[i])
 	{
-		printf("Nsh: export: \'%s\': not a valid identifier\n", s);
-		*(nsh->last_status) = 1;
-		return (0);
-	}
-	while (s[i])
-	{
-		if (ft_isalpha(s[i]) || ft_isdigit(s[i]) || s[i] == '_')
-			ret = 1;
-		else
-		{
-			printf("Nsh: export: \'%s\': not a valid identifier\n", s);
-			*(nsh->last_status) = 1;
-			ret = 0;
-			break ;
-		}
+		if (!ft_isalpha(var[i]) && !ft_isdigit(var[i]) && var[i] != '_')
+			return (not_valid(nsh, var, val));
 		i++;
 	}
-	return (ret);
+	return (1);
 }
 
 void	actually_export(t_sh *nsh, char *var, char *val)
@@ -93,12 +94,12 @@ int	nsh_export(t_sh *nsh, char **args)
 	while (args[++i])
 	{
 		j = 0;
-		if (!is_valid_idenfier(nsh, args[i]))
-			continue ;
 		while (args[i][j] && args[i][j] != '=')
 			j++;
 		var = ft_substr(args[i], 0, j);
 		val = ft_substr(&args[i][j + 1], 0, ft_strlen(&args[i][j + 1]));
+		if (!is_valid_idenfier(nsh, var, val))
+			continue ;
 		actually_export(nsh, var, val);
 		free(var);
 		free(val);

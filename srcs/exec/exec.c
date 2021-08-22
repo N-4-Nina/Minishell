@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 12:53:59 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/21 15:19:28 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	single_child(t_smpl *smpl, t_env *env)
 	{
 		if (errno == EACCES)
 		{
-			printf("nsh: %s: Permission non accordée\n", smpl->path);
+			printf("nsh: %s: Permission denied\n", smpl->path);
 			error = 126;
 		}
 	}
@@ -43,24 +43,15 @@ int	single_child(t_smpl *smpl, t_env *env)
 int	fork_single(t_smpl *smpl, t_env *env, int *status)
 {
 	pid_t	pid;
-	pid_t	wpid;
 
+	set_sig_behav(CATCH);
 	pid = fork();
 	if (pid == -1)
 		return (-1);
 	if (pid == 0)
 		single_child(smpl, env);
 	else
-	{
-		set_sig_behav(CATCH);
-		wpid = waitpid(pid, status, WUNTRACED);
-		while (!WIFEXITED(*status) && !WIFSIGNALED(*status))
-			wpid = waitpid(pid, status, WUNTRACED);
-		if (g_sig_catcher[0])
-			set_sig_status(status);
-		else
-			*status = *status >> 8;
-	}
+		await_child(status);
 	return (*status);
 }
 

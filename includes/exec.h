@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:27:36 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 14:59:29 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/21 15:19:14 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ t_smpl	*build_simple(t_sh *nsh, t_ast *node);
 
 //pipe_seq
 int		exec_pipe_seq(t_sh *nsh, t_cmd *cmd);
-
 int		call_builtin(t_sh *nsh, t_smpl *s);
 int		spawn(t_smpl *smpl, t_env *env);
+void	await_child(int *status);
+void	await_children(t_sh *nsh, t_cmd *cmd);
 
 //word
 int		id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh);

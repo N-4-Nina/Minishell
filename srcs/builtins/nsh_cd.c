@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:38 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 15:10:49 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/20 18:35:42 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	nsh_cd(t_sh *nsh, char **args)
 		*(nsh->last_status) = 0;
 		return (*(nsh->last_status));
 	}
+	printf("Nsh: cd: %s: No such file or directory\n", args[1]);
 	*(nsh->last_status) = 1;
 	return (*(nsh->last_status));
 }

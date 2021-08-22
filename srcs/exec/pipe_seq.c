@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:17:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 15:06:19 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/21 10:27:15 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ int	exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 void	pipe_seq_parent(t_sh *nsh, pid_t pid, int red[2], int *fd)
 {
 	close(red[1]);
-	set_sig_behav(CATCH);
-	waitpid(pid, nsh->last_status, WUNTRACED);
-	*nsh->last_status = *nsh->last_status >> 8;
+	(void)nsh;
+	(void)pid;
+	if (*fd)
+		close(*fd);
 	*fd = red[0];
 }
 
@@ -67,9 +68,12 @@ void	pipe_seq_child(t_sh *nsh, t_cmd *cmd, int red[2], int fd)
 {
 	close(red[0]);
 	set_sig_behav(RESET);
-	dup2(fd, 0);
+	dup2(fd, STDIN_FILENO);
+	if (fd)
+		close(fd);
 	if (cmd->i < cmd->smpnb - 1)
 		dup2(red[1], 1);
+	close(red[1]);
 	exec_seq_part(nsh, cmd->smpl[cmd->i], red, fd);
 }
 
@@ -83,6 +87,7 @@ int	exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
 	red[0] = 0;
 	red[1] = 1;
 	fd = 0;
+	set_sig_behav(CATCH);
 	while (cmd->i < cmd->smpnb)
 	{
 		if (pipe(red))
@@ -96,5 +101,6 @@ int	exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
 			pipe_seq_parent(nsh, pid, red, &fd);
 		cmd->i++;
 	}
+	await_children(nsh, cmd);
 	return (0);
 }
