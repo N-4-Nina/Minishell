@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 18:29:13 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/22 08:38:17 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/24 12:08:32 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,22 @@ void	await_child(int *status)
 void	await_children(t_sh *nsh, t_cmd *cmd)
 {
 	int	segflt;
+	int	status;
 
 	cmd->i = 0;
 	segflt = 0;
+	status = 0;
 	while (cmd->i++ < cmd->smpnb)
 	{
-		waitpid(-1, nsh->last_status, WUNTRACED);
-		if (WIFSIGNALED(*nsh->last_status) && *nsh->last_status == 139)
+		waitpid(-1, &status, WUNTRACED);
+		if (WIFSIGNALED(status) && status == 139)
 			segflt = 1;
+		else if (WIFSIGNALED(status) && WTERMSIG(status) == 13)
+			continue ;
 		else if (g_sig_catcher[0])
 			set_sig_status(nsh->last_status);
 		else
-			*nsh->last_status = *nsh->last_status >> 8;
+			*nsh->last_status = status >> 8;
 	}
 	if (segflt)
 		printf("Segmentation fault (core dumped)\n");

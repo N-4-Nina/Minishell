@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/13 08:22:37 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/24 11:33:35 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,16 @@ void	copy_data(t_lex *l, int add)
 
 int	check_multiline(t_lex *l)
 {
-	if (l->inp[ft_strlen(l->inp) - 1] == '\\')
+	int	len;
+
+	len = ft_strlen(l->inp);
+	if (len)
 	{
-		printf("Multiline is not supported.\n");
-		return (1);
+		if (l->inp[len - 1] == '\\')
+		{
+			printf("Multiline is not supported.\n");
+			return (1);
+		}
 	}
 	return (0);
 }
@@ -69,7 +75,7 @@ int	tokenize(t_lex *l)
 {
 	l->i = 0;
 	l->j = 0;
-	while (l->inp[l->i] && l->j < l->nt)
+	while (l->i < l->inpSize && l->j < l->nt)
 	{
 		token_init(&l->t[l->j]);
 		if (isQuote(l->inp[l->i]))
@@ -88,6 +94,7 @@ int	lex_build(t_lex *l, char *prompt)
 {
 	if (!l->inp)
 		return (0);
+	l->inpSize = ft_strlen(l->inp);
 	if (check_multiline(l) || count_tokens(l) <= 0)
 	{
 		free(prompt);

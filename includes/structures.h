@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:17:12 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 16:50:57 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/24 11:22:08 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_lex
 {
 	char	*inp;
 	t_tok	*t;
+	int		inpSize;
 	int		nt;
 	int		i;
 	int		j;

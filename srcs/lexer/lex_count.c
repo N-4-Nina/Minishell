@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:44:04 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/13 08:24:17 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/24 11:29:51 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../includes/lexer.h"
 #include "../includes/utils.h"
 
-int	count_quote(t_lex *l)
+int	count_quote(t_lex *l, int isNew)
 {
 	char	matching;
 
@@ -29,7 +29,10 @@ int	count_quote(t_lex *l)
 		return (-1);
 	}
 	l->i++;
-	l->nt++;
+	if (isNew)
+		l->nt++;
+	if (l->inp[l->i] && !isBlank(l->inp[l->i]))
+		return (count_word(l, 0));
 	return (1);
 }
 
@@ -51,12 +54,18 @@ int	count_spec(t_lex *l)
 	return (1);
 }
 
-int	count_word(t_lex *l)
+int	count_word(t_lex *l, int isNew)
 {
-	while (l->inp[l->i] && !(isBlank(l->inp[l->i]))
-		&& !(isSpec(l->inp[l->i])) && !(isQuote(l->inp[l->i])))
+	while (l->i < l->inpSize && !(isBlank(l->inp[l->i]))
+		&& !(isSpec(l->inp[l->i])))
+	{
+		if (isQuote(l->inp[l->i]))
+			if (count_quote(l, 0) < 0)
+				return (-1);
 		l->i++;
-	l->nt++;
+	}
+	if (isNew)
+		l->nt++;
 	return (1);
 }
 
@@ -64,16 +73,16 @@ int	count_tokens(t_lex *l)
 {
 	int	r;
 
-	while (l->inp[l->i])
+	while (l->i < l->inpSize - 1)
 	{
 		if (l->inp[l->i] && isQuote(l->inp[l->i]))
-			r = count_quote(l);
+			r = count_quote(l, 1);
 		else if (l->inp[l->i] && isBlank(l->inp[l->i]))
 			r = count_blank(l);
 		else if (l->inp[l->i] && isSpec(l->inp[l->i]))
 			r = count_spec(l);
 		else if (l->inp[l->i] && !isSpec(l->inp[l->i]))
-			r = count_word(l);
+			r = count_word(l, 1);
 		if (r < 0)
 		{
 			l->i = 0;
