@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/21 11:14:46 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/22 12:15:58 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	catch_signal(int signum)
 {
 	g_sig_catcher[0] = 1;
 	g_sig_catcher[1] = signum;
-	printf("catcher %d\n", signum);
 	if (signum == 3 || signum == 4 || signum == 6
 		||signum == 8)
 		printf("Core Dumped.\n");
@@ -61,6 +60,7 @@ void	set_sig_behav(int mode)
 	{
 		while (i < _NSIG)
 			signal(i++, SIG_DFL);
+		signal(SIGTSTP, SIG_IGN);
 		signal(SIGINT, interactive_handler);
 		signal(SIGQUIT, interactive_handler);
 	}
@@ -68,7 +68,6 @@ void	set_sig_behav(int mode)
 	{
 		while (i < 15)
 			signal(i++, SIG_DFL);
-		signal(SIGSEGV, catch_signal);
 	}
 	else if (mode == CATCH)
 	{

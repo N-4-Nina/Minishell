@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_replace.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:15:10 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/12 17:06:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/22 14:55:01 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,15 @@ int	replace_var(char **dst, char *src, t_env *env)
 
 int	replace_strong(char **dst, char *src)
 {
-	int	i;
+	int		i;
+	char	*sub;
 
 	i = 1;
 	while (src[i] && src[i] != '\'')
 		i++;
-	do_cat(dst, ft_substr(src, 1, i - 1));
+	sub = ft_substr(src, 1, i - 1);
+	do_cat(dst, sub);
+	free(sub);
 	return (i + 1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:38 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/20 18:35:42 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/22 15:31:56 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int	nsh_cd(t_sh *nsh, char **args)
 	if (!chdir(args[1]))
 	{
 		if (var)
+		{
+			free(var->value);
 			var->value = get_current_dir_name();
+		}
 		*(nsh->last_status) = 0;
 		return (*(nsh->last_status));
 	}

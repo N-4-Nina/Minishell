@@ -6,13 +6,14 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/20 10:55:20 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/22 14:47:06 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/structures.h"
 #include "../includes/libs.h"
 #include "../includes/environment.h"
+#include "../includes/builtins.h"
 
 int	nsh_export_env(t_sh *nsh)
 {
@@ -34,7 +35,7 @@ int	nsh_export_env(t_sh *nsh)
 	return (0);
 }
 
-int	not_valid(t_sh *nsh, char *var, char *val)
+int	not_valid(t_sh *nsh, char *var, char *val, char **args)
 {
 	if (!var[0])
 		printf("Nsh: export: \'=%s\': not a valid identifier\n", val);
@@ -43,22 +44,23 @@ int	not_valid(t_sh *nsh, char *var, char *val)
 	*(nsh->last_status) = 1;
 	free(var);
 	free(val);
+	nsh_unset(nsh, args);
 	return (0);
 }
 
-int	is_valid_idenfier(t_sh *nsh, char *var, char *val)
+int	is_valid_idenfier(t_sh *nsh, char *var, char *val, char **args)
 {
 	int	i;
 
 	i = 0;
 	if (!var[i])
-		return (not_valid(nsh, var, val));
+		return (not_valid(nsh, var, val, args));
 	if (ft_isdigit(var[0]))
-		return (not_valid(nsh, var, val));
+		return (not_valid(nsh, var, val, args));
 	while (var[i])
 	{
 		if (!ft_isalpha(var[i]) && !ft_isdigit(var[i]) && var[i] != '_')
-			return (not_valid(nsh, var, val));
+			return (not_valid(nsh, var, val, args));
 		i++;
 	}
 	return (1);
@@ -98,8 +100,8 @@ int	nsh_export(t_sh *nsh, char **args)
 			j++;
 		var = ft_substr(args[i], 0, j);
 		val = ft_substr(&args[i][j + 1], 0, ft_strlen(&args[i][j + 1]));
-		if (!is_valid_idenfier(nsh, var, val))
-			continue ;
+		if (!is_valid_idenfier(nsh, var, val, args))
+			break ;
 		actually_export(nsh, var, val);
 		free(var);
 		free(val);
