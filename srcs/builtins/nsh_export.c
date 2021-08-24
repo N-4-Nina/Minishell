@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/24 08:52:24 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/24 15:40:16 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,10 @@ int	nsh_export(t_sh *nsh, char **args)
 		return (nsh_export_env(nsh));
 	while (args[++i])
 	{
-		j = 0;
-		while (args[i][j] && args[i][j] != '=')
-			j++;
+		val = ft_strchr(args[i], '=');
+		j = (int)(val - args[i]);
+		if (!val || !args[i][j])
+			continue ;
 		var = ft_substr(args[i], 0, j);
 		if ((size_t)j < ft_strlen(args[i]))
 			val = ft_substr(&args[i][j + 1], 0, ft_strlen(&args[i][j + 1]));

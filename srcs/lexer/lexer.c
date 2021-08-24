@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/24 11:33:35 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/24 18:48:27 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ int	tokenize(t_lex *l)
 	while (l->i < l->inpSize && l->j < l->nt)
 	{
 		token_init(&l->t[l->j]);
-		if (isQuote(l->inp[l->i]))
-			handle_quote(l);
-		else if (isBlank(l->inp[l->i]))
+		if (isBlank(l->inp[l->i]))
 			handle_blank(l);
 		else if (isSpec(l->inp[l->i]))
 			handle_spec(l);
