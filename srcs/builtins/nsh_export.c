@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/22 14:47:06 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/24 08:52:24 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	actually_export(t_sh *nsh, char *var, char *val)
 	}
 	else
 		add_var(nsh->env, var, val);
+	free(var);
+	free(val);
 }
 
 int	nsh_export(t_sh *nsh, char **args)
@@ -99,12 +101,13 @@ int	nsh_export(t_sh *nsh, char **args)
 		while (args[i][j] && args[i][j] != '=')
 			j++;
 		var = ft_substr(args[i], 0, j);
-		val = ft_substr(&args[i][j + 1], 0, ft_strlen(&args[i][j + 1]));
+		if ((size_t)j < ft_strlen(args[i]))
+			val = ft_substr(&args[i][j + 1], 0, ft_strlen(&args[i][j + 1]));
+		else
+			val = ft_substr(&args[i][j], 1, 0);
 		if (!is_valid_idenfier(nsh, var, val, args))
 			break ;
 		actually_export(nsh, var, val);
-		free(var);
-		free(val);
 	}
 	return (*(nsh->last_status));
 }
