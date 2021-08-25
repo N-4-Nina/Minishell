@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:15:10 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/25 16:19:57 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 16:36:13 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	replace_var(char **dst, char *src, t_env *env)
 	if (ft_strlen(src) == 1)
 	{
 		do_cat(dst, src);
-		return (1);	
+		return (1);
 	}
 	else if (isQuote(src[1]) || isBlank(src[1]))
 	{
