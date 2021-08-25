@@ -22,6 +22,6 @@ void	abort_token(t_lex *l);
 void	free_tokens(char **tokens);
 void	token_init(t_tok *tok);
 int		set_spec_type(t_lex *l);
-void	copy_data(t_lex *l, int add);
+void	copy_data(t_lex *l);
 
 #endif

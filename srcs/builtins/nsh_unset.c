@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:15:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 18:22:12 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 16:09:22 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,25 @@
 #include "../includes/libs.h"
 #include "../includes/environment.h"
 
-int	nsh_unset(t_sh *nsh, char **args)
+int	unset_valid_idenfier(char *var)
+{
+	int	i;
+
+	i = 0;
+	if (!var[i])
+		return (0);
+	if (ft_isdigit(var[0]))
+		return (0);
+	while (var[i])
+	{
+		if (!ft_isalpha(var[i]) && !ft_isdigit(var[i]) && var[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	nsh_mute_unset(t_sh *nsh, char **args)
 {
 	int		i;
 	t_env	*node;
@@ -22,6 +40,8 @@ int	nsh_unset(t_sh *nsh, char **args)
 	i = 1;
 	while (args[i])
 	{
+		if (!unset_valid_idenfier(args[i]))
+			break ;
 		node = NULL;
 		node = find_by_name(nsh->env, args[i]);
 		if (node)
@@ -29,4 +49,30 @@ int	nsh_unset(t_sh *nsh, char **args)
 		i++;
 	}
 	return (0);
+}
+
+int	nsh_unset(t_sh *nsh, char **args)
+{
+	int		i;
+	int		ret;
+	t_env	*node;
+
+	i = 1;
+	ret = 0;
+	while (args[i])
+	{
+		if (!unset_valid_idenfier(args[i]))
+		{
+			ret = 1;
+			printf("Nsh: unset: `%s': not a valid identifier\n", args[i]);
+			i++;
+			continue ;
+		}
+		node = NULL;
+		node = find_by_name(nsh->env, args[i]);
+		if (node)
+			remove_var(&nsh->env, node);
+		i++;
+	}
+	return (ret);
 }

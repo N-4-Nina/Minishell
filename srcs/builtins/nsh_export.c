@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/24 15:40:16 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 16:07:54 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	not_valid(t_sh *nsh, char *var, char *val, char **args)
 	*(nsh->last_status) = 1;
 	free(var);
 	free(val);
-	nsh_unset(nsh, args);
+	nsh_mute_unset(nsh, args);
 	return (0);
 }
 

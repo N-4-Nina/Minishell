@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/24 18:48:27 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 10:28:10 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@
 #include "../includes/utils.h"
 #include "../includes/lexer.h"
 
-void	copy_data(t_lex *l, int add)
+void	copy_data(t_lex *l)
 {
-	l->t[l->j].data = (char *)malloc(l->t[l->j].len + add);
+	l->t[l->j].data = (char *)malloc(l->t[l->j].len + 1);
 	if (!l->t[l->j].data)
 		return (abort_token(l));
-	ft_strlcpy(l->t[l->j].data, &l->inp[l->i], l->t[l->j].len + add);
+	ft_strlcpy(l->t[l->j].data, &l->inp[l->i], l->t[l->j].len + 1);
 }
 
 int	check_multiline(t_lex *l)

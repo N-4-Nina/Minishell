@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:32:38 by user42            #+#    #+#             */
-/*   Updated: 2021/08/22 15:56:29 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 11:09:25 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 		return (-1);
 	}
 	s->argv[0] = ft_strdup(node->left->data);
+	s->has_cmd_word = 1;
 	s->argc++;
 	node = node->right;
 	while (node)

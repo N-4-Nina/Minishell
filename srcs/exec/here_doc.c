@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 10:39:49 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/22 16:02:14 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 14:32:54 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,15 @@ void	hd_read(t_smpl *s, int fd, char *end)
 	set_sig_behav(RESET);
 	endsize = ft_strlen(end);
 	line = readline("> ");
+	max = 0;
 	if (!line)
 		printf("\nnsh: Warning: here-document ended \
 with EOF instead of \"%s\"\n", end);
-	max = ft_strlen(line);
+	else
+		max = ft_strlen(line);
 	if (max < endsize)
 		max = endsize;
-	while (ft_strncmp(line, end, max))
+	while (line && ft_strncmp(line, end, max))
 	{
 		if (!hd_write(fd, &line, end, &max))
 			break ;

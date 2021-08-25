@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:27:05 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/24 20:28:20 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 14:37:08 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	lex_reset(t_lex *l)
 	l->nt--;
 	while (l->nt >= 0)
 	{
-		if (l->t[l->nt].type == PIPE || l->t[l->nt].type == SEMI
-			|| l->syntax_error)
+		if (l->t[l->nt].type == PIPE || l->t[l->nt].type == SEMI)
 			free(l->t[l->nt].data);
 		l->nt--;
 	}

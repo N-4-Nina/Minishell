@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/24 11:49:29 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 11:16:59 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void	catch_signal(int signum)
 	g_sig_catcher[1] = signum;
 	if (signum == 3 || signum == 4 || signum == 6
 		||signum == 8)
-		printf("Core Dumped.\n");
+		printf("Nsh: Core Dumped.\n");
 	else if (signum == 11)
-		printf("Segmentation fault (core dumped)\n");
-	else if (signum == 13)
-		printf("broken pipe\n");
+		printf("Nsh: Segmentation fault (core dumped)\n");
 }
 
 void	hd_catch_sig(int signum)

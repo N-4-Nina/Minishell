@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:29 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 14:59:02 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 12:12:17 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int	parse_pipe_seq(t_sh *nsh, t_ast **current, int dir)
 	new = new_node(N_PIPE_SEQ, ft_strdup("PIPE"));
 	if (parse_simple_cmd(nsh, &new->left))
 	{
+		if (nsh->lex->syntax_error)
+		{
+			ast_reset(&new);
+			return (0);
+		}
 		if (dir == 0)
 			graft_node_left(current, new);
 		else

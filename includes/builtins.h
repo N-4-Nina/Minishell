@@ -10,6 +10,7 @@ int		nsh_cd(t_sh *nsh, char **args);
 int		nsh_pwd(t_sh *nsh, char **args);
 int		nsh_export(t_sh *nsh, char **args);
 int		nsh_unset(t_sh *nsh, char **args);
+int		nsh_mute_unset(t_sh *nsh, char **args);
 int		nsh_env(t_sh *nsh, char **args);
 int		nsh_exit(t_sh *nsh, char **args);
 

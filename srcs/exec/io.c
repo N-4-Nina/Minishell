@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:01:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 14:55:52 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/25 11:01:09 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int	handle_io_suf(t_smpl *s, t_ast *node, t_env *env, int *status)
 	open_file(s, xpd, hd, get_flags(node->right->data));
 	free(xpd);
 	if (s->output == -1)
+	{
+		*status = 1;
 		return (-1);
+	}
 	return (1);
 }
 
@@ -70,7 +73,7 @@ int	handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh)
 	open_file(s, xpd, hd, get_flags(io_node->right->data));
 	free(xpd);
 	if (s->output == -1)
-		return (-1);
+		return ((*nsh->last_status = 1) - 2);
 	node = node->right;
 	while (node)
 	{
