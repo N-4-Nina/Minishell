@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 16:07:54 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/26 13:30:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,31 @@
 #include "../includes/libs.h"
 #include "../includes/environment.h"
 #include "../includes/builtins.h"
+#include "../includes/arrays.h"
 
 int	nsh_export_env(t_sh *nsh)
 {
-	t_env	*lst;
+	char	**arr;
+	int		size;
+	int		i;
+	int		j;
 
-	lst = nsh->env;
-	while (lst)
+	i = 0;
+	arr = env_to_array(nsh->env, &size);
+	sort_array(arr, size);
+	while (arr[i])
 	{
+		j = 0;
 		write(1, "declare -x ", 12);
-		write(1, lst->name, ft_strlen(lst->name));
-		write(1, "=", 1);
-		write(1, "\"", 1);
-		write(1, lst->value, ft_strlen(lst->value));
-		write(1, "\"", 1);
-		write(1, "\n", 1);
-		lst = lst->next;
+		while (arr[i][j] != '=')
+			write(1, &arr[i][j++], 1);
+		write(1, "=\"", 2);
+		while (arr[i][++j])
+			write(1, &arr[i][j], 1);
+		write(1, "\"\n", 2);
+		i++;
 	}
+	free_array(arr, size);
 	*(nsh->last_status) = 0;
 	return (0);
 }

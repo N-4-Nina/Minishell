@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 14:49:34 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 14:57:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/26 14:43:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../includes/libs.h"
 #include "../includes/exec.h"
 
-void	do_cat(char **dst, char *src)
+int	do_cat(char **dst, char *src)
 {
 	int		len;
 	char	*tmp;
@@ -22,7 +22,7 @@ void	do_cat(char **dst, char *src)
 	if (!*dst)
 	{
 		*dst = ft_strdup(src);
-		return ;
+		return (1);
 	}
 	len = ft_strlen(*dst) + ft_strlen(src) + 1;
 	tmp = ft_strdup(*dst);
@@ -31,6 +31,7 @@ void	do_cat(char **dst, char *src)
 	ft_strlcpy(*dst, tmp, ft_strlen(tmp) + 1);
 	ft_strlcat(*dst, src, len);
 	free(tmp);
+	return (1);
 }
 
 int	append_single(char **dst, char c)

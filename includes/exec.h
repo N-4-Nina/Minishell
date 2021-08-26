@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:27:36 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/21 15:19:14 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/26 14:43:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	redirect(t_smpl *s, int *ori_in, int *ori_out);
 void	recover_origin(int origin[2]);
 
 //expansion
-void	do_cat(char **dst, char *src);
+int     do_cat(char **dst, char *src);
 int		replace_weak(char **dst, char *src, t_env *env, int *status);
 int		replace_strong(char **dst, char *src);
 int		replace_var(char **dst, char *src, t_env *env);

@@ -1,12 +1,14 @@
--> echo -nnnn -nnnnnnn something
+-> echo -nnnn -nnnnnnn something===============================================CORRECTED
 
--> sleep ctrl+\ doesn't display Core dump in bash -minor problem-
+-> sleep ctrl+\ doesn't display Core dump in bash -minor problem-==============ACTUALLY IT DOES ??
 
--> echo $0 $PATH
+-> echo $0 $PATH===============================================================CORRECTED
 
-exit should write exit in stderror
+-> export TEST=2 export TEST=$TEST:2222 (revoir interpretation des $)==========CORRECTED
 
-->exit avec valeur negative. atoi(-1) cast en unsigned doit donner 255
+-> exit should write exit in stderror
+
+-> exit avec valeur negative. atoi(-1) cast en unsigned doit donner 255
 
 -> cd sans rien va dans home (home not set if not set)
 
@@ -19,8 +21,6 @@ exit should write exit in stderror
 -> int agrc, char **argv, char **envp
 
 -> export seul trie le tableau
-
--> export TEST=2 export TEST=$TEST:2222 (revoir interpretation des $)
 
 -> unset PWD: cd is restored when cd
 

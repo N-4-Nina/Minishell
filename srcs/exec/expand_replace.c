@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_replace.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:15:10 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/25 16:36:13 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/26 15:33:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,19 @@ int	replace_var(char **dst, char *src, t_env *env)
 	int		i;
 
 	if (ft_strlen(src) == 1)
-	{
-		do_cat(dst, src);
-		return (1);
-	}
-	else if (isQuote(src[1]) || isBlank(src[1]))
-	{
-		do_cat(dst, "$");
-		return (1);
-	}
+		return (do_cat(dst, src));
+	else if (!ft_isalnum(src[1]) && src[1] != '_')
+		return (do_cat(dst, "$"));
 	i = 1;
-	while (src[i] && src[i] != '/' && !(isBlank(src[i])) && !isQuote(src[i]))
+	while (src[i] && (ft_isalnum(src[i]) || src[i] == '_'))
 		i++;
 	sub = ft_substr(src, 1, i - 1);
 	var = find_by_name(env, sub);
 	free(sub);
 	if (!var)
-		return (i);
-	do_cat(dst, var->value);
+		do_cat(dst, "");
+	else
+		do_cat(dst, var->value);
 	return (i);
 }
 

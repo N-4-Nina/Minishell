@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:21:06 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 18:39:19 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/26 12:28:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libs.h"
-
-void	free_array(char **ar, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-		free(ar[i++]);
-	if (ar)
-		free(ar);
-}
 
 char	*get_current_dir_name(void)
 {
