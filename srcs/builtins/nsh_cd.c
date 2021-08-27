@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:38 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 12:21:26 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 14:45:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ char	*get_target(t_sh *nsh, char **args)
 		home = find_by_name(nsh->env, "HOME");
 		if (!home)
 		{
-			write(STDERR_FILENO, "NSH: cd: HOME not set\n", 23);
+			display_error("NSH: cd: HOME not set\n", "", "");
 			return (NULL);
 		}
 		else
-			return(ft_strdup(home->value));
+			return (ft_strdup(home->value));
 	}
 	else
 		return (ft_strdup(args[1]));
@@ -45,7 +45,7 @@ int	cd_args_error(t_sh *nsh, char **args)
 	if (i > 2)
 	{
 		*(nsh->last_status) = 1;
-		write(STDERR_FILENO, "Nsh: cd: too many arguments\n", 29);
+		display_error("Nsh: cd: too many arguments\n", "", "");
 		return (1);
 	}
 	return (0);
@@ -73,7 +73,7 @@ void	update_pwd(t_sh *nsh)
 int	nsh_cd(t_sh *nsh, char **args)
 {
 	char	*target;
-	
+
 	if (cd_args_error(nsh, args))
 		return (*(nsh->last_status));
 	target = get_target(nsh, args);
@@ -86,7 +86,7 @@ int	nsh_cd(t_sh *nsh, char **args)
 		*(nsh->last_status) = 0;
 		return (*(nsh->last_status));
 	}
-	printf("Nsh: cd: %s: No such file or directory\n", target);
+	display_error("Nsh: cd: ", target, ": No such file or directory\n");
 	free(target);
 	*(nsh->last_status) = 1;
 	return (*(nsh->last_status));

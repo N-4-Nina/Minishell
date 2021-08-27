@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:01:16 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 18:05:53 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 13:15:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/libs.h"
 #include "../includes/exec.h"
 #include "../includes/utils.h"
+#include "../includes/arrays.h"
 
 int	cmd_execute(t_sh *nsh, t_cmd *cmd)
 {

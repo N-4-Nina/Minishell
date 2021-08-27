@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 10:33:42 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 13:14:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "../includes/nsh.h"
 #include "../includes/lexer.h"
 #include "../includes/signals.h"
+#include "../includes/arrays.h"
 
 void	nsh_clear(t_sh *nsh)
 {

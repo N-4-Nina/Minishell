@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:01:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 11:01:09 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 15:22:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/libs.h"
 #include "../includes/exec.h"
 #include "../includes/environment.h"
+#include "../includes/utils.h"
 
 int	handle_io_suf(t_smpl *s, t_ast *node, t_env *env, int *status)
 {
@@ -22,7 +23,7 @@ int	handle_io_suf(t_smpl *s, t_ast *node, t_env *env, int *status)
 
 	if (!find_by_name(env, "HEREDOC"))
 	{
-		printf("Please set a valid HEREDOC variable.\n");
+		display_error("Please set a valid HEREDOC variable.\n", "", "");
 		return (-1);
 	}
 	hd = find_by_name(env, "HEREDOC")->value;
@@ -63,7 +64,7 @@ int	handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh)
 	char	*xpd;
 
 	if (!find_by_name(nsh->env, "HEREDOC"))
-		return (printf("Please set a valid HEREDOC variable.\n") - 39);
+		return (display_error("Please set a valid HEREDOC variable.\n", "", ""));
 	hd = find_by_name(nsh->env, "HEREDOC")->value;
 	io_node = node->left;
 	if (ft_strncmp(io_node->right->data, "<<", 3))

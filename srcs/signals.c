@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 12:27:41 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 13:21:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/libs.h"
 #include "../includes/defines.h"
 #include "../includes/signals.h"
+#include "../includes/utils.h"
 
 void	hd_catch_sig(int signum)
 {
@@ -41,9 +42,9 @@ void	catch_signal(int signum)
 	g_sig_catcher[1] = signum;
 	if (signum == 3 || signum == 4 || signum == 6
 		||signum == 8)
-		printf("Nsh: Core Dumped.\n");
+		display_error("Nsh: Core Dumped.\n", "", "");
 	else if (signum == 11)
-		printf("Nsh: Segmentation fault (core dumped)\n");
+		display_error("Nsh: Segmentation fault (core dumped)\n", "", "");
 }
 
 void	set_sig_status(int *status)

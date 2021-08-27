@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   await_children.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 18:29:13 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/24 12:08:32 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 15:02:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/structures.h"
 #include "../../includes/libs.h"
 #include "../../includes/signals.h"
+#include "../../includes/utils.h"
 
 void	await_child(int *status)
 {
 	waitpid(-1, status, WUNTRACED);
 	if (WIFSIGNALED(*status) && *status == 139)
-		printf("Segmentation fault (core dumped)\n");
+		display_error("Segmentation fault (core dumped)\n", "", "");
 	else if (g_sig_catcher[0])
 		set_sig_status(status);
 	else
@@ -46,5 +47,5 @@ void	await_children(t_sh *nsh, t_cmd *cmd)
 			*nsh->last_status = status >> 8;
 	}
 	if (segflt)
-		printf("Segmentation fault (core dumped)\n");
+		display_error("Segmentation fault (core dumped)\n", "", "");
 }

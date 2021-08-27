@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 12:12:44 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 16:00:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int	parse(t_sh *nsh)
 	check = tree_init(nsh);
 	check = parse_input(nsh);
 	if (!lex_isover(*nsh->lex) && lex_inbound(*nsh->lex))
-		return (syntax_error(nsh->lex->t[nsh->lex->i], nsh->lex));
+		return (syntax_error(nsh->lex));
 	return (check);
 }

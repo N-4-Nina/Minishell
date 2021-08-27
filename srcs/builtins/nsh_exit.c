@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:45 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/22 14:16:16 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 15:00:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "../includes/exec.h"
 #include "../includes/utils.h"
 #include "../includes/environment.h"
+#include "../includes/arrays.h"
 
 void	free_everything(t_sh *nsh)
 {
@@ -41,22 +42,22 @@ int	handle_args(t_sh *nsh, char **args)
 	i = 0;
 	if (args[1])
 	{
-		while (args[1][i])
+		if (args[1][0] == '-')
+			i++;
+		while (args[1][i] && ft_isdigit(args[1][i]))
+			i++;
+		if (args[1][i] || (args[1][0] == '-' && i == 1))
 		{
-			if (!ft_isdigit(args[1][i++]))
-			{
-				printf("Nsh: exit: %s: numeric argument required\n", args[1]);
-				*nsh->last_status = 2;
-				return (-1);
-			}
+			display_error("Nsh: exit: ", args[1],
+				" : numeric argument required\n");
+			*nsh->last_status = 2;
+			return (-1);
 		}
 	}
-	i = 0;
-	while (args[i])
-		i++;
+	i = array_size(args);
 	if (i > 2)
 	{
-		printf("Nsh: exit: too many arguments\n");
+		display_error("Nsh: exit: too many arguments\n", "", "");
 		*nsh->last_status = 1;
 		return (0);
 	}
@@ -67,10 +68,11 @@ int	nsh_exit(t_sh *nsh, char **args)
 {
 	int	exit_status;
 
+	display_error("exit\n", "", "");
 	exit_status = handle_args(nsh, args);
 	if (!exit_status)
 		return (1);
-	if (args[1] && exit_status > 0)
+	if (args[1])
 		exit_status = ft_atoi(args[1]);
 	else
 		exit_status = *nsh->last_status;

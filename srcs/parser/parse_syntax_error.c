@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_syntax_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:40:53 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/24 20:24:33 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 16:19:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 #include "../includes/libs.h"
 #include "../includes/astree.h"
 #include "../includes/parser.h"
+#include "../includes/utils.h"
+#include "../includes/lexer.h"
 
-int	syntax_error(t_tok t, t_lex *l)
+int	syntax_error(t_lex *l)
 {
 	static char	*spec[6] = {">>", ">", "<<", "<", "|", ";"};
+	t_tok		near;
 
-	if (t.type == WORD)
-		printf("Syntax Error, unexpected token near %s \n", t.data);
-	else if (t.type > -1 && t.type < 6)
-		printf("Syntax Error, unexpected token near \"%s\" \n", spec[t.type]);
-	else
-		printf("Syntax Error: couldn't set token type.\n");
+	near = l->t[l->i];
+	if (!lex_inbound(*l))
+		display_error("Syntax Error: unexpected token.\n", "", "");
+	if (near.type == WORD)
+		display_error("Syntax Error, unexpected token near ", near.data, "\n");
+	else if (near.type >= 0 && near.type < 6)
+		display_error("Syntax Error, unexpected token near \"", spec[near.type], "\" \n");
 	l->syntax_error = 1;
 	return (0);
 }

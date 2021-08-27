@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 15:36:45 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 13:16:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../includes/environment.h"
 #include "../includes/utils.h"
 #include "../includes/defines.h"
+#include "../includes/arrays.h"
 
 char	*get_dir_name(t_env *env)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_count.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:44:04 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/24 18:27:14 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 15:52:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@
 
 int	count_quote(t_lex *l)
 {
-	char	matching;
+	char	matching[2];
 
-	matching = l->inp[l->i];
+	matching[0] = l->inp[l->i];
+	matching[1] = 0;
 	l->i++;
-	while (l->inp[l->i] && l->inp[l->i] != matching)
+	while (l->inp[l->i] && l->inp[l->i] != matching[0])
 		l->i++;
 	if (!l->inp[l->i])
 	{
-		printf("Nsh: did not find matching %c quote. \n", matching);
+		display_error("Nsh: did not find matching ", matching,  " quote.\n");
 		return (-1);
 	}
 	l->i++;

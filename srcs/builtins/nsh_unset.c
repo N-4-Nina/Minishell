@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:15:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 16:09:22 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 14:46:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/structures.h"
 #include "../includes/libs.h"
 #include "../includes/environment.h"
+#include "../includes/utils.h"
 
 int	unset_valid_idenfier(char *var)
 {
@@ -64,7 +65,8 @@ int	nsh_unset(t_sh *nsh, char **args)
 		if (!unset_valid_idenfier(args[i]))
 		{
 			ret = 1;
-			printf("Nsh: unset: `%s': not a valid identifier\n", args[i]);
+			display_error("Nsh: unset: `", args[i],
+				"': not a valid identifier\n");
 			i++;
 			continue ;
 		}

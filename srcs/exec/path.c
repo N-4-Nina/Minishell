@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/08/26 15:45:58 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 15:17:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../includes/exec.h"
 #include "../includes/utils.h"
 #include "../includes/environment.h"
+#include "../includes/arrays.h"
 
 int	set_abs_path(t_smpl *s, char *name)
 {
@@ -26,7 +27,7 @@ int	set_abs_path(t_smpl *s, char *name)
 		free(name);
 		return (1);
 	}
-	printf("Nsh: Command not found: %s\n", name + 1);
+	display_error("Nsh: Command not found: ", name, "\n");
 	free(name);
 	return (0);
 }
@@ -92,7 +93,7 @@ int	set_cmd_path(t_smpl *s, t_env *env, char *name)
 	if (seek_in_path(s, split, name, j))
 		return (1);
 	free_array(split, j);
-	printf("Nsh: Command not found: %s\n", name + 1);
+	display_error("Nsh: Command not found: ", name  + 1, "\n");
 	free(name);
 	return (0);
 }

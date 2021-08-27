@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/26 13:30:31 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 14:47:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../includes/environment.h"
 #include "../includes/builtins.h"
 #include "../includes/arrays.h"
+#include "../includes/utils.h"
 
 int	nsh_export_env(t_sh *nsh)
 {
@@ -46,9 +47,9 @@ int	nsh_export_env(t_sh *nsh)
 int	not_valid(t_sh *nsh, char *var, char *val, char **args)
 {
 	if (!var[0])
-		printf("Nsh: export: \'=%s\': not a valid identifier\n", val);
+		display_error("Nsh: export: \'=", val, "\': not a valid identifier\n");
 	else
-		printf("Nsh: export: \'%s\': not a valid identifier\n", var);
+		display_error("Nsh: export: \'", var, "\': not a valid identifier\n");
 	*(nsh->last_status) = 1;
 	free(var);
 	free(val);

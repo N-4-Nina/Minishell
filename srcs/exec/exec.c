@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/21 15:19:28 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 14:46:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "../includes/utils.h"
 #include "../includes/signals.h"
 #include "../includes/defines.h"
+#include "../includes/arrays.h"
 
 int	single_child(t_smpl *smpl, t_env *env)
 {
@@ -30,11 +31,8 @@ int	single_child(t_smpl *smpl, t_env *env)
 	envArr = env_to_array(env, &envSize);
 	if (execve(smpl->path, smpl->argv, envArr) == -1)
 	{
-		if (errno == EACCES)
-		{
-			printf("nsh: %s: Permission denied\n", smpl->path);
-			error = 126;
-		}
+		display_error(strerror(errno), "", "");
+		error = 126;
 	}
 	free_array(envArr, envSize);
 	exit(EXIT_SUCCESS + error);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:20:15 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 12:29:36 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 16:22:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ int	nsh_loop(t_sh *nsh)
 			add_history(nsh->lex->inp);
 		if (!lex_build(nsh->lex, nsh->inp->prompt))
 			continue ;
-		parse(nsh);
+		if (!parse(nsh))
+		{
+			nsh_reset(nsh);
+			continue ;
+		}
 		exec(nsh);
 		nsh_reset(nsh);
 	}

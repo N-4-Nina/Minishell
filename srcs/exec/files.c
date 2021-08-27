@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:11:45 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 10:57:39 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 15:03:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/libs.h"
 #include "../includes/exec.h"
 #include "../includes/defines.h"
+#include "../includes/utils.h"
 
 void	close_files(t_smpl *s)
 {
@@ -50,7 +51,7 @@ int	open_file(t_smpl *s, char *file, char *hd, int flags)
 	fd = open(file, flags, 0660);
 	if (fd < 0)
 	{
-		printf("Nsh: file: %s \n", strerror(errno));
+		display_error("Nsh: file: ", strerror(errno), "\n");
 		s->output = -1;
 		return (-1);
 	}

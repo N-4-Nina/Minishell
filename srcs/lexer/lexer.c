@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 10:28:10 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 15:49:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_multiline(t_lex *l)
 	{
 		if (l->inp[len - 1] == '\\')
 		{
-			printf("Multiline is not supported.\n");
+			display_error("Multiline is not supported.\n", "", "");
 			return (1);
 		}
 	}

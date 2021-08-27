@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_seq.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:17:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/21 10:27:15 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 14:24:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "../includes/signals.h"
 #include "../includes/defines.h"
 #include "../includes/utils.h"
+#include "../includes/arrays.h"
 
 void	pipe_seq_redir(t_smpl *s)
 {
@@ -41,11 +42,8 @@ int	exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 	{
 		if (execve(s->path, s->argv, envArr) == -1)
 		{
-			if (errno == EACCES)
-			{
-				printf("nsh: %s: Permission non accordée\n", s->path);
-				error = 126;
-			}
+			display_error(strerror(errno), "\n", "");
+			error = 126;
 		}
 	}
 	dup2(fd, STDIN_FILENO);

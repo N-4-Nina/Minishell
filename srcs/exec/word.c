@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:32:38 by user42            #+#    #+#             */
-/*   Updated: 2021/08/26 15:51:22 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 15:47:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/libs.h"
 #include "../includes/exec.h"
 #include "../includes/builtins.h"
+#include "../includes/utils.h"
 
 int	id_cmd_suffix(t_smpl *s, t_ast *node, t_sh *nsh)
 {
@@ -40,7 +41,8 @@ int	validate_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 
 int	id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 {
-	char	*xpd;
+	char		*xpd;
+	struct stat	buf;
 
 	xpd = expand_word(node->left->data, nsh->env, nsh->last_status);
 	s->isbuiltin = is_builtin(xpd, nsh->bui);
@@ -54,6 +56,12 @@ int	id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 	else if (!set_cmd_path(s, nsh->env, xpd))
 	{
 		*nsh->last_status = 127;
+		return (-1);
+	}
+	if (s->isbuiltin == -1 && !stat(s->path, &buf) && S_ISDIR(buf.st_mode))
+	{
+		display_error("Nsh: ", s->path, " is a directory\n");
+		*nsh->last_status = 126;
 		return (-1);
 	}
 	return (validate_cmd_word(s, node, nsh));

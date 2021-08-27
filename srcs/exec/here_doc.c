@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 10:39:49 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/25 14:32:54 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 15:12:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../includes/exec.h"
 #include "../includes/signals.h"
 #include "../includes/defines.h"
+#include "../includes/utils.h"
 
 /*I was wondering why valgrind reported some
 still reachables when using heredoc but it is
@@ -32,15 +33,16 @@ int	check_heredoc(t_smpl *s, char **hd)
 	{
 		s->output = -1;
 		free(s->argv[0]);
-		printf("Please set the HEREDOC variable.\n");
+		display_error("Please set the HEREDOC variable.\n", "", "");
 		return (0);
 	}
 	fd = open(*hd, FLAGS_DGREAT, 0660);
 	if (fd < 0)
 	{
 		s->output = -1;
-		free(s->argv[0]);
-		printf("HEREDOC file must be accessible to this program.\n");
+		//free(s->argv[0]);
+		display_error("HEREDOC file must be \
+accessible to this program.\n", "", "");
 		free((*hd));
 		return (0);
 	}
@@ -59,8 +61,8 @@ int	hd_write(int fd, char **line, char *end, size_t *max)
 	*line = readline("> ");
 	if (!*line)
 	{
-		printf("\nnsh: Warning: here-document ended \
-with EOF instead of \"%s\"\n", end);
+		display_error("\nnsh: Warning: here-document ended \
+with EOF instead of \"", end, "\"\n");
 		return (0);
 	}
 	*max = ft_strlen(*line);
@@ -80,8 +82,8 @@ void	hd_read(t_smpl *s, int fd, char *end)
 	line = readline("> ");
 	max = 0;
 	if (!line)
-		printf("\nnsh: Warning: here-document ended \
-with EOF instead of \"%s\"\n", end);
+		display_error("\nnsh: Warning: here-document ended \
+with EOF instead of \"", end, "\"\n");
 	else
 		max = ft_strlen(line);
 	if (max < endsize)
@@ -128,7 +130,7 @@ int	here_doc(t_smpl *s, char *hd, char *end)
 		unlink(hd);
 	fd = open(hd, O_CREAT | O_WRONLY | O_APPEND, 0660);
 	if (fd < 0)
-		printf("%s\n", strerror(errno));
+		display_error(strerror(errno), "\n", "");
 	pid = fork();
 	if (!pid)
 		hd_read(s, fd, end);
