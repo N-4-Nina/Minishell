@@ -37,3 +37,4 @@
 
 -> check possible difference between messages when command not found (french is pretty different
 -> mixing redirection and pipe with syntax error is very dangerous, should work on that).
+-> DONT FORGET TO HANDLE SHLVL !
