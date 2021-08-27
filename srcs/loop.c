@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:20:15 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/13 07:49:21 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 12:29:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	nsh_loop(t_sh *nsh)
 			free(nsh->inp->prompt);
 			break ;
 		}
+		if (g_sig_catcher[1])
+			set_sig_status(nsh->last_status);
 		if (!is_empty(nsh->lex->inp))
 			add_history(nsh->lex->inp);
 		if (!lex_build(nsh->lex, nsh->inp->prompt))

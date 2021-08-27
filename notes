@@ -10,15 +10,15 @@
 
 -> exit avec valeur negative. atoi(-1) cast en unsigned doit donner 255
 
--> cd sans rien va dans home (home not set if not set)
+-> cd sans rien va dans home (home not set if not set)=========================CORRECTED(should check some more for leaks)
 
 -> No such file quand pas de PATH
 
--> ctrl + C echo $? = 130
+-> ctrl + C echo $? = 130=======================================================HANDLED(should check for interractions / more signals)
 
 ->  < file cat   should work, as well as   > file echo hey
 
--> int agrc, char **argv, char **envp
+-> int agrc, char **argv, char **envp==========================================USED
 
 -> export seul trie le tableau
 

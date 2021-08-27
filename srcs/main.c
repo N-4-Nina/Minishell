@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 16:24:00 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 10:33:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ void	reset_sig_catcher(void)
 	g_sig_catcher[1] = 0;
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	t_sh	nsh;
 
-	nsh_init(&nsh);
+	(void)argc;
+	(void)argv;
+	nsh_init(&nsh, envp);
 	nsh_loop(&nsh);
 	return (0);
 }

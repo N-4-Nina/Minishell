@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 11:16:59 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/27 12:27:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "../includes/libs.h"
 #include "../includes/defines.h"
 #include "../includes/signals.h"
+
+void	hd_catch_sig(int signum)
+{
+	g_sig_catcher[0] = 1;
+	g_sig_catcher[1] = signum;
+}
 
 void	interactive_handler(int signum)
 {
@@ -23,6 +29,7 @@ void	interactive_handler(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		hd_catch_sig(SIGINT);
 	}
 	else if (signum == SIGQUIT)
 		write(1, "\b\b  \b\b", 6);
@@ -37,12 +44,6 @@ void	catch_signal(int signum)
 		printf("Nsh: Core Dumped.\n");
 	else if (signum == 11)
 		printf("Nsh: Segmentation fault (core dumped)\n");
-}
-
-void	hd_catch_sig(int signum)
-{
-	g_sig_catcher[0] = 1;
-	g_sig_catcher[1] = signum;
 }
 
 void	set_sig_status(int *status)

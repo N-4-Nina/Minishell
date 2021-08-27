@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 12:29:17 by user42            #+#    #+#             */
-/*   Updated: 2021/08/26 13:32:09 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 10:38:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ void	sort_array(char **ar, int size)
 		}
 		i++;
 	}
+}
+
+int	array_size(char **ar)
+{
+	int	i;
+
+	i = 0;
+	while (ar[i])
+		i++;
+	return (i);
 }
 
 void	free_array(char **ar, int size)

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 14:50:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 10:58:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/libs.h"
 #include "../includes/environment.h"
 #include "../includes/utils.h"
+#include "../includes/arrays.h"
 
 void	add_var(t_env *env, char *name, char *value)
 {
@@ -86,21 +87,26 @@ void	add_heredoc_path(t_env **env)
 }
 
 //init must be secured : should return something if a getenv returns NULL.
-void	env_init(t_env **env)
+void	env_init(t_env **env, char **envp)
 {
-	char	*cdn;
+	char	*var;
+	char	*val;
+	int		i;
+	int		envSize;
 
 	*env = (t_env *)malloc(sizeof(t_env));
 	(*env)->name = NULL;
 	(*env)->value = NULL;
 	(*env)->next = NULL;
-	cdn = get_current_dir_name();
-	add_var(*env, "PWD", cdn);
-	free(cdn);
-	add_var(*env, "PATH", \
-"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin/");
-	add_var(*env, "TERM", "xterm-256color");
-	add_var(*env, "PAGER", "less");
-	add_var(*env, "LANG", "en_US.UTF-8");
+	i = 0;
+	envSize = array_size(envp);
+	while (i < envSize)
+	{
+		val = ft_strchr(envp[i], '=') + 1;
+		var = ft_substr(envp[i], 0, (int)(val - envp[i] - 1));
+		add_var(*env, var, val);
+		free(var);
+		i++;
+	}
 	add_heredoc_path(env);
 }

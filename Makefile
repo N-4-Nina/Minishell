@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:45:13 by chpl              #+#    #+#              #
-#    Updated: 2021/08/10 16:22:10 by chpl             ###   ########.fr        #
+#    Updated: 2021/08/27 12:40:29 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIBFT = libft/
 
 #Flags, Libraries and Includes
 CFLAGS      := -Wall -Wextra -Werror
-LIB         := -L libft/ -lft -lncurses -lX11 -lreadline
+LIB         := -L libft/ -lft -lreadline
 INC         := -I$(INCDIR) -I ${LIBFT}
 INCDEP      := -I$(INCDIR)
 

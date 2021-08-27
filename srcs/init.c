@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:21:53 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 13:16:27 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 10:30:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	nsh_alloc(t_sh *nsh)
 	nsh->last_status = (int *)malloc(sizeof(int));
 }
 
-int	nsh_init(t_sh *nsh)
+int	nsh_init(t_sh *nsh, char **envp)
 {
 	nsh_alloc(nsh);
-	env_init(&nsh->env);
+	env_init(&nsh->env, envp);
 	lex_init(nsh->lex);
 	bui_init(nsh);
 	return (1);
