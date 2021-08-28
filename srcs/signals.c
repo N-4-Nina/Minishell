@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 13:21:18 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 19:16:49 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../includes/defines.h"
 #include "../includes/signals.h"
 #include "../includes/utils.h"
+#include "../includes/builtins.h"
 
 void	hd_catch_sig(int signum)
 {
@@ -63,20 +64,21 @@ void	set_sig_behav(int mode)
 		while (i < _NSIG)
 			signal(i++, SIG_DFL);
 		signal(SIGTSTP, SIG_IGN);
+		signal(SIGTERM, nsh_exit);
 		signal(SIGINT, interactive_handler);
 		signal(SIGQUIT, interactive_handler);
 	}
 	else if (mode == RESET)
 	{
-		while (i < 15)
+		while (i < _NSIG)
 			signal(i++, SIG_DFL);
 	}
 	else if (mode == CATCH)
 	{
-		while (i < 15)
+		while (i < _NSIG)
 			signal(i++, catch_signal);
 	}
 	else if (mode == HD_CATCH)
-		while (i < 15)
+		while (i < _NSIG)
 			signal(i++, hd_catch_sig);
 }

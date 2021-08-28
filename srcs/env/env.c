@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 10:58:40 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/27 17:57:19 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,16 @@ void	add_heredoc_path(t_env **env)
 	free(tmp);
 }
 
-//init must be secured : should return something if a getenv returns NULL.
+char	*update_shlvl(char *lvl)
+{
+	int	n;
+
+	n = ft_atoi(lvl);
+	n++;
+	lvl = ft_itoa(n);
+	return (lvl);
+}
+
 void	env_init(t_env **env, char **envp)
 {
 	char	*var;
@@ -104,9 +113,13 @@ void	env_init(t_env **env, char **envp)
 	{
 		val = ft_strchr(envp[i], '=') + 1;
 		var = ft_substr(envp[i], 0, (int)(val - envp[i] - 1));
+		if (!ft_strncmp(var, "SHLVL", 6))
+			val = update_shlvl(val);
 		add_var(*env, var, val);
 		free(var);
 		i++;
 	}
+	if (!find_by_name(*env, "SHLVL"))
+		add_var(*env, "SHLVL", "1");
 	add_heredoc_path(env);
 }
