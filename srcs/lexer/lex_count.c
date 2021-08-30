@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_count.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:44:04 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 15:52:03 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/28 10:56:53 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	count_quote(t_lex *l)
 		l->i++;
 	if (!l->inp[l->i])
 	{
-		display_error("Nsh: did not find matching ", matching,  " quote.\n");
+		display_error("Nsh: did not find matching ", matching, " quote.\n");
 		return (-1);
 	}
 	l->i++;

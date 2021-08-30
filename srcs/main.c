@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 13:14:56 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/28 10:05:01 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,19 @@
 #include "../includes/signals.h"
 #include "../includes/arrays.h"
 
-void	nsh_clear(t_sh *nsh)
+int	nsh_clear(t_sh *nsh)
 {
+	int	ret;
+
+	ret = *nsh->last_status;
 	free(nsh->lex);
 	free(nsh->inp);
 	free_array(nsh->bui->str, 7);
 	free(nsh->bui);
 	free(nsh->last_status);
 	env_clear(nsh->env);
+	display_error("exit\n", "", "");
+	return (ret);
 }
 
 void	nsh_reset(t_sh *nsh)
@@ -46,10 +51,11 @@ void	reset_sig_catcher(void)
 int	main(int argc, char **argv, char **envp)
 {
 	t_sh	nsh;
+	int		exit;
 
 	(void)argc;
 	(void)argv;
 	nsh_init(&nsh, envp);
-	nsh_loop(&nsh);
-	return (0);
+	exit = nsh_loop(&nsh);
+	return (exit);
 }

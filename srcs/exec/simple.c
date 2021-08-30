@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:10:02 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 12:52:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/29 13:47:40 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	args_count(t_ast *node)
 	int	ac;
 
 	ac = 0;
-	while (node && (node->left->type == N_WORD || node->type == N_CMD_SUFFIX))
+	while (node && (node->left->type == N_WORD ||
+		node->left->type == N_IO_FILE || node->type == N_CMD_SUFFIX))
 	{
 		if (node->left->type != N_IO_FILE)
 			ac++;

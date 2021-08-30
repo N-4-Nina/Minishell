@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/08/27 15:17:45 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/28 18:08:38 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ int	set_cmd_path(t_smpl *s, t_env *env, char *name)
 	name = new;
 	split = get_split(env);
 	if (!split)
-		return (0);
+		return (display_error("Nsh: Command not found: ", name + 1, "\n"));
 	while (split[j])
 		j++;
 	if (seek_in_path(s, split, name, j))
 		return (1);
 	free_array(split, j);
-	display_error("Nsh: Command not found: ", name  + 1, "\n");
+	display_error("Nsh: Command not found: ", name + 1, "\n");
 	free(name);
 	return (0);
 }

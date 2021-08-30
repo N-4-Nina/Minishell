@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 19:16:49 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/28 19:01:02 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	catch_signal(int signum)
 	g_sig_catcher[1] = signum;
 	if (signum == 3 || signum == 4 || signum == 6
 		||signum == 8)
-		display_error("Nsh: Core Dumped.\n", "", "");
+		display_error("Nsh: Quit (core dumped)\n", "", "");
 	else if (signum == 11)
 		display_error("Nsh: Segmentation fault (core dumped)\n", "", "");
 }
@@ -58,27 +58,26 @@ void	set_sig_behav(int mode)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (mode == INTERACTIVE)
 	{
-		while (i < _NSIG)
-			signal(i++, SIG_DFL);
+		while (++i < _NSIG)
+			signal(i, SIG_DFL);
 		signal(SIGTSTP, SIG_IGN);
-		signal(SIGTERM, nsh_exit);
+		signal(SIGTERM, catch_signal);
 		signal(SIGINT, interactive_handler);
 		signal(SIGQUIT, interactive_handler);
 	}
 	else if (mode == RESET)
-	{
-		while (i < _NSIG)
+		while (++i < _NSIG)
 			signal(i++, SIG_DFL);
-	}
 	else if (mode == CATCH)
 	{
-		while (i < _NSIG)
-			signal(i++, catch_signal);
+		while (++i < _NSIG && i != 17)
+			if (i != 17 && i != 11)
+				signal(i, catch_signal);
 	}
 	else if (mode == HD_CATCH)
-		while (i < _NSIG)
-			signal(i++, hd_catch_sig);
+		while (++i < 15)
+			signal(i, hd_catch_sig);
 }

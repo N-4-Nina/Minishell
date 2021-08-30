@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:01:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 15:22:21 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/28 19:11:23 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	handle_node(t_smpl *s, t_ast *node, t_sh *nsh)
 	if (node->left->type == N_WORD && !s->has_cmd_word)
 		check = id_cmd_word(s, node, nsh);
 	else if (node->left->type == N_WORD)
-		check = id_cmd_suffix(s, node->left, nsh);
+		check = id_cmd_suffix(s, node, nsh);
 	else if (node->left->type == N_IO_FILE)
 		check = handle_io_suf(s, node->left, nsh->env, nsh->last_status);
 	if (check < 0)
@@ -78,7 +78,7 @@ int	handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh)
 	node = node->right;
 	while (node)
 	{
-		if (handle_node < 0)
+		if (handle_node(s, node, nsh) < 0)
 			return (-1);
 		node = node->right;
 	}

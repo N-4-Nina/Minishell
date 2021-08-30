@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:20:15 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 16:22:41 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/28 17:57:57 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,38 @@ int	is_empty(char *s)
 	return (1);
 }
 
+int	loop_signal(t_sh *nsh)
+{
+	int caught;
+
+	if (g_sig_catcher[0])
+	{
+		caught = g_sig_catcher[1];
+		set_sig_status(nsh->last_status);
+		if (caught == SIGTERM)
+			return (1);
+		if (caught == SIGSEGV)
+			nsh_exit(nsh, NULL);
+	}
+	return (0);
+}
+
+void	process_input(t_sh *nsh)
+{
+	if (!is_empty(nsh->lex->inp))
+		add_history(nsh->lex->inp);
+	if (!lex_build(nsh->lex, nsh->inp->prompt))
+		return ;
+	if (!parse(nsh))
+	{
+		nsh_reset(nsh);
+		return ;
+	}
+	exec(nsh);
+	nsh_reset(nsh);
+	return ;
+}
+
 int	nsh_loop(t_sh *nsh)
 {
 	int		status;
@@ -46,25 +78,12 @@ int	nsh_loop(t_sh *nsh)
 		set_sig_behav(INTERACTIVE);
 		build_prompt(nsh->env, nsh->inp);
 		nsh->lex->inp = readline(nsh->inp->prompt);
-		if (!nsh->lex->inp)
+		if (!nsh->lex->inp || loop_signal(nsh))
 		{
 			free(nsh->inp->prompt);
 			break ;
 		}
-		if (g_sig_catcher[1])
-			set_sig_status(nsh->last_status);
-		if (!is_empty(nsh->lex->inp))
-			add_history(nsh->lex->inp);
-		if (!lex_build(nsh->lex, nsh->inp->prompt))
-			continue ;
-		if (!parse(nsh))
-		{
-			nsh_reset(nsh);
-			continue ;
-		}
-		exec(nsh);
-		nsh_reset(nsh);
+		process_input(nsh);
 	}
-	nsh_clear(nsh);
-	return (status);
+	return (nsh_clear(nsh));
 }

@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 17:57:19 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/28 10:36:05 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,16 @@ void	add_heredoc_path(t_env **env)
 	free(tmp);
 }
 
-char	*update_shlvl(char *lvl)
+void	update_shlvl(t_env *env, char *var, char *lvl)
 {
 	int	n;
 
 	n = ft_atoi(lvl);
 	n++;
 	lvl = ft_itoa(n);
-	return (lvl);
+	add_var(env, var, lvl);
+	free(lvl);
+	return ;
 }
 
 void	env_init(t_env **env, char **envp)
@@ -114,8 +116,9 @@ void	env_init(t_env **env, char **envp)
 		val = ft_strchr(envp[i], '=') + 1;
 		var = ft_substr(envp[i], 0, (int)(val - envp[i] - 1));
 		if (!ft_strncmp(var, "SHLVL", 6))
-			val = update_shlvl(val);
-		add_var(*env, var, val);
+			update_shlvl(*env, var, val);
+		else
+			add_var(*env, var, val);
 		free(var);
 		i++;
 	}

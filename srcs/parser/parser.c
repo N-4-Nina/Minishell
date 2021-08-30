@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 16:00:44 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/28 19:01:56 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int	parse(t_sh *nsh)
 	check = parse_input(nsh);
 	if (!lex_isover(*nsh->lex) && lex_inbound(*nsh->lex))
 		return (syntax_error(nsh->lex));
+	write_dot(&nsh->ast);
 	return (check);
 }
