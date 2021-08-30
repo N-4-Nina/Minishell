@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:58:28 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 10:30:39 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/30 15:40:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ void	remove_var(t_env **env, t_env *node);
 char	**env_to_array(t_env *env, int *size);
 void	env_init(t_env **env, char **envp);
 int		strmatch(char *s1, char *s2);
+void	add_heredoc_path(t_env **env);
+void	update_shlvl(t_env *env, char *var, char *lvl);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 10:39:49 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/28 10:59:38 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/30 14:01:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	check_heredoc(t_smpl *s, char **hd)
 	if (fd < 0)
 	{
 		s->output = -1;
-		//free(s->argv[0]);
 		display_error("HEREDOC file must be \
 accessible to this program.\n", "", "");
 		free((*hd));

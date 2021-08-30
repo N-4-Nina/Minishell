@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:11:45 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 15:03:19 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/30 11:56:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	close_files(t_smpl *s)
 		s->filesnb--;
 		close(s->files[s->filesnb]);
 	}
-	free(s->files);
+	if (s->files)
+		free(s->files);
 }
 
 int	get_flags(char *red)

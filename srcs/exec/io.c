@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:01:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/28 19:11:23 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/30 13:32:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,10 @@ int	handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh)
 	if (s->output == -1)
 		return ((*nsh->last_status = 1) - 2);
 	node = node->right;
-	while (node)
+	if (node)
 	{
 		if (handle_node(s, node, nsh) < 0)
 			return (-1);
-		node = node->right;
 	}
 	return (1);
 }

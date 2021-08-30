@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:07:09 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/12 15:27:41 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/30 15:36:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,6 @@ int	env_size(t_env *node)
 	}
 	node = origin;
 	return (i);
-}
-
-void	remove_var(t_env **env, t_env *node)
-{
-	t_env	*lst;
-
-	lst = *env;
-	if (lst == node)
-	{
-		*env = lst->next;
-		free(lst->name);
-		free(lst->value);
-		free(lst);
-		return ;
-	}
-	while (lst->next != node)
-		lst = lst->next;
-	lst->next = node->next;
-	free(node->name);
-	free(node->value);
-	free(node);
 }
 
 int	strmatch(char *s1, char *s2)

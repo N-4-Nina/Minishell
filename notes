@@ -6,13 +6,13 @@
 
 -> export TEST=2 export TEST=$TEST:2222 (revoir interpretation des $)==========CORRECTED
 
--> exit should write exit in stderror
+-> exit should write exit in stderror==========================================CORRECTED
 
--> exit avec valeur negative. atoi(-1) cast en unsigned doit donner 255
+-> exit avec valeur negative. atoi(-1) cast en unsigned doit donner 255========CORRECTED (i do not cast tho ?)
 
 -> cd sans rien va dans home (home not set if not set)=========================CORRECTED(should check some more for leaks)
 
--> No such file quand pas de PATH
+-> No such file quand pas de PATH==============================================CORRECTED
 
 -> ctrl + C echo $? = 130=======================================================HANDLED(should check for interractions / more signals)
 
@@ -20,21 +20,28 @@
 
 -> int agrc, char **argv, char **envp==========================================USED
 
--> export seul trie le tableau
+-> export seul trie le tableau=================================================CORRECTED
 
--> unset PWD: cd is restored when cd
+-> unset PWD: cd is restored when cd===========================================CORRECTED
 
--> $DOESNTEXIST segfaults.
+-> $DOESNTEXIST segfaults. ===================================================CORRECTED
 
+-> redir seule gives Bad address.
+
+
+(
 -> LS COLORS
 
 -> kill -9
 
 -> /dev/null > env  (attention)
-
+)
 
 ==> ALSO
 
 -> check possible difference between messages when command not found (french is pretty different
 -> mixing redirection and pipe with syntax error is very dangerous, should work on that).
 -> DONT FORGET TO HANDLE SHLVL !
+-> All redirections are canceled if HEREDOC is not defined which is lame.
+
+

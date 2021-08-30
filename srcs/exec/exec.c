@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 14:46:53 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/30 16:57:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,20 @@ int	fork_single(t_smpl *smpl, t_env *env, int *status)
 	return (*status);
 }
 
-int 	exec_single(t_sh *nsh, t_smpl *s)
+int	exec_single(t_sh *nsh, t_smpl *s)
 {
 	int	ret;
 	int	origin[2];
 
 	ret = 0;
 	redirect(s, &origin[0], &origin[1]);
-	if (s->isbuiltin == -1)
-		ret = fork_single(s, nsh->env, nsh->last_status);
-	else
-		ret = (call_builtin(nsh, s));
+	if (s->has_cmd_word)
+	{
+		if (s->isbuiltin == -1)
+			ret = fork_single(s, nsh->env, nsh->last_status);
+		else
+			ret = (call_builtin(nsh, s));
+	}
 	recover_origin(origin);
 	return (ret);
 }

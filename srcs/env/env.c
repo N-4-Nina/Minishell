@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/28 10:36:05 by chpl             ###   ########.fr       */
+/*   Updated: 2021/08/30 15:36:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,6 @@
 #include "../includes/environment.h"
 #include "../includes/utils.h"
 #include "../includes/arrays.h"
-
-void	add_var(t_env *env, char *name, char *value)
-{
-	t_env	*list;
-	t_env	*new;
-
-	if (env_is_empty(env))
-	{
-		env->name = ft_strdup(name);
-		env->value = ft_strdup(value);
-		env->next = NULL;
-	}
-	else
-	{
-		new = (t_env *)malloc(sizeof(t_env));
-		new->name = ft_strdup(name);
-		new->value = ft_strdup(value);
-		new->next = NULL;
-		list = env;
-		while (list->next)
-			list = list->next;
-		list->next = new;
-	}
-}
-
-t_env	*find_by_name(t_env *env, char *str)
-{
-	t_env	*current;
-
-	current = env;
-	while (current)
-	{
-		if (strmatch(str, current->name))
-			return (current);
-		current = current->next;
-	}
-	return (NULL);
-}
 
 void	env_clear(t_env *env)
 {
@@ -68,34 +30,6 @@ void	env_clear(t_env *env)
 		free(current);
 		current = tmp;
 	}
-}
-
-void	add_heredoc_path(t_env **env)
-{
-	char	*tmp;
-	char	*str;
-
-	tmp = getenv("USER");
-	if (!tmp)
-		tmp = ft_strdup("user42");
-	add_var(*env, "USER", tmp);
-	str = ft_strjoin("/home/", tmp);
-	tmp = ft_strjoin(str, "/.nsh_heredoc");
-	add_var(*env, "HEREDOC", tmp);
-	free(str);
-	free(tmp);
-}
-
-void	update_shlvl(t_env *env, char *var, char *lvl)
-{
-	int	n;
-
-	n = ft_atoi(lvl);
-	n++;
-	lvl = ft_itoa(n);
-	add_var(env, var, lvl);
-	free(lvl);
-	return ;
 }
 
 void	env_init(t_env **env, char **envp)
