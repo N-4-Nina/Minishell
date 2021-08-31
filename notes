@@ -16,7 +16,7 @@
 
 -> ctrl + C echo $? = 130=======================================================HANDLED(should check for interractions / more signals)
 
-->  < file cat   should work, as well as   > file echo hey
+->  < file cat   should work, as well as   > file echo hey=====================CORRECTED
 
 -> int agrc, char **argv, char **envp==========================================USED
 
@@ -26,7 +26,7 @@
 
 -> $DOESNTEXIST segfaults. ===================================================CORRECTED
 
--> redir seule gives Bad address.
+-> redir seule gives Bad address. ============================================CORRECTED
 
 
 (
@@ -39,7 +39,6 @@
 
 ==> ALSO
 
--> check possible difference between messages when command not found (french is pretty different
 -> mixing redirection and pipe with syntax error is very dangerous, should work on that).
 -> DONT FORGET TO HANDLE SHLVL !
 -> All redirections are canceled if HEREDOC is not defined which is lame.

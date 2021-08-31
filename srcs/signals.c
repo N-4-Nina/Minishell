@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/30 16:57:38 by user42           ###   ########.fr       */
+/*   Updated: 2021/08/31 15:10:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@
 #include "../includes/utils.h"
 #include "../includes/builtins.h"
 
-void	hd_catch_sig(int signum)
-{
-	g_sig_catcher[0] = 1;
-	g_sig_catcher[1] = signum;
-}
-
 void	interactive_handler(int signum)
 {
 	if (signum == SIGINT)
@@ -31,27 +25,40 @@ void	interactive_handler(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		hd_catch_sig(SIGINT);
+		catch_signal(SIGINT);
 	}
 	else if (signum == SIGQUIT)
 		write(1, "\b\b  \b\b", 6);
 }
 
-void	catch_signal(int signum)
+void	set_interactive(void)
 {
-	g_sig_catcher[0] = 1;
-	g_sig_catcher[1] = signum;
-	if (signum == 3 || signum == 4 || signum == 6
-		||signum == 8)
-		display_error("Nsh: Quit (core dumped)\n", "", "");
-	else if (signum == 11)
-		display_error("Nsh: Segmentation fault (core dumped)\n", "", "");
+	int	i;
+
+	i = -1;
+	while (++i < _NSIG)
+		signal(i, SIG_DFL);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTERM, catch_signal);
+	signal(SIGINT, interactive_handler);
+	signal(SIGQUIT, interactive_handler);
 }
 
-void	set_sig_status(int *status)
+void	set_catch(void)
 {
-	*status = 128 + g_sig_catcher[1];
-	reset_sig_catcher();
+	int	i;
+
+	i = -1;
+	while (++i < _NSIG)
+	{
+		if (i == SIGINT || i == SIGQUIT)
+			signal(i, catch_signal);
+		else if (i == 15 || i == 18 || i == 20
+			|| i == 21 || i == 22 || i == 23 || i == 28)
+			signal(i, SIG_IGN);
+		else
+			signal(i, SIG_DFL);
+	}
 }
 
 void	set_sig_behav(int mode)
@@ -60,24 +67,14 @@ void	set_sig_behav(int mode)
 
 	i = -1;
 	if (mode == INTERACTIVE)
-	{
-		while (++i < _NSIG)
-			signal(i, SIG_DFL);
-		signal(SIGTSTP, SIG_IGN);
-		signal(SIGTERM, catch_signal);
-		signal(SIGINT, interactive_handler);
-		signal(SIGQUIT, interactive_handler);
-	}
+		set_interactive();
 	else if (mode == RESET)
 		while (++i < _NSIG)
 			signal(i++, SIG_DFL);
 	else if (mode == CATCH)
-	{
-		while (++i < _NSIG && i != 17)
-			if (i != 17 && i != 11)
-				signal(i, catch_signal);
-	}
+		set_catch();
 	else if (mode == HD_CATCH)
-		while (++i < 15)
-			signal(i, hd_catch_sig);
+		while (++i < _NSIG)
+			if (i != SIGCHLD)
+				signal(i, catch_signal);
 }
