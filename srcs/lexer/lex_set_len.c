@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:03:06 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 11:04:38 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	set_word_len(t_lex *l)
 		&& !(is_blank(l->inp[l->i + l->t[l->j].len]))
 		&& !(is_spec(l->inp[l->i + l->t[l->j].len])))
 	{
-		if (is_quote(l->inp[l->i + l->t[l->j].len]))
+		if (l->inp[l->i + l->t[l->j].len] == '\\')
+			l->t[l->j].len += 2;
+		else if (is_quote(l->inp[l->i + l->t[l->j].len]))
 			set_quote_len(l);
 		else
 			l->t[l->j].len++;

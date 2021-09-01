@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_replace.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:15:10 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/26 15:33:40 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 10:20:43 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 #include "../includes/exec.h"
 #include "../includes/environment.h"
 #include "../includes/utils.h"
+
+int	replace_backslash(char **dst, char *src)
+{
+	do_cat(dst, src);
+	free(src);
+	return (2);
+}
 
 int	replace_status(char **dst, char *src, int status)
 {
@@ -75,8 +82,10 @@ int	replace_weak(char **dst, char *src, t_env *env, int *status)
 	{
 		if (src[i] == '$' && src[i + 1] == '?')
 			i += replace_status(dst, &src[i], *status);
-		if (src[i] == '$')
+		else if (src[i] == '$')
 			i += replace_var(dst, &src[i], env);
+		else if (src[i] == '\\' && src[i + 1])
+			i += replace_backslash(dst, ft_substr(src, i + 1, 1));
 		else
 		{
 			single[0] = src[i];
@@ -84,7 +93,7 @@ int	replace_weak(char **dst, char *src, t_env *env, int *status)
 			i++;
 		}
 	}
-	if (i == 1)
+	if (i == 1 && !*dst)
 		*dst = ft_strdup("");
 	return (i + 1);
 }

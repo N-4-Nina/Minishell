@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 14:49:34 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/26 14:43:34 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 10:21:08 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ char	*expand_word(char *s, t_env *env, int *status)
 		else if (s[i] == '$')
 			i += replace_var(&new, &s[i], env);
 		else if (s[i] == '\\' && s[i + 1])
-		{
-			do_cat(&new, ft_substr(s, i + 1, 1));
-			i += 2;
-		}
+			i += replace_backslash(&new, ft_substr(s, i + 1, 1));
 		else
 			i += append_single(&new, s[i]);
 	}

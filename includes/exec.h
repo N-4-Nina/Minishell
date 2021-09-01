@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:27:36 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/30 15:45:17 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 09:14:18 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	recover_origin(int origin[2]);
 
 //expansion
 int		do_cat(char **dst, char *src);
+int		replace_backslash(char **dst, char *src);
 int		replace_weak(char **dst, char *src, t_env *env, int *status);
 int		replace_strong(char **dst, char *src);
 int		replace_var(char **dst, char *src, t_env *env);

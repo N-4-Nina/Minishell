@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:44:04 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 10:39:32 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	count_quote(t_lex *l)
 	matching[0] = l->inp[l->i];
 	matching[1] = 0;
 	l->i++;
-	while (l->inp[l->i] && l->inp[l->i] != matching[0])
+	while (l->inp[l->i] && (l->inp[l->i] != matching[0]
+			|| (l->inp[l->i] == matching[0] && l->inp[l->i] == '"'
+				&& l->inp[l->i - 1] == '\\')))
 		l->i++;
 	if (!l->inp[l->i])
 	{
@@ -56,7 +58,9 @@ int	count_word(t_lex *l)
 	while (l->i < l->inp_size && !(is_blank(l->inp[l->i]))
 		&& !(is_spec(l->inp[l->i])))
 	{
-		if (is_quote(l->inp[l->i]))
+		if (l->inp[l->i] == '\\')
+			l->i += 2;
+		else if (is_quote(l->inp[l->i]))
 		{
 			if (count_quote(l) < 0)
 				return (-1);

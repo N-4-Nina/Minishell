@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 09:17:44 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int	check_multiline(t_lex *l)
 	len = ft_strlen(l->inp);
 	if (len)
 	{
-		if (l->inp[len - 1] == '\\')
+		if (len > 1 && l->inp[len - 1] == '\\' && l->inp[len - 2] == '\\')
+			return (0);
+		else if (l->inp[len - 1] == '\\')
 		{
 			display_error("Multiline is not supported.\n", "", "");
 			return (1);
