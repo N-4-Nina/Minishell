@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 15:49:38 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ int	tokenize(t_lex *l)
 {
 	l->i = 0;
 	l->j = 0;
-	while (l->i < l->inpSize && l->j < l->nt)
+	while (l->i < l->inp_size && l->j < l->nt)
 	{
 		token_init(&l->t[l->j]);
-		if (isBlank(l->inp[l->i]))
+		if (is_blank(l->inp[l->i]))
 			handle_blank(l);
-		else if (isSpec(l->inp[l->i]))
+		else if (is_spec(l->inp[l->i]))
 			handle_spec(l);
-		else if (!isSpec(l->inp[l->i]))
+		else if (!is_spec(l->inp[l->i]))
 			handle_word(l);
 	}
 	return (1);
@@ -92,7 +92,7 @@ int	lex_build(t_lex *l, char *prompt)
 {
 	if (!l->inp)
 		return (0);
-	l->inpSize = ft_strlen(l->inp);
+	l->inp_size = ft_strlen(l->inp);
 	if (check_multiline(l) || count_tokens(l) <= 0)
 	{
 		free(prompt);

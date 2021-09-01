@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:20:15 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/30 13:59:26 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_empty(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (!isBlank(s[i]))
+		if (!is_blank(s[i]))
 			return (0);
 		i++;
 	}
@@ -75,7 +75,7 @@ int	nsh_loop(t_sh *nsh)
 	status = 1;
 	while (status)
 	{
-		set_sig_behav(INTERACTIVE);
+		set_sig_behav(INTERACTIVE, NULL);
 		build_prompt(nsh->env, nsh->inp);
 		nsh->lex->inp = readline(nsh->inp->prompt);
 		if (!nsh->lex->inp || loop_signal(nsh))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 11:37:25 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/30 15:36:59 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 08:24:56 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ void	env_init(t_env **env, char **envp)
 	char	*var;
 	char	*val;
 	int		i;
-	int		envSize;
+	int		env_size;
 
 	*env = (t_env *)malloc(sizeof(t_env));
 	(*env)->name = NULL;
 	(*env)->value = NULL;
 	(*env)->next = NULL;
 	i = 0;
-	envSize = array_size(envp);
-	while (i < envSize)
+	env_size = array_size(envp);
+	while (i < env_size)
 	{
 		val = ft_strchr(envp[i], '=') + 1;
 		var = ft_substr(envp[i], 0, (int)(val - envp[i] - 1));

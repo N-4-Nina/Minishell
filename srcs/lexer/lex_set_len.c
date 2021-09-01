@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:03:06 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 10:46:35 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	set_spec_len(t_lex *l)
 
 void	set_word_len(t_lex *l)
 {
-	while (l->i + l->t[l->j].len < l->inpSize
-		&& !(isBlank(l->inp[l->i + l->t[l->j].len]))
-		&& !(isSpec(l->inp[l->i + l->t[l->j].len])))
+	while (l->i + l->t[l->j].len < l->inp_size
+		&& !(is_blank(l->inp[l->i + l->t[l->j].len]))
+		&& !(is_spec(l->inp[l->i + l->t[l->j].len])))
 	{
-		if (isQuote(l->inp[l->i + l->t[l->j].len]))
+		if (is_quote(l->inp[l->i + l->t[l->j].len]))
 			set_quote_len(l);
 		else
 			l->t[l->j].len++;

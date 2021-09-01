@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_seq.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:17:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 14:24:28 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 08:24:56 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ void	pipe_seq_redir(t_smpl *s)
 
 int	exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 {
-	char	**envArr;
-	int		envSize;
+	char	**env_arr;
+	int		env_size;
 	int		error;
 
 	error = 0;
-	envArr = env_to_array(nsh->env, &envSize);
+	env_arr = env_to_array(nsh->env, &env_size);
 	pipe_seq_redir(s);
 	if (s->isbuiltin >= 0)
 		call_builtin(nsh, s);
 	else
 	{
-		if (execve(s->path, s->argv, envArr) == -1)
+		if (execve(s->path, s->argv, env_arr) == -1)
 		{
 			display_error(strerror(errno), "\n", "");
 			error = 126;
@@ -48,7 +48,7 @@ int	exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 	}
 	dup2(fd, STDIN_FILENO);
 	dup2(red[1], STDOUT_FILENO);
-	free_array(envArr, envSize);
+	free_array(env_arr, env_size);
 	exit(EXIT_SUCCESS + error);
 }
 
@@ -65,7 +65,7 @@ void	pipe_seq_parent(t_sh *nsh, pid_t pid, int red[2], int *fd)
 void	pipe_seq_child(t_sh *nsh, t_cmd *cmd, int red[2], int fd)
 {
 	close(red[0]);
-	set_sig_behav(RESET);
+	set_sig_behav(RESET, NULL);
 	dup2(fd, STDIN_FILENO);
 	if (fd)
 		close(fd);
@@ -85,7 +85,7 @@ int	exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
 	red[0] = 0;
 	red[1] = 1;
 	fd = 0;
-	set_sig_behav(CATCH);
+	set_sig_behav(CATCH, NULL);
 	while (cmd->i < cmd->smpnb)
 	{
 		if (pipe(red))

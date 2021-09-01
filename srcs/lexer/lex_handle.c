@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:30:49 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 09:04:14 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	handle_blank(t_lex *l)
 {
-	while (l->inp[l->i] && isBlank(l->inp[l->i]))
+	while (l->inp[l->i] && is_blank(l->inp[l->i]))
 		l->i++;
 }
 

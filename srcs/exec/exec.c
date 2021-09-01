@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/30 16:57:53 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 08:24:57 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@
 
 int	single_child(t_smpl *smpl, t_env *env)
 {
-	char	**envArr;
-	int		envSize;
+	char	**env_arr;
+	int		env_size;
 	int		error;
 
-	envSize = 0;
+	env_size = 0;
 	error = 0;
 	signal(SIGINT, SIG_DFL);
-	envArr = env_to_array(env, &envSize);
-	if (execve(smpl->path, smpl->argv, envArr) == -1)
+	env_arr = env_to_array(env, &env_size);
+	if (execve(smpl->path, smpl->argv, env_arr) == -1)
 	{
 		display_error(strerror(errno), "", "");
 		error = 126;
 	}
-	free_array(envArr, envSize);
+	free_array(env_arr, env_size);
 	exit(EXIT_SUCCESS + error);
 }
 
@@ -42,7 +42,7 @@ int	fork_single(t_smpl *smpl, t_env *env, int *status)
 {
 	pid_t	pid;
 
-	set_sig_behav(CATCH);
+	set_sig_behav(CATCH, smpl->argv[0]);
 	pid = fork();
 	if (pid == -1)
 		return (-1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:21:06 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 15:22:49 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ char	*get_current_dir_name(void)
 		return (NULL);
 }
 
-int	isSpec(char c)
+int	is_spec(char c)
 {
 	return (c == '>' || c == '<'
 		|| c == '|' || c == ';');
 }
 
-int	isQuote(char c)
+int	is_quote(char c)
 {
 	return (c == '\'' || c == '"');
 }
 
-int	isBlank(char c)
+int	is_blank(char c)
 {
 	return (c == 32 || (c > 8 && c < 14));
 }

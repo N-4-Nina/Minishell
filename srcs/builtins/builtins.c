@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 09:26:49 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 15:14:15 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 08:25:39 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	bui_init(t_sh *nsh)
 	int			i;
 	static char	builtin_str[7][7] = {"echo", "cd", "pwd", \
 "export", "unset", "env", "exit"};
-	static	int	(*builtin_func[7])(t_sh *, char **) = \
+	static int	(*builtin_func[7])(t_sh *, char **) = \
 	{&nsh_echo, &nsh_cd, &nsh_pwd, &nsh_export, \
 &nsh_unset, &nsh_env, &nsh_exit};
 

@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 12:00:04 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/11 12:21:22 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 08:19:41 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define SET_YELLOW  "\x1b[33m"
 # define SET_BLUE    "\x1b[34m"
 # define SET_WHITE   "\x1b[0m"
-# define	COLOR_SIZE	6
+# define COLOR_SIZE	6
 # define BOLD_SIZE   5
 # define AST_LEFT 0
 # define AST_RIGHT 1

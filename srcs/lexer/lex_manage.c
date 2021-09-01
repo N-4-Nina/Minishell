@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:27:05 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 14:37:08 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 08:20:38 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	lex_reset(t_lex *l)
 {
 	l->i = 0;
 	l->j = 0;
-	l->inpSize = 0;
+	l->inp_size = 0;
 	if (l->inp)
 		free(l->inp);
 	l->nt--;
@@ -41,6 +41,6 @@ void	lex_init(t_lex *l)
 	l->nt = 0;
 	l->i = 0;
 	l->j = 0;
-	l->inpSize = 0;
+	l->inp_size = 0;
 	l->syntax_error = 0;
 }

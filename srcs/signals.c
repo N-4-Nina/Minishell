@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/31 15:10:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 08:16:26 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	set_interactive(void)
 	signal(SIGQUIT, interactive_handler);
 }
 
-void	set_catch(void)
+void	set_catch(char *cmd)
 {
 	int	i;
 
@@ -59,9 +59,11 @@ void	set_catch(void)
 		else
 			signal(i, SIG_DFL);
 	}
+	if (cmd && !ft_strncmp(cmd, "kill", 5))
+		signal(SIGQUIT, SIG_IGN);
 }
 
-void	set_sig_behav(int mode)
+void	set_sig_behav(int mode, char *cmd)
 {
 	int	i;
 
@@ -72,7 +74,7 @@ void	set_sig_behav(int mode)
 		while (++i < _NSIG)
 			signal(i++, SIG_DFL);
 	else if (mode == CATCH)
-		set_catch();
+		set_catch(cmd);
 	else if (mode == HD_CATCH)
 		while (++i < _NSIG)
 			if (i != SIGCHLD)

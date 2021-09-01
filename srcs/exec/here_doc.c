@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 10:39:49 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/30 14:01:42 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/01 08:13:40 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	hd_read(t_smpl *s, int fd, char *end)
 	size_t	endsize;
 	char	*line;
 
-	set_sig_behav(RESET);
+	set_sig_behav(RESET, NULL);
 	endsize = ft_strlen(end);
 	line = readline("> ");
 	max = 0;
@@ -100,7 +100,7 @@ with EOF instead of \"", end, "\"\n");
 
 void	hd_parent(t_smpl *s, char *hd, int fd, int *status)
 {
-	set_sig_behav(HD_CATCH);
+	set_sig_behav(HD_CATCH, NULL);
 	waitpid(0, status, WUNTRACED);
 	fd = open(hd, FLAGS_LESS, 0660);
 	s->files[s->filesnb++] = fd;

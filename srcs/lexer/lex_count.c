@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:44:04 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/28 10:56:53 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	count_quote(t_lex *l)
 
 int	count_blank(t_lex *l)
 {
-	while (l->inp[l->i] && isBlank(l->inp[l->i]))
+	while (l->inp[l->i] && is_blank(l->inp[l->i]))
 		l->i++;
 	return (1);
 }
@@ -53,10 +53,10 @@ int	count_spec(t_lex *l)
 
 int	count_word(t_lex *l)
 {
-	while (l->i < l->inpSize && !(isBlank(l->inp[l->i]))
-		&& !(isSpec(l->inp[l->i])))
+	while (l->i < l->inp_size && !(is_blank(l->inp[l->i]))
+		&& !(is_spec(l->inp[l->i])))
 	{
-		if (isQuote(l->inp[l->i]))
+		if (is_quote(l->inp[l->i]))
 		{
 			if (count_quote(l) < 0)
 				return (-1);
@@ -72,13 +72,13 @@ int	count_tokens(t_lex *l)
 {
 	int	r;
 
-	while (l->i < l->inpSize)
+	while (l->i < l->inp_size)
 	{
-		if (l->inp[l->i] && isBlank(l->inp[l->i]))
+		if (l->inp[l->i] && is_blank(l->inp[l->i]))
 			r = count_blank(l);
-		else if (l->inp[l->i] && isSpec(l->inp[l->i]))
+		else if (l->inp[l->i] && is_spec(l->inp[l->i]))
 			r = count_spec(l);
-		else if (l->inp[l->i] && !isSpec(l->inp[l->i]))
+		else if (l->inp[l->i] && !is_spec(l->inp[l->i]))
 			r = count_word(l);
 		if (r < 0)
 		{
