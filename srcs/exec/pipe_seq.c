@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:17:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:24:56 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/01 08:36:26 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,25 @@ int	exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 {
 	char	**env_arr;
 	int		env_size;
-	int		error;
+	int		ret;
 
-	error = 0;
+	ret = 0;
 	env_arr = env_to_array(nsh->env, &env_size);
 	pipe_seq_redir(s);
 	if (s->isbuiltin >= 0)
-		call_builtin(nsh, s);
+		ret = call_builtin(nsh, s);
 	else
 	{
 		if (execve(s->path, s->argv, env_arr) == -1)
 		{
 			display_error(strerror(errno), "\n", "");
-			error = 126;
+			ret = 126;
 		}
 	}
 	dup2(fd, STDIN_FILENO);
 	dup2(red[1], STDOUT_FILENO);
 	free_array(env_arr, env_size);
-	exit(EXIT_SUCCESS + error);
+	exit(EXIT_SUCCESS + ret);
 }
 
 void	pipe_seq_parent(t_sh *nsh, pid_t pid, int red[2], int *fd)
@@ -89,7 +89,7 @@ int	exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
 	while (cmd->i < cmd->smpnb)
 	{
 		if (pipe(red))
-			write(1, "pipe creation error\n", 20);
+			write(2, "pipe creation error\n", 20);
 		pid = fork();
 		if (pid < 0)
 			return (-1);
