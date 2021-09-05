@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:17:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/05 18:21:11 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/05 18:56:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ int	exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 	pipe_seq_redir(s);
 	if (s->isbuiltin >= 0)
 		ret = call_builtin(nsh, s);
-	else
+	else if (s->path_is_set)
 	{
 		if (execve(s->path, s->argv, env_arr) == -1)
 		{
 			display_error(strerror(errno), "\n", "");
 			ret = 126;
 		}
+	}
+	else
+	{
+		display_error("Nsh: Command not found: ", s->argv[0], "\n");
+		ret = 127;
 	}
 	//dup2(fd, STDIN_FILENO);
 	//dup2(red[1], STDOUT_FILENO);
@@ -72,7 +77,7 @@ void	pipe_seq_child(t_sh *nsh, t_cmd *cmd, int red[2], int fd)
 	if (fd)
 		close(fd);
 	if (cmd->i < cmd->smpnb - 1)
-		dup2(red[1], 1);
+		dup2(red[1], STDOUT_FILENO);
 	close(red[1]);
 	exec_seq_part(nsh, cmd->smpl[cmd->i], red, fd);
 }

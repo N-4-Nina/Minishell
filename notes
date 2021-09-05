@@ -8,3 +8,16 @@ should work normally.
 => command not found and pipes.
 
 => norme. OF COURSE
+
+
+leak = ==24896== 42 bytes in 21 blocks are definitely lost in loss record 11 of 46
+==24896==    at 0x4C31B0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==24896==    by 0x40104F: copy_data (lexer.c:37)
+==24896==    by 0x40159D: handle_spec (lex_handle.c:35)
+==24896==    by 0x401358: tokenize (lexer.c:86)
+==24896==    by 0x401488: lex_build (lexer.c:111)
+==24896==    by 0x400E7D: process_input (loop.c:59)
+==24896==    by 0x400F6E: nsh_loop (loop.c:86)
+==24896==    by 0x402575: main (main.c:59)
+
+command= fewjfbewof | ls | rev > file | fewfew

@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:10:02 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/30 14:00:47 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/05 19:15:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/exec.h"
+#include "structures.h"
+#include "libs.h"
+#include "exec.h"
 
 int	args_count(t_ast *node)
 {
@@ -48,6 +48,7 @@ void	init_simple(t_smpl *s, int ac, int fc)
 	s->output = STDOUT_FILENO;
 	s->filesnb = 0;
 	s->has_cmd_word = 0;
+	s->path_is_set = 0;
 	s->isbuiltin = -1;
 	s->path = NULL;
 }

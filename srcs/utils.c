@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:21:06 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:23:33 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/05 19:09:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,27 @@
 
 int	display_error(char *one, char *two, char *three)
 {
+	char *str;
+	char *tmp;
+	
+	str = NULL;
 	if (one)
-		write(STDERR_FILENO, one, ft_strlen(one));
-	if (one)
-		write(STDERR_FILENO, two, ft_strlen(two));
-	if (one)
-		write(STDERR_FILENO, three, ft_strlen(three));
+		str = ft_strdup(one);
+	if (two)
+	{
+		tmp = str;
+		str = ft_strjoin(str, two);
+		free(tmp);
+	}
+	if (three)
+	{
+		tmp = str;
+		str = ft_strjoin(str, three);
+		free(tmp);
+	}
+	write(STDERR_FILENO, str, ft_strlen(str));
+	if (str)
+		free(str);
 	return (0);
 }
 

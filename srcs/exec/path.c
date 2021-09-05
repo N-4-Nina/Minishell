@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/08/28 18:08:38 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/05 18:36:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ int	set_abs_path(t_smpl *s, char *name)
 	if (!stat(name, &buf))
 	{
 		s->path = ft_strdup(name);
+		s->path_is_set = 1;
 		free(name);
 		return (1);
 	}
-	display_error("Nsh: Command not found: ", name, "\n");
+	//display_error("Nsh: Command not found: ", name, "\n");
 	free(name);
 	return (0);
 }
@@ -50,6 +51,7 @@ int	seek_in_path(t_smpl *s, char **split, char *name, int splitSize)
 			free_array(split, splitSize);
 			free(path);
 			free(name);
+			s->path_is_set = 1;
 			return (1);
 		}
 		else
@@ -86,14 +88,14 @@ int	set_cmd_path(t_smpl *s, t_env *env, char *name)
 	free(name);
 	name = new;
 	split = get_split(env);
-	if (!split)
-		return (display_error("Nsh: Command not found: ", name + 1, "\n"));
+	//if (!split)
+	//	return (display_error("Nsh: Command not found: ", name + 1, "\n"));
 	while (split[j])
 		j++;
 	if (seek_in_path(s, split, name, j))
 		return (1);
 	free_array(split, j);
-	display_error("Nsh: Command not found: ", name + 1, "\n");
+	//display_error("Nsh: Command not found: ", name + 1, "\n");
 	free(name);
 	return (0);
 }

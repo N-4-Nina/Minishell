@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:17:12 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:20:39 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/05 18:32:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_simple
 	int		hasheredoc;
 	int		isbuiltin;
 	int		has_cmd_word;
+	int		path_is_set;
 	int		argc;
 	int		filesnb;
 	int		*files;
