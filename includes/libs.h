@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:22:03 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/10 14:50:21 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/05 16:55:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <term.h>
-# include <X11/keysym.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>

@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:13:17 by chappelle         #+#    #+#             */
-/*   Updated: 2021/08/10 15:01:39 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/05 17:12:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/exec.h"
+#include "structures.h"
+#include "libs.h"
+#include "exec.h"
 
 void	recover_origin(int origin[2])
 {
 	dup2(origin[0], STDIN_FILENO);
 	dup2(origin[1], STDOUT_FILENO);
+	close(origin[0]);
+	close(origin[1]);
 }
 
 void	redirect(t_smpl *s, int *ori_in, int *ori_out)

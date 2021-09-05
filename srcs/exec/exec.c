@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:24:57 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/05 17:21:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/exec.h"
-#include "../includes/environment.h"
-#include "../includes/utils.h"
-#include "../includes/signals.h"
-#include "../includes/defines.h"
-#include "../includes/arrays.h"
+#include "structures.h"
+#include "libs.h"
+#include "exec.h"
+#include "environment.h"
+#include "utils.h"
+#include "signals.h"
+#include "defines.h"
+#include "arrays.h"
 
 int	single_child(t_smpl *smpl, t_env *env)
 {
@@ -68,6 +68,10 @@ int	exec_single(t_sh *nsh, t_smpl *s)
 			ret = (call_builtin(nsh, s));
 	}
 	recover_origin(origin);
+	if (s->input > 1)
+		close(s->input);
+	if (s->output > 1)
+		close(s->output);
 	return (ret);
 }
 

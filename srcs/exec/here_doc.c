@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 10:39:49 by chappelle         #+#    #+#             */
-/*   Updated: 2021/09/01 08:13:40 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/05 17:26:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ with EOF instead of \"", end, "\"\n");
 
 void	hd_parent(t_smpl *s, char *hd, int fd, int *status)
 {
+	close(fd);
 	set_sig_behav(HD_CATCH, NULL);
 	waitpid(0, status, WUNTRACED);
 	fd = open(hd, FLAGS_LESS, 0660);

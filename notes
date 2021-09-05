@@ -1,0 +1,10 @@
+i think i solved fd leak problem already. obviously should test more, especially because fd number sometimes decreases actually.
+( try simple pipe with two commands and then ls | ls | ls ......)
+
+=> export a="s -la"
+	l$a
+should work normally.
+
+=> command not found and pipes.
+
+=> norme. OF COURSE

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   await_children.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 18:29:13 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:05:02 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/05 16:54:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/structures.h"
-#include "../../includes/libs.h"
-#include "../../includes/signals.h"
-#include "../../includes/utils.h"
+#include "structures.h"
+#include "libs.h"
+#include "signals.h"
+#include "utils.h"
 
 void	display_signal_error(int status)
 {

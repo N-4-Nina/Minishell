@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_seq.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:17:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:36:26 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/05 18:21:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int	exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 			ret = 126;
 		}
 	}
-	dup2(fd, STDIN_FILENO);
-	dup2(red[1], STDOUT_FILENO);
+	//dup2(fd, STDIN_FILENO);
+	//dup2(red[1], STDOUT_FILENO);
+	(void)fd;
+	(void)red;
 	free_array(env_arr, env_size);
 	exit(EXIT_SUCCESS + ret);
 }
@@ -99,6 +101,8 @@ int	exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
 			pipe_seq_parent(nsh, pid, red, &fd);
 		cmd->i++;
 	}
+	if (fd > 1)
+		close(fd);
 	await_children(nsh, cmd);
 	return (0);
 }
