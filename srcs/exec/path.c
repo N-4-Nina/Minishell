@@ -6,16 +6,16 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/09/05 18:36:53 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 11:28:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/exec.h"
-#include "../includes/utils.h"
-#include "../includes/environment.h"
-#include "../includes/arrays.h"
+#include "structures.h"
+#include "libs.h"
+#include "exec.h"
+#include "utils.h"
+#include "environment.h"
+#include "arrays.h"
 
 int	set_abs_path(t_smpl *s, char *name)
 {
@@ -28,7 +28,6 @@ int	set_abs_path(t_smpl *s, char *name)
 		free(name);
 		return (1);
 	}
-	//display_error("Nsh: Command not found: ", name, "\n");
 	free(name);
 	return (0);
 }
@@ -88,14 +87,11 @@ int	set_cmd_path(t_smpl *s, t_env *env, char *name)
 	free(name);
 	name = new;
 	split = get_split(env);
-	//if (!split)
-	//	return (display_error("Nsh: Command not found: ", name + 1, "\n"));
 	while (split[j])
 		j++;
 	if (seek_in_path(s, split, name, j))
 		return (1);
 	free_array(split, j);
-	//display_error("Nsh: Command not found: ", name + 1, "\n");
 	free(name);
 	return (0);
 }

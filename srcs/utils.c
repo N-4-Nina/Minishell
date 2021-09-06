@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:21:06 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/05 19:09:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 11:28:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	display_error(char *one, char *two, char *three)
 {
-	char *str;
-	char *tmp;
-	
+	char	*str;
+	char	*tmp;
+
 	str = NULL;
 	if (one)
 		str = ft_strdup(one);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/06 10:38:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 12:47:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,27 @@ int	single_child(t_smpl *smpl, t_env *env)
 {
 	char	**env_arr;
 	int		env_size;
-	int		error;
+	int		ret;
 
 	env_size = 0;
-	error = 0;
+	ret = 0;
 	signal(SIGINT, SIG_DFL);
 	env_arr = env_to_array(env, &env_size);
-	if (execve(smpl->path, smpl->argv, env_arr) == -1)
+	if (smpl->path_is_set)
 	{
-		display_error(strerror(errno), "", "");
-		error = 126;
+		if (execve(smpl->path, smpl->argv, env_arr) == -1)
+		{
+			display_error(strerror(errno), "", "");
+			ret = 126;
+		}
+	}
+	else
+	{
+		display_error("Nsh: Command not found: ", smpl->argv[0], "\n");
+		ret = 127;
 	}
 	free_array(env_arr, env_size);
-	exit(EXIT_SUCCESS + error);
+	exit(EXIT_SUCCESS + ret);
 }
 
 int	fork_single(t_smpl *smpl, t_env *env, int *status)

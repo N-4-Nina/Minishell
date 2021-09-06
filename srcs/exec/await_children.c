@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 18:29:13 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/05 18:55:43 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 11:32:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	await_child(int *status)
 		*status = *status >> 8;
 }
 
-void	await_children(t_sh *nsh, t_cmd *cmd)
+int	await_children(t_sh *nsh, t_cmd *cmd)
 {
 	int	status;
 
@@ -52,4 +52,5 @@ void	await_children(t_sh *nsh, t_cmd *cmd)
 		else
 			*nsh->last_status = status >> 8;
 	}
+	return (0);
 }

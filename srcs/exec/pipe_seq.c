@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:17:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/05 18:56:07 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 11:36:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	pipe_seq_redir(t_smpl *s)
 		dup2(s->output, STDOUT_FILENO);
 }
 
-int	exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
+int	exec_seq_part(t_sh *nsh, t_smpl *s)
 {
 	char	**env_arr;
 	int		env_size;
@@ -51,10 +51,6 @@ int	exec_seq_part(t_sh *nsh, t_smpl *s, int red[2], int fd)
 		display_error("Nsh: Command not found: ", s->argv[0], "\n");
 		ret = 127;
 	}
-	//dup2(fd, STDIN_FILENO);
-	//dup2(red[1], STDOUT_FILENO);
-	(void)fd;
-	(void)red;
 	free_array(env_arr, env_size);
 	exit(EXIT_SUCCESS + ret);
 }
@@ -79,7 +75,7 @@ void	pipe_seq_child(t_sh *nsh, t_cmd *cmd, int red[2], int fd)
 	if (cmd->i < cmd->smpnb - 1)
 		dup2(red[1], STDOUT_FILENO);
 	close(red[1]);
-	exec_seq_part(nsh, cmd->smpl[cmd->i], red, fd);
+	exec_seq_part(nsh, cmd->smpl[cmd->i]);
 }
 
 int	exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
@@ -108,6 +104,5 @@ int	exec_pipe_seq(t_sh *nsh, t_cmd *cmd)
 	}
 	if (fd > 1)
 		close(fd);
-	await_children(nsh, cmd);
-	return (0);
+	return (await_children(nsh, cmd));
 }
