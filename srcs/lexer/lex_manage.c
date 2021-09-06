@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lex_manage.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 09:27:05 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:20:38 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/06 10:40:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/lexer.h"
+#include "structures.h"
+#include "libs.h"
+#include "lexer.h"
 
 void	lex_reset(t_lex *l)
 {

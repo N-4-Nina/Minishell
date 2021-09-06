@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:10:02 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/05 19:15:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 10:30:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	files_count(t_ast *node, int *c)
 
 void	init_simple(t_smpl *s, int ac, int fc)
 {
-	s->argv = (char **)malloc(sizeof(char *) * (ac + 1));
+	s->argv = (char **)malloc(sizeof(char *) * (ac + 2));
 	s->files = (int *)malloc(sizeof(int *) * (fc + 1));
 	s->argc = 0;
 	s->input = STDIN_FILENO;

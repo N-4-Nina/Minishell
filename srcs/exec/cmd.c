@@ -6,15 +6,15 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:01:16 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/30 13:20:38 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/06 10:43:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/exec.h"
-#include "../includes/utils.h"
-#include "../includes/arrays.h"
+#include "structures.h"
+#include "libs.h"
+#include "exec.h"
+#include "utils.h"
+#include "arrays.h"
 
 int	cmd_execute(t_sh *nsh, t_cmd *cmd)
 {
@@ -27,12 +27,28 @@ int	cmd_execute(t_sh *nsh, t_cmd *cmd)
 	return (0);
 }
 
+void	count_smpls(t_ast *node, t_cmd *cmd)
+{
+	t_ast	*pipenode;
+	int		i;
+
+	pipenode = node;
+	cmd->smpnb = 0;
+	i = 0;
+	while (pipenode)
+	{
+		pipenode = pipenode->right;
+		i++;
+	}
+	cmd->smpl = (t_smpl **)malloc(sizeof(t_smpl *) * i);
+}
+
 int	cmd_build(t_sh *nsh, t_ast *node, t_cmd *cmd)
 {
 	t_ast	*pipenode;
 
 	pipenode = node;
-	cmd->smpnb = 0;
+	count_smpls(node, cmd);
 	while (pipenode)
 	{
 		node = pipenode;
@@ -65,4 +81,5 @@ void	cmd_reset(t_cmd *cmd)
 			free(cmd->smpl[i]);
 		i++;
 	}
+	free(cmd->smpl);
 }
