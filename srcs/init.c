@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:21:53 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 10:30:05 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/08 09:10:42 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/lexer.h"
-#include "../includes/parser.h"
-#include "../includes/exec.h"
-#include "../includes/environment.h"
-#include "../includes/builtins.h"
+#include "structures.h"
+#include "libs.h"
+#include "lexer.h"
+#include "parser.h"
+#include "exec.h"
+#include "environment.h"
+#include "builtins.h"
 
 void	nsh_alloc(t_sh *nsh)
 {

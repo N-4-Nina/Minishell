@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   arrays.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 12:29:17 by user42            #+#    #+#             */
-/*   Updated: 2021/08/30 11:29:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/15 10:53:40 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libs.h"
+#include "libs.h"
 
 int	ft_strcmp(const char *p1, const char *p2)
 {
@@ -62,7 +62,11 @@ void	free_array(char **ar, int size)
 
 	i = 0;
 	while (i < size)
-		free(ar[i++]);
+	{
+		if (ar[i])
+			free(ar[i]);
+		i++;
+	}
 	if (ar)
 		free(ar);
 }

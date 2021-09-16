@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 14:49:34 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 10:21:08 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/14 09:52:15 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,32 @@ int	append_single(char **dst, char c)
 	return (1);
 }
 
-char	*expand_word(char *s, t_env *env, int *status)
+char	*expand_word(char *s, t_env *env, int *status, t_smpl *smpl)
+{
+	int		i;
+	char	**new;
+
+	i = 0;
+	while (s[i])
+	{
+		new = &smpl->argv[smpl->argc];
+		if (s[i] == '\'')
+			i += replace_strong(new, &s[i]);
+		else if (s[i] == '"')
+			i += replace_weak(new, &s[i], env, status);
+		else if (s[i] == '$' && s[i + 1] == '?')
+			i += replace_status(new, &s[i], *status);
+		else if (s[i] == '$')
+			i += replace_var(new, &s[i], env, smpl);
+		else if (s[i] == '\\' && s[i + 1])
+			i += replace_backslash(new, ft_substr(s, i + 1, 1));
+		else
+			i += append_single(new, s[i]);
+	}
+	return (*new);
+}
+
+char	*expand_io(char *s, t_env *env, int *status, t_smpl *smpl)
 {
 	int		i;
 	char	*new;
@@ -73,7 +98,7 @@ char	*expand_word(char *s, t_env *env, int *status)
 		else if (s[i] == '$' && s[i + 1] == '?')
 			i += replace_status(&new, &s[i], *status);
 		else if (s[i] == '$')
-			i += replace_var(&new, &s[i], env);
+			i += replace_var(&new, &s[i], env, smpl);
 		else if (s[i] == '\\' && s[i + 1])
 			i += replace_backslash(&new, ft_substr(s, i + 1, 1));
 		else

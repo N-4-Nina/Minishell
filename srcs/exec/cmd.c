@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:01:16 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/06 10:43:34 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/14 10:01:33 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	cmd_reset(t_cmd *cmd)
 	while (i < cmd->smpnb)
 	{
 		close_files(cmd->smpl[i]);
-		free_array(cmd->smpl[i]->argv, cmd->smpl[i]->argc);
+		free_array(cmd->smpl[i]->argv, cmd->smpl[i]->ac_alloc);
 		if (cmd->smpl[i]->path)
 			free(cmd->smpl[i]->path);
 		if (cmd->smpl[i])

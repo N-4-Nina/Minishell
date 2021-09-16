@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/06 12:47:04 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/14 16:35:57 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	single_child(t_smpl *smpl, t_env *env)
 	{
 		if (execve(smpl->path, smpl->argv, env_arr) == -1)
 		{
-			display_error(strerror(errno), "", "");
+			display_error("Nsh:", strerror(errno), "\n");
 			ret = 126;
 		}
 	}

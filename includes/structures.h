@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:17:12 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/05 18:32:39 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/14 09:55:14 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_simple
 	int		has_cmd_word;
 	int		path_is_set;
 	int		argc;
+	int		ac_alloc;
 	int		filesnb;
 	int		*files;
 	char	*path;

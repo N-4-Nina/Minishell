@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:32:38 by user42            #+#    #+#             */
-/*   Updated: 2021/09/05 18:35:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/15 10:49:01 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	id_cmd_suffix(t_smpl *s, t_ast *node, t_sh *nsh)
 
 int	validate_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 {
-	s->argv[0] = ft_strdup(node->left->data);
+	//free(s->argv[0]);
+	//s->argv[0] = ft_strdup(node->left->data);
 	s->has_cmd_word = 1;
 	s->argc++;
 	node = node->right;
@@ -41,19 +42,15 @@ int	validate_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 
 int	id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 {
-	char		*xpd;
 	struct stat	buf;
 
-	xpd = expand_word(node->left->data, nsh->env, nsh->last_status);
-	s->isbuiltin = is_builtin(xpd, nsh->bui);
+	expand_word(node->left->data, nsh->env, nsh->last_status, s);
+	s->isbuiltin = is_builtin(s->argv[0], nsh->bui);
 	if (s->isbuiltin != -1)
-		free(xpd);
-	else if (!*xpd)
-	{
-		free(xpd);
+		NULL;
+	else if (!*s->argv[0])
 		return (-1);
-	}
-	else if (!set_cmd_path(s, nsh->env, xpd))
+	else if (s->isbuiltin == -1 && !set_cmd_path(s, nsh->env, s->argv[0]))
 	{
 		*nsh->last_status = 127;
 		return (validate_cmd_word(s, node, nsh));
@@ -69,7 +66,7 @@ int	id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 
 int	handle_word_suf(t_smpl *s, t_ast *node, t_env *env, int *status)
 {
-	s->argv[s->argc] = expand_word(node->data, env, status);
+	expand_word(node->data, env, status, s);
 	if (!s->argv[s->argc])
 		s->argv[s->argc] = ft_strdup("");
 	s->argc++;

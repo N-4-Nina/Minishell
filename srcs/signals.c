@@ -6,16 +6,16 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:51:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/01 08:16:26 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/08 09:11:27 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/defines.h"
-#include "../includes/signals.h"
-#include "../includes/utils.h"
-#include "../includes/builtins.h"
+#include "structures.h"
+#include "libs.h"
+#include "defines.h"
+#include "signals.h"
+#include "utils.h"
+#include "builtins.h"
 
 void	interactive_handler(int signum)
 {

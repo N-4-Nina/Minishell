@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:20:15 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/06 10:44:23 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/08 09:11:00 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/signals.h"
-#include "../includes/lexer.h"
-#include "../includes/parser.h"
-#include "../includes/exec.h"
-#include "../includes/nsh.h"
-#include "../includes/defines.h"
-#include "../includes/prompt.h"
-#include "../includes/utils.h"
-#include "../includes/builtins.h"
+#include "structures.h"
+#include "libs.h"
+#include "signals.h"
+#include "lexer.h"
+#include "parser.h"
+#include "exec.h"
+#include "nsh.h"
+#include "defines.h"
+#include "prompt.h"
+#include "utils.h"
+#include "builtins.h"
 
 int	is_empty(char *s)
 {

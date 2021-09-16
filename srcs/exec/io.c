@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:01:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/31 17:14:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/09 09:20:17 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	handle_io_suf(t_smpl *s, t_ast *node, t_env *env, int *status)
 	if (!check_heredoc_var(node, env, &hd))
 		return (-1);
 	if (ft_strncmp(node->right->data, "<<", 3))
-		xpd = expand_word(node->left->data, env, status);
+		xpd = expand_io(node->left->data, env, status, s);
 	else
 		xpd = ft_strdup(node->left->data);
 	open_file(s, xpd, hd, get_flags(node->right->data));
@@ -84,7 +84,7 @@ int	handle_io_first(t_smpl *s, t_ast *node, t_sh *nsh)
 	if (!check_heredoc_var(io_node, nsh->env, &hd))
 		return (-1);
 	if (ft_strncmp(io_node->right->data, "<<", 3))
-		xpd = expand_word(io_node->left->data, nsh->env, nsh->last_status);
+		xpd = expand_io(io_node->left->data, nsh->env, nsh->last_status, s);
 	else
 		xpd = ft_strdup(io_node->left->data);
 	open_file(s, xpd, hd, get_flags(io_node->right->data));

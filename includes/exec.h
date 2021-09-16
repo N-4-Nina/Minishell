@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:27:36 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/06 11:32:36 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/14 09:57:51 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		here_doc(t_smpl *s, char *hd, char *end);
 char	*update_heredoc_name(char *hd);
 
 //simple
-void	init_simple(t_smpl *s, int ac, int fc);
+void	init_simple(t_smpl *s, int fc);
 t_smpl	*build_simple(t_sh *nsh, t_ast *node);
 
 //pipe_seq
@@ -61,8 +61,9 @@ int		do_cat(char **dst, char *src);
 int		replace_backslash(char **dst, char *src);
 int		replace_weak(char **dst, char *src, t_env *env, int *status);
 int		replace_strong(char **dst, char *src);
-int		replace_var(char **dst, char *src, t_env *env);
+int		replace_var(char **dst, char *src, t_env *env, t_smpl *smpl);
 int		replace_status(char **dst, char *src, int status);
-char	*expand_word(char *s, t_env *env, int *status);
+char	*expand_word(char *s, t_env *env, int *status, t_smpl *smpl);
+char	*expand_io(char *s, t_env *env, int *status, t_smpl *smpl);
 
 #endif
