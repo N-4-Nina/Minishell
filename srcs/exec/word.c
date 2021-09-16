@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:32:38 by user42            #+#    #+#             */
-/*   Updated: 2021/09/15 10:49:01 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/16 15:02:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	id_cmd_suffix(t_smpl *s, t_ast *node, t_sh *nsh)
 
 int	validate_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 {
-	//free(s->argv[0]);
-	//s->argv[0] = ft_strdup(node->left->data);
 	s->has_cmd_word = 1;
 	s->argc++;
 	node = node->right;

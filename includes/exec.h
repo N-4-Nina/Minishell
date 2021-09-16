@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:27:36 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/14 09:57:51 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/16 15:17:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ char	*update_heredoc_name(char *hd);
 //simple
 void	init_simple(t_smpl *s, int fc);
 t_smpl	*build_simple(t_sh *nsh, t_ast *node);
+int		args_count(t_ast *node, t_env *env);
+void	files_count(t_ast *node, int *c);
 
 //pipe_seq
 int		exec_pipe_seq(t_sh *nsh, t_cmd *cmd);
 int		call_builtin(t_sh *nsh, t_smpl *s);
 int		spawn(t_smpl *smpl, t_env *env);
 void	await_child(int *status);
-int     await_children(t_sh *nsh, t_cmd *cmd);
+int		await_children(t_sh *nsh, t_cmd *cmd);
 
 //word
 int		id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh);
@@ -62,6 +64,7 @@ int		replace_backslash(char **dst, char *src);
 int		replace_weak(char **dst, char *src, t_env *env, int *status);
 int		replace_strong(char **dst, char *src);
 int		replace_var(char **dst, char *src, t_env *env, t_smpl *smpl);
+int		replace_var_in_quote(char **dst, char *src, t_env *env);
 int		replace_status(char **dst, char *src, int status);
 char	*expand_word(char *s, t_env *env, int *status, t_smpl *smpl);
 char	*expand_io(char *s, t_env *env, int *status, t_smpl *smpl);

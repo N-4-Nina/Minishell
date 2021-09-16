@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/09/15 10:56:26 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/16 15:01:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ int	set_abs_path(t_smpl *s, char *name)
 	{
 		s->path = ft_strdup(name);
 		s->path_is_set = 1;
-		//free(name);
 		return (1);
 	}
-	//free(name);
 	return (0);
 }
 
@@ -84,8 +82,6 @@ int	set_cmd_path(t_smpl *s, t_env *env, char *name)
 	if (ft_strchr(name, '/'))
 		return (set_abs_path(s, name));
 	new = ft_strjoin("/", name);
-	//free(name);
-	//name = new;
 	split = get_split(env);
 	while (split[j])
 		j++;
