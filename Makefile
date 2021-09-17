@@ -6,7 +6,7 @@
 #    By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:45:13 by chpl              #+#    #+#              #
-#    Updated: 2021/09/14 12:53:58 by chpl             ###   ########.fr        #
+#    Updated: 2021/09/17 15:32:04 by chpl             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,9 @@ SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 
 #Defauilt Make
-all: ft directories $(TARGET)
+all: ft directories link
+
+$(TARGET): all
 
 #Remake
 re: fclean all
@@ -59,7 +61,7 @@ fclean: clean
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
 
 #Link
-$(TARGET): $(OBJECTS)
+link: $(OBJECTS)
 	$(CC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
 
 #Compile
