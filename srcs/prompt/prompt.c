@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 13:16:24 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/18 09:34:29 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,10 @@ char	*get_dir_name(t_env *env)
 
 void	build_prompt(t_env *env, t_inp *inp)
 {	
-	int		i;
 	int		j;
 	int		len;
 	char	*s;
 
-	i = 0;
 	j = 0;
 	s = get_dir_name(env);
 	len = ft_strlen(s);
@@ -66,6 +64,5 @@ void	build_prompt(t_env *env, t_inp *inp)
 	j += ft_strlcat(&inp->prompt[j], " -> ", 5);
 	j += ft_strlcat(&inp->prompt[j], SET_WHITE, COLOR_SIZE);
 	j += ft_strlcat(&inp->prompt[j], SET_LIGHT, BOLD_SIZE + 1);
-	i = 0;
 	free(s);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 15:44:33 by user42            #+#    #+#             */
-/*   Updated: 2021/08/30 15:44:34 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:13:52 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		nsh_echo(t_sh *nsh, char **args);
 int		nsh_cd(t_sh *nsh, char **args);
 int		nsh_pwd(t_sh *nsh, char **args);
 int		nsh_export(t_sh *nsh, char **args);
+int		nsh_export_env(t_sh *nsh);
 int		nsh_unset(t_sh *nsh, char **args);
 int		nsh_mute_unset(t_sh *nsh, char **args);
 int		nsh_env(t_sh *nsh, char **args);

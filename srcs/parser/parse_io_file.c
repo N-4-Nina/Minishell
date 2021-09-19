@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:04:44 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/25 13:57:16 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/18 08:43:36 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parse_io_file(t_sh *nsh, t_ast **current)
 		}
 		nsh->lex->i--;
 		nsh->lex->syntax_error = 1;
-		free_node(new, 1);
+		free_node(new, 0);
 	}
 	free_node(io, 1);
 	return (0);

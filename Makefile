@@ -6,13 +6,13 @@
 #    By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:45:13 by chpl              #+#    #+#              #
-#    Updated: 2021/09/17 15:32:04 by chpl             ###   ########.fr        #
+#    Updated: 2021/09/19 08:35:22 by chpl             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC          := clang
 #The Target Binary Program
 TARGET      := minishell
+LINK		:= link
 #The Directories, Source, Includes, Objects, Binary and Resources
 SRCDIR      := srcs
 INCDIR      := includes
@@ -32,38 +32,30 @@ INCDEP      := -I$(INCDIR)
 SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 
-#Defauilt Make
-all: ft directories link
-
-$(TARGET): all
-
+#Default Make
+all: ft directories $(TARGET)
 #Remake
 re: fclean all
-
-ft:
-	@make -C libft
-
-#Make the Directories
-directories:
-	@mkdir -p $(BUILDDIR)
-
 #Clean only Objecst
 clean:
 	@$(RM) -rf $(BUILDDIR)
 	make -C libft clean
-
 #Full Clean, Objects and Binaries
 fclean: clean
 	@$(RM) -rf $(TARGETDIR)/$(TARGET)
 	make -C libft fclean
-
 #Pull in dependency info for *existing* .o files
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
-
 #Link
-link: $(OBJECTS)
+$(TARGET): $(OBJECTS)
+	$(MAKE) ft
+	$(MAKE) directories
 	$(CC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
-
+ft:
+	@make -C libft
+#Make the Directories
+directories:
+	@mkdir -p $(BUILDDIR)
 #Compile
 $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)

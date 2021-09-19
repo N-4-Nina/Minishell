@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "signals.h": "c",
-        "utils.h": "c",
-        "exec.h": "c",
-        "builtins.h": "c"
-    }
-}

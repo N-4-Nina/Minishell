@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_grafting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:17:10 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 15:54:20 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/18 09:33:53 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 
 void	graft_node_left(t_ast **node, t_ast *new)
 {
-	t_ast	*current;
-
 	if (!node || !new)
 		return ;
 	if (!*node)
@@ -25,14 +23,11 @@ void	graft_node_left(t_ast **node, t_ast *new)
 		*node = new;
 		return ;
 	}
-	current = *node;
 	(*node)->left = new;
 }
 
 void	graft_node_right(t_ast **node, t_ast *new)
 {
-	t_ast	*current;
-
 	if (!node || !new)
 		return ;
 	if (!*node)
@@ -40,6 +35,5 @@ void	graft_node_right(t_ast **node, t_ast *new)
 		*node = new;
 		return ;
 	}
-	current = *node;
 	(*node)->right = new;
 }

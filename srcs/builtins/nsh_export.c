@@ -3,46 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 07:51:46 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 14:47:11 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:05:14 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/environment.h"
-#include "../includes/builtins.h"
-#include "../includes/arrays.h"
-#include "../includes/utils.h"
-
-int	nsh_export_env(t_sh *nsh)
-{
-	char	**arr;
-	int		size;
-	int		i;
-	int		j;
-
-	i = 0;
-	arr = env_to_array(nsh->env, &size);
-	sort_array(arr, size);
-	while (arr[i])
-	{
-		j = 0;
-		write(1, "declare -x ", 12);
-		while (arr[i][j] != '=')
-			write(1, &arr[i][j++], 1);
-		write(1, "=\"", 2);
-		while (arr[i][++j])
-			write(1, &arr[i][j], 1);
-		write(1, "\"\n", 2);
-		i++;
-	}
-	free_array(arr, size);
-	*(nsh->last_status) = 0;
-	return (0);
-}
+#include "structures.h"
+#include "libs.h"
+#include "environment.h"
+#include "builtins.h"
+#include "arrays.h"
+#include "utils.h"
 
 int	not_valid(t_sh *nsh, char *var, char *val, char **args)
 {
