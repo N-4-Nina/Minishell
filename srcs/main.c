@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:38:37 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/06 10:06:05 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/25 12:08:15 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/utils.h"
-#include "../includes/environment.h"
-#include "../includes/astree.h"
-#include "../includes/nsh.h"
-#include "../includes/lexer.h"
-#include "../includes/signals.h"
-#include "../includes/arrays.h"
+#include "structures.h"
+#include "libs.h"
+#include "utils.h"
+#include "environment.h"
+#include "astree.h"
+#include "nsh.h"
+#include "lexer.h"
+#include "signals.h"
+#include "arrays.h"
 
 int	nsh_clear(t_sh *nsh)
 {

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   nsh_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:15:48 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/27 14:46:21 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/25 11:51:26 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/environment.h"
-#include "../includes/utils.h"
+#include "structures.h"
+#include "libs.h"
+#include "environment.h"
+#include "utils.h"
 
 int	unset_valid_idenfier(char *var)
 {
