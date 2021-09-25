@@ -6,7 +6,7 @@
 #    By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 10:45:13 by chpl              #+#    #+#              #
-#    Updated: 2021/09/19 08:35:22 by chpl             ###   ########.fr        #
+#    Updated: 2021/09/25 11:40:44 by chpl             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ DEPEXT      := d
 OBJEXT      := o
 LIBFT = libft/
 #Flags, Libraries and Includes
+CC			:= clang
 CFLAGS      := -Wall -Wextra -Werror
 LIB         := -L libft/ -lft -lreadline
 INC         := -I$(INCDIR) -I ${LIBFT}

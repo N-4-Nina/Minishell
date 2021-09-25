@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:45 by chpl              #+#    #+#             */
-/*   Updated: 2021/08/28 10:36:59 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/25 11:26:39 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int	nsh_exit(t_sh *nsh, char **args)
 	exit_status = handle_args(nsh, args);
 	if (!exit_status)
 		return (1);
-	if (args[1])
-		exit_status = ft_atoi(args[1]);
-	else
+	if (exit_status < 0 || !args[1])
 		exit_status = *nsh->last_status;
+	else
+		exit_status = ft_atoi(args[1]);
 	free_everything(nsh);
 	exit(exit_status);
 }
