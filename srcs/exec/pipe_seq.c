@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_seq.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:17:22 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/06 11:36:02 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/25 12:42:52 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structures.h"
-#include "../includes/libs.h"
-#include "../includes/exec.h"
-#include "../includes/environment.h"
-#include "../includes/signals.h"
-#include "../includes/defines.h"
-#include "../includes/utils.h"
-#include "../includes/arrays.h"
+#include "structures.h"
+#include "libs.h"
+#include "exec.h"
+#include "environment.h"
+#include "signals.h"
+#include "defines.h"
+#include "utils.h"
+#include "arrays.h"
 
 void	pipe_seq_redir(t_smpl *s)
 {
@@ -41,10 +41,7 @@ int	exec_seq_part(t_sh *nsh, t_smpl *s)
 	else if (s->path_is_set)
 	{
 		if (execve(s->path, s->argv, env_arr) == -1)
-		{
-			display_error(strerror(errno), "\n", "");
-			ret = 126;
-		}
+			exec_error(s->path, &ret);
 	}
 	else
 	{

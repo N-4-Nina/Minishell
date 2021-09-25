@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:00:33 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/14 16:35:57 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/25 12:41:51 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int	single_child(t_smpl *smpl, t_env *env)
 	if (smpl->path_is_set)
 	{
 		if (execve(smpl->path, smpl->argv, env_arr) == -1)
-		{
-			display_error("Nsh:", strerror(errno), "\n");
-			ret = 126;
-		}
+			exec_error(smpl->path, &ret);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:38:18 by user42            #+#    #+#             */
-/*   Updated: 2021/09/20 13:18:47 by chpl             ###   ########.fr       */
+/*   Updated: 2021/09/25 12:28:13 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	set_abs_path(t_smpl *s, char *name)
 {
 	struct stat	buf;
 
-	if (!stat(name, &buf))
+	if (!stat(name, &buf) && ft_strncmp(name, "..", 3))
 	{
 		s->path = ft_strdup(name);
 		s->path_is_set = 1;
@@ -79,7 +79,7 @@ int	set_cmd_path(t_smpl *s, t_env *env, char *name)
 	char		**split;
 
 	j = 0;
-	if (ft_strchr(name, '/'))
+	if (name && (ft_strchr(name, '/') || name[0] == '.'))
 		return (set_abs_path(s, name));
 	new = ft_strjoin("/", name);
 	split = get_split(env);

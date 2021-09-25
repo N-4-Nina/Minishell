@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 17:32:38 by user42            #+#    #+#             */
-/*   Updated: 2021/09/16 15:02:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/25 12:45:22 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	id_cmd_word(t_smpl *s, t_ast *node, t_sh *nsh)
 		*nsh->last_status = 127;
 		return (validate_cmd_word(s, node, nsh));
 	}
-	if (s->isbuiltin == -1 && !stat(s->path, &buf) && S_ISDIR(buf.st_mode))
+	if (s->isbuiltin == -1 && ft_strncmp(s->path, ".", 1)
+		&& !stat(s->path, &buf) && S_ISDIR(buf.st_mode))
 	{
 		display_error("Nsh: ", s->path, " is a directory\n");
 		*nsh->last_status = 126;

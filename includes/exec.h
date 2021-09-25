@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chpl <chpl@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:27:36 by chpl              #+#    #+#             */
-/*   Updated: 2021/09/16 15:17:54 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/25 12:43:12 by chpl             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXEC_H
 
 int		exec(t_sh *nsh);
+void	exec_error(char *str, int *ret);
 int		build_exec(t_sh *nsh, t_ast *node);
 //cmd
 int		fork_single(t_smpl *smpl, t_env *env, int *status);
